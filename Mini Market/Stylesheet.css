@@ -1,0 +1,97 @@
+form {
+    border: 3px solid #f1f1f1;
+}
+
+.navi{
+    list-style-type: none;
+    margin: 0;
+    padding: 16px;
+
+}
+
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 1px solid #ccc;
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 20px;
+    margin: 8px 0;
+    border: none;
+    width: 35%;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+.collapsible{
+    background-color: #eee;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 15px;
+}
+.active, .collapsible:hover {
+    background-color: #ccc;
+}
+
+.collapsible-body {
+    padding: 0 18px;
+    display: none;
+    overflow: hidden;
+    background-color: #f1f1f1;
+}
+
+.container {
+    padding: 16px;
+}
+
+.itemscontainer{
+    width: 50%;
+}
+/* www.w3schools.com/css/css_navbar_horizontal.asp */
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+li {
+    float: left;
+}
+
+li a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+li a:hover {
+    background-color: #111;
+}
+
+.modal{
+    display: block;
+    background-color: lightgrey;
+    text-align: center;
+    border: 3px solid #f1f1f1;
+
+
+}
+
+.button_class {
+}

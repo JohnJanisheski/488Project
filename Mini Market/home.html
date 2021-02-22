@@ -1,69 +1,163 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>about us</title>
-	<link rel="stylesheet" href="/../css/vendor.css" />
-	<link rel="stylesheet" href="/../css/LineIcons.min.css" />
-	<link href="/../css/tam.css" rel="stylesheet">
-<style rel="stylesheet">
-.bo{
-	background-color: #FFF;
-    border: none;
-    color: black;
-    width: 100px;
-}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Testing firebase!</title>
+    <link rel="stylesheet" href="Stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+    <div class="container" id="sign_in_header">
+        <h1 style="font-family: 'Comic Sans MS',serif; font-size: 400%">Mini Market</h1>
+        <h1 style="font-family: 'Comic Sans MS',serif; font-size: 160%; padding-left: 30px">Trading Made Easy</h1>
+    </div>
+
 
 </head>
 
-<body data-spy="scroll" data-target=".navbar">
-	<aside class="aside">
+<!-- https://github.com/iamshaunjp/firebase-auth/blob/lesson-10/index.html -->
 
-		<div class="nav-wrapper">
-
-			<nav class="navbar text-center align-items-center justify-content-center">
-                <div class="collapse navbar-collapse show" id="navbarCollapse">
-                	<div class="about-avatar mb-5">
-						<div class="about-avatar-details mt-4">
-							<h1>Royal Hotel</h1>
-						</div>
-
-					</div>
-                    <ul class="navbar-nav mx-auto">
-                        <li class="nav-item active">
-                            <a class="nav-link" href="home"><i class="lni-home"></i>Home</a>
-						</li>
-						<li class="nav-item">
-                            <a class="nav-link" href="about"><i class="lni-phone-handset"></i>About us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login_start"><i class="lni-briefcase"></i>Booking</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/login_start"><i class="lni-pencil"></i></i>Sign in</a>
-                        </li>
-               
-                    </ul>
-                </div>
-	        </nav>
-        </div>
-        <!-- END: NAVBAR -->
-    </aside>
-
-	<div class="page-wrapper" style="width: 100%;">
-		<section class="section section-light section-contact" id="contact" style="width: 70%;background-color: rgba(0, 0, 0, 0);">
-            <div class="container" style="width: 100%;">
-                <div class="section-head">
-                  <h1>Welcome to Royal Hotel</h1>
-                </div> 
-      <img src="/../images/1.jpg" style="height: 450px;width: 100%;"/>
-			</div>
-		</section>
+<body>
+<!-- navigation -->
+<nav class="navi">
+    <div class="nav-wrapper container">
+        <ul id="navigation" class="navigation-options">
+            <li class="logged-in">
+                <a href="#" class="modal-trigger" data-target="modal-account">Account</a>
+            </li>
+            <li class="logged-in">
+                <a href="#" class="greytext" id="logout">Log out</a>
+            </li>
+            <li class="logged-in">
+                <a href="#" class="modal-trigger" data-target="modal-add">Add Item</a>
+            </li>
+            <li class="logged-in">
+                <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
+            </li>
+            <li class="logged-out">
+                <a href="#" class="modal-trigger" data-target="modal-signup">Sign Up</a>
+            </li>
+        </ul>
     </div>
+</nav>
 
-    <script src="/../js/vendor.js"></script>
-    <script src="/../js/custom.js"></script>
+<!-- sign up -->
+
+<div id="modal-signup" class="modal">
+    <div class="modal-content">
+        <h3>Sign Up</h3>
+        <form id="signup-form">
+            <label>Email</label>
+            <input type="text" placeholder="Enter Email" id="signup-email">
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter Password" id="signup-password">
+            <div class="button_class">
+                <button id="sign-up-button" type="submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<!-- login form -->
+<div class="modal" id ="modal-login">
+    <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
+    <h3>Log In</h3>
+    <form method = "post" id="login-form">
+        <div class="container">
+            <label>Email</label>
+            <input type="text" placeholder="Enter Email" id="login-email">
+
+            <label>Password</label>
+            <input type="password" placeholder="Enter Password" id="login-password">
+
+            <div class="button_class">
+                <button  id="sign-in-button" type="submit">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+
+<!-- account details -->
+<div class="modal" id ="modal-account">
+    <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
+    <h3>Account Information</h3>
+    <div class="account-details"></div>
+</div>
+
+
+<!-- add item -->
+<div class="modal" id ="modal-add">
+    <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
+    <h3>Add item</h3>
+    <form id="add-item-form">
+        <div class="input-field">
+            <input type="text" id="title">
+            <label for="title">Item title</label>
+        </div>
+        <div class="input-field">
+            <textarea id="description" class="textarea"></textarea>
+            <label for="description">Description of Item</label>
+        </div>
+        <div class="button_class">
+            <button id="item-button" type="submit">Submit</button>
+        </div>
+    </form>
+</div>
+
+<!-- items already added -->
+<div class="itemscontainer" id="items-list">
+    <ul class="collapsible itemslist">
+        <li>
+            <div class="collapsible-header">Title of item</div>
+            <div class="collapsible-body">Description</div>
+
+        </li>
+        <li>
+            <div class="collapsible-header">Title of item</div>
+            <div class="collapsible-body">Description</div>
+
+        </li>
+    </ul>
+</div>
+
+
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
+        authDomain: "mini-market-aa3c4.firebaseapp.com",
+        databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
+        projectId: "mini-market-aa3c4",
+        storageBucket: "mini-market-aa3c4.appspot.com",
+        messagingSenderId: "490789165755",
+        appId: "1:490789165755:web:99ce734f2657cce080e79e",
+        measurementId: "G-D480CCRXP5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(config);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+    db.settings({ timestampsInSnapshots: true });
+</script>
+
+<!-- javascript for page changes -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/auth.js"></script>
 </body>
 </html>
