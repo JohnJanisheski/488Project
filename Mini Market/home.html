@@ -45,7 +45,6 @@
 </nav>
 
 <!-- sign up -->
-
 <div id="modal-signup" class="modal">
     <div class="modal-content">
         <h3>Sign Up</h3>
@@ -95,6 +94,7 @@
 <div class="modal" id ="modal-add">
     <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
     <h3>Add item</h3>
+
     <form id="add-item-form">
         <div class="input-field">
             <input type="text" id="title">
@@ -108,10 +108,12 @@
             <button id="item-button" type="submit">Submit</button>
         </div>
     </form>
+    <ul id="items-list"></ul>
+
 </div>
 
 <!-- items already added -->
-<div class="itemscontainer" id="items-list">
+<div class="itemscontainer" >
     <ul class="collapsible itemslist">
         <li>
             <div class="collapsible-header">Title of item</div>
@@ -149,15 +151,14 @@
         measurementId: "G-D480CCRXP5"
     };
     // Initialize Firebase
-    firebase.initializeApp(config);
+    firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    db.settings({ timestampsInSnapshots: true });
 </script>
 
 <!-- javascript for page changes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="scripts/main.js"></script>
-<script src="scripts/auth.js"></script>
+<script src="main.js"></script>
+<script src="auth.js"></script>
 </body>
 </html>
