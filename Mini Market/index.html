@@ -97,34 +97,30 @@
 
     <form id="add-item-form">
         <div class="input-field">
-            <input type="text" id="title">
-            <label for="title">Item title</label>
+        <input type="text" id="title">
+        <label for="title">Title</label>
         </div>
         <div class="input-field">
-            <textarea id="description" class="textarea"></textarea>
-            <label for="description">Description of Item</label>
+            <textarea id="description"></textarea>
+            <label for="description">Description</label>
         </div>
-        <div class="button_class">
-            <button id="item-button" type="submit">Submit</button>
+        <div class="input-field">
+            <input type="text" id="type">
+            <label for="type">Item Type</label>
         </div>
+        <button type="submit">Submit</button>
     </form>
-    <ul id="items-list"></ul>
+
+    </ul>
 
 </div>
 
-<!-- items already added -->
+<!-- items already added-->
 <div class="itemscontainer" >
     <ul class="collapsible itemslist">
-        <li>
-            <div class="collapsible-header">Title of item</div>
-            <div class="collapsible-body">Description</div>
+        <ul id="itemslist" class="itemsList-class">
 
-        </li>
-        <li>
-            <div class="collapsible-header">Title of item</div>
-            <div class="collapsible-body">Description</div>
-
-        </li>
+        </ul>
     </ul>
 </div>
 
