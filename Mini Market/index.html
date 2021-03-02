@@ -49,11 +49,19 @@
     <div class="modal-content">
         <h3>Sign Up</h3>
         <form id="signup-form">
+
             <label>Email</label>
             <input type="text" placeholder="Enter Email" id="signup-email">
 
             <label>Password</label>
             <input type="password" placeholder="Enter Password" id="signup-password">
+            <label>Name</label>
+            <input type="text" placeholder="Enter Name" id="signup-name">
+            <label>Campus</label>
+            <input type="text" placeholder="Enter Campus" id="signup-campus">
+            <label>Biography</label>
+            <input type="text" placeholder="Enter Bio" id="signup-bio">
+
             <div class="button_class">
                 <button id="sign-up-button" type="submit">Submit</button>
             </div>
@@ -86,7 +94,27 @@
 <div class="modal" id ="modal-account">
     <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
     <h3>Account Information</h3>
-    <div class="account-details"></div>
+    <div class="account-details">
+        <form id="account-details-form">
+            <div class="input-field">
+                <input type="text" id="name">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+                <input id="email">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="campus">
+                <label for="campus">Campus</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="bio">
+                <label for="bio">Bio</label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 
 
