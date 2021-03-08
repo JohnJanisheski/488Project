@@ -42,10 +42,10 @@
                 <a href="#account" class="trigger" data-target="account">Account</a>
             </li>
             <li class="logged-in">
-                <a href="#additem" class="trigger" data-target="additem">Add Item</a>
+                <a href="#add-item" class="trigger" data-target="add-item">Add Item</a>
             </li>
             <li class="logged-in">
-                <a href="#itemsadded" class="trigger" data-target="itemsadded">Item List</a>
+                <a href="#items-added" class="trigger" data-target="items-added">Item List</a>
             </li>
             <li class="logged-out">
                 <a href="#login" class="trigger" data-target="login">Login</a>
@@ -84,22 +84,23 @@
 <div>
     <div class="content">
         <h3>Sign Up</h3>
+        <!-- User will enter in their email, password, first and last names, their campus and a bio for their account -->
         <form id="signup-form">
-
             <label>Email</label>
             <input type="text" placeholder="Enter Email" id="signup-email">
-
             <label>Password</label>
             <input type="password" placeholder="Enter Password" id="signup-password">
-            <label>Name</label>
-            <input type="text" placeholder="Enter Name" id="signup-name">
+            <label>First Name</label>
+            <input type="text" placeholder="Enter First Name" id="signup-first-name">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter Last Name" id="signup-last-name">
             <label>Campus</label>
             <input type="text" placeholder="Enter Campus" id="signup-campus">
             <label>Biography</label>
             <input type="text" placeholder="Enter Bio" id="signup-bio">
-
+            <!-- This button will submit the form to the firebase authurization service ()-->
             <div class="button_class">
-                <button id="sign-up-button" type="submit">Submit</button>
+                <button id="sign-up-button" type="submit">Sign Up Now</button>
             </div>
         </form>
     </div>
@@ -139,7 +140,7 @@
 </section>
 
 <!-- add item -->
-<section id ="additem">
+<section id ="add-item">
 <div>
     <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
     <h3>Add item</h3>
@@ -157,7 +158,7 @@
             <label for="type">Item Type</label>
             <input type="text" id="type">
         </div>
-        <button id="additembutton" type="submit">Submit</button>
+        <button id="button" type="submit">Submit</button>
     </form>
 
     </ul>
@@ -166,7 +167,7 @@
 </section>
 
 <!-- items already added-->
-<section id="itemsadded">
+<section id="items-added">
 <div class="itemscontainer">
     <ul class="collapsible itemslist">
         <ul id="itemslist" class="itemsList-class">

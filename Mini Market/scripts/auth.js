@@ -2,59 +2,47 @@
 <!-- "Firebase auth tutorial creating new users -->
 <!-- www.youtube.com/watch?v=wkdCpktUfGg&list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ&index=5  -->
 
+const itemlist = document.querySelector('.itemslist');
 <!-- auth state changes -->
 auth.onAuthStateChanged(user => {
     if (user){
         console.log('user logged in: ', user);
-        db.collection('items').get().then(snapshot => {
-            snapshot.docs.forEach(doc =>{
-                console.log(doc.data());
-                renderList(doc);
-            })
+        db.collection('items').onSnapshot(snapshot => {
+            let newChange = snapshot.docChanges();
+            newChange.forEach((change => {
+                if (change.type == 'added'){
+                    renderList(change.doc);
+                }
+                else if (change.type == 'removed'){
+                    let li = itemlist.querySelector('[data-id=' + change.doc.id + ']');
+                    itemlist.removeChild(li);
+                }
+            }))
         });
-
-        itemlist.innerHTML = '';
+        setupUI(user);
     }
     else{
         console.log('user logged out');
-        itemlist.innerHTML = '<h5 class="center-align">Login to view items!</h5>'
+        setupUI();
     }
 });
 
-const account = document.querySelector('#account-details');
-const checkUser = (user) => {
-    if (user) {
-        const html = '<div>Logged in as ${user.email}</div>';
-        account.innerHTML = html;
-    }
-    else{
-        account.innerHTML = '';
-    }
-};
 
-// signup
-const signupForm = document.querySelector('#signup-form');
-signupForm.addEventListener('submit', (e) => {
+<!-- login current users -->
+const login = document.querySelector('#login-form');
+const loginContainer = document.querySelector('#login');
+
+login.addEventListener('submit', (e) =>{
     e.preventDefault();
+    const userEmail = login['login-email'].value;
+    const userPassword = login['login-password'].value;
 
-    // Get Users Email and Potential Password
-    const userEmail = signupForm['signup-email'].value;
-    const userPassword = signupForm['signup-password'].value;
+    // Attempt to Sign user in
+    auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
+        login.reset();
+        loginContainer.style.display="none";
 
-    // Attempt to create new user
-    auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        return db.collection('accounts').doc(cred.user.id).set({
-            bio: signupForm['signup-bio'].value,
-            firstName: signupForm['signup-first-name'].value,
-            lastName: signupForm['signup-last-name'].value,
-            campus: signupForm['signup-campus'].value,
-        })
-
-    }).then(() => {
-        const modal = document.querySelector('#modal-signup');
-        M.Modal.getInstance(modal).close();
-        signupForm.reset();
-    });
+    }); // Error Handling Still needs to be implemented
 });
 
 <!-- logout -->
@@ -63,81 +51,90 @@ logout.addEventListener('click', (e) => {
     e.preventDefault();
     auth.signOut();
 });
+// Sign the user out and go back to default page
 
-<!-- login current users -->
-const login = document.querySelector('#login-form')
-login.addEventListener('submit', (e) =>{
+
+// signup
+const signupForm = document.querySelector('#signup-form');
+const signupContainer = document.querySelector('#signup');
+
+signupForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    const userEmail = login['login-email'].value;
-    const userPassword = login['login-password'].value;
+    const userEmail = signupForm['signup-email'].value;
+    const userPassword = signupForm['signup-password'].value;
 
-    auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        const modal = document.querySelector('#modal-login');
-        M.Modal.getInstance(modal).close();
-        login.reset();
-    });
-});
-
-<!-- add items -->
-const addItemsForm = document.querySelector('#add-item-form');
-addItemsForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-
-    db.collection('items').add({
-        title: addItemsForm['title'].value,
-        description: addItemsForm['description'].value,
-        type: addItemsForm['type'].value
+    // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
+    auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
+        return db.collection('accounts').doc(cred.user.uid).set({
+            bio: signupForm['signup-bio'].value,
+            firstname: signupForm['signup-first-name'].value,
+            lastname: signupForm['signup-last-name'].value,
+            campus: signupForm['signup-campus'].value,
+        })
 
     }).then(() => {
-        const modal = document.querySelector('#modal-add');
-        M.Modal.getInstance(modal).close();
-        addItemsForm.reset();
+        signupForm.reset();
+        signupContainer.style.display="none";
     });
 });
 
 
-<!-- create profile -->
-const accountForm = document.querySelector('#account-details-form');
-accountForm.addEventListener('submit', (e) => {
-    e.preventDefault();
+<!-- conditional menu links -->
+document.getElementById("log-in-button").addEventListener("click", () => {
+    document.getElementById("add-item").style.display="none";
+    document.getElementById("login").style.display="block";
+    document.getElementById("signup").style.display="none";
+    document.getElementById("items-added").style.display="none";
 
-    db.collection('users').add({
-        name: accountForm['name'].value,
-        email: accountForm['email'].value,
-        campus: accountForm['campus'].value,
-        bio: accountForm['bio'].value
+}, false);
 
-    }).then(() => {
-        const modal = document.querySelector('#modal-add');
-        M.Modal.getInstance(modal).close();
-        accountForm.reset();
-    });
-});
+document.getElementById("sign-up-button").addEventListener("click", () => {
+    document.getElementById("add-item").style.display="none";
+    document.getElementById("login").style.display="none";
+    document.getElementById("signup").style.display="block";
+    document.getElementById("items-added").style.display="none";
+}, false);
 
 
 <!-- www.youtube.com/watch?v=zpQle4SBRfg&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB&index=4&t=24s -->
 <!-- show items list -->
-const itemlist = document.querySelector('.itemslist');
 
 function renderList(doc){
     let li = document.createElement('li');
     let title = document.createElement('span');
     let desc = document.createElement('span');
     let type = document.createElement('span');
+    let del = document.createElement('del');
 
     li.setAttribute('data-id', doc.id);
     title.textContent = doc.data().title;
     desc.textContent = doc.data().description;
     type.textContent = doc.data().type;
+    del.textContent = 'X';
 
     li.appendChild(title);
     li.appendChild(desc);
     li.appendChild(type);
+    li.appendChild(del);
     itemlist.appendChild(li);
+
+    //delete item
+    del.addEventListener('click', (e) => {
+        e.stopPropagation();
+        let id = e.target.parentElement.getAttribute('data-id');
+        db.collection('items').doc(id).delete();
+    });
 }
 
-
-
-
-
-
+const addItemsForm = document.querySelector('#add-item-form');
+addItemsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log(uid);
+    db.collection('items').add({
+        title: addItemsForm['title'].value,
+        description: addItemsForm['description'].value,
+        type: addItemsForm['type'].value
+    }).then(() => {
+        addItemsForm.reset();
+    })
+});
