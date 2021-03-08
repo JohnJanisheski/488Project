@@ -3,6 +3,9 @@
 <!-- www.youtube.com/watch?v=wkdCpktUfGg&list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ&index=5  -->
 
 const itemlist = document.querySelector('.itemslist');
+//get current user id
+
+
 <!-- auth state changes -->
 auth.onAuthStateChanged(user => {
     if (user){
@@ -48,7 +51,6 @@ login.addEventListener('submit', (e) =>{
 <!-- logout -->
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
-    e.preventDefault();
     auth.signOut();
 });
 
@@ -119,11 +121,18 @@ function renderList(doc){
     li.appendChild(del);
     itemlist.appendChild(li);
 
+    let user = firebase.auth().currentUser;
+    var uid;
+    if (user) {
+        uid = user.uid;
+    }
+
     //delete item
     del.addEventListener('click', (e) => {
         e.stopPropagation();
         let id = e.target.parentElement.getAttribute('data-id');
         db.collection('items').doc(id).delete();
+       db.collection('accounts').doc(uid).collection('userItems').doc(id).delete();
     });
 }
 
@@ -132,20 +141,21 @@ addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let user = firebase.auth().currentUser;
     var uid;
-    if (user){
+    if (user) {
         uid = user.uid;
     }
 
-    // console.log(uid);
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
         type: addItemsForm['type'].value,
         userId: uid
-    }).then(() => {
+    }).then(docRef => {
+        console.log(docRef.id);
         addItemsForm.reset();
     });
 
+    <!-- stackoverflow.com/questions/48873465/how-to-add-sub-collection-to-a-document-in-firestore -->
     db.collection('accounts').doc(uid).collection('userItems').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
