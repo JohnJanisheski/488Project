@@ -45,7 +45,7 @@
                 <a href="#additem" class="trigger" data-target="additem">Add Item</a>
             </li>
             <li class="logged-in">
-                <a href="#itemsadded" class="trigger" data-target="itemsadded">Your items</a>
+                <a href="#itemsadded" class="trigger" data-target="itemsadded">Item List</a>
             </li>
             <li class="logged-out">
                 <a href="#login" class="trigger" data-target="login">Login</a>
@@ -54,11 +54,30 @@
                 <a href="#signup" class="trigger" data-target="signup">Sign Up</a>
             </li>
             <li class="logged-in">
-                <a href="#logout" class="greytext" id="logout">Log out</a>
+                <a href="#logout-page" class="trigger" id="logout" data-target="logout-page">Log out</a>
+            </li>
+            <li class="logged-out">
+                <a href="#homepage" class="trigger" data-target="homepage">Homepage</a>
             </li>
         </ul>
     </div>
 </nav>
+
+<section id="homepage">
+    <div class="content">
+        <h3>Homepage</h3>
+        <p>Please log in or create an account to get started!</p>
+    </div>
+</section>
+
+<section id="logout-page">
+    <div class="content">
+        <h3>Logged out</h3>
+        <p>You are successfully logged out</p>
+    </div>
+</section>
+
+
 
 <!-- sign up -->
 <section id="signup">

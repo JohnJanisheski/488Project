@@ -73,9 +73,19 @@
 <!-- conditional menu links -->
 const loggedOutLinks = document.querySelectorAll('.logged-out');
 const loggedInLinks = document.querySelectorAll('.logged-in');
+const accountInfo = document.querySelector('.account-details');
+
 
 const setupUI = (user) => {
     if (user){
+        db.collection('accounts').doc(user.uid).get().then(doc =>{
+            const html = `<div> Logged in as ${user.email}</div>
+                      <div> Name is ${doc.data().name}</div>
+                      <div> Campus is ${doc.data().campus}</div>
+                      <div> Biography: ${doc.data().bio}</div>   `;
+            accountInfo.innerHTML = html;
+        });
+
         loggedInLinks.forEach(item => item.style.display = 'block');
         loggedOutLinks.forEach(item => item.style.display = 'none');
     }

@@ -2,25 +2,29 @@
 <!-- "Firebase auth tutorial creating new users -->
 <!-- www.youtube.com/watch?v=wkdCpktUfGg&list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ&index=5  -->
 
-
+const itemlist = document.querySelector('.itemslist');
 <!-- auth state changes -->
 auth.onAuthStateChanged(user => {
     if (user){
         console.log('user logged in: ', user);
         db.collection('items').onSnapshot(snapshot => {
-            snapshot.docs.forEach(doc =>{
-                console.log(doc.data());
-                renderList(doc);
-            })
+            let newChange = snapshot.docChanges();
+            newChange.forEach((change => {
+                if (change.type == 'added'){
+                    renderList(change.doc);
+                }
+                else if (change.type == 'removed'){
+                    let li = itemlist.querySelector('[data-id=' + change.doc.id + ']');
+                    itemlist.removeChild(li);
+                }
+            }))
         });
         setupUI(user);
-
-
     }
     else{
         console.log('user logged out');
         setupUI();
-        itemlist.innerHTML = '<h5 class="center-align">Login to view items!</h5>'
+
     }
 });
 
@@ -91,7 +95,7 @@ document.getElementById("sign-up-button").addEventListener("click", () => {
 
 <!-- www.youtube.com/watch?v=zpQle4SBRfg&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB&index=4&t=24s -->
 <!-- show items list -->
-const itemlist = document.querySelector('.itemslist');
+
 
 function renderList(doc){
     let li = document.createElement('li');
@@ -112,6 +116,7 @@ function renderList(doc){
     li.appendChild(del);
     itemlist.appendChild(li);
 
+    //delete item
     del.addEventListener('click', (e) => {
         e.stopPropagation();
         let id = e.target.parentElement.getAttribute('data-id');
@@ -122,6 +127,7 @@ function renderList(doc){
 const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
+    console.log(uid);
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,

@@ -29,6 +29,11 @@ button:hover {
     padding: 16px;
 }
 
+.itemsList-class{
+    padding: 40px;
+    color: pink;
+}
+
 ul{
     list-style-type: none;
     padding: 0;
@@ -70,6 +75,8 @@ li del{
     font-weight:  bold;
     cursor:  pointer;
 }
+
+
 
 
 .button_class {
