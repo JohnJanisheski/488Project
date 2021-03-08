@@ -102,17 +102,20 @@ function renderList(doc){
     let title = document.createElement('span');
     let desc = document.createElement('span');
     let type = document.createElement('span');
+   // let uid = document.createElement('span')
     let del = document.createElement('del');
 
     li.setAttribute('data-id', doc.id);
     title.textContent = doc.data().title;
     desc.textContent = doc.data().description;
     type.textContent = doc.data().type;
+   // uid.textContent = doc.data().type;
     del.textContent = 'X';
 
     li.appendChild(title);
     li.appendChild(desc);
     li.appendChild(type);
+    //li.appendChild(uid);
     li.appendChild(del);
     itemlist.appendChild(li);
 
@@ -127,14 +130,29 @@ function renderList(doc){
 const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(uid);
+    let user = firebase.auth().currentUser;
+    var uid;
+    if (user){
+        uid = user.uid;
+    }
+
+    // console.log(uid);
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
-        type: addItemsForm['type'].value
+        type: addItemsForm['type'].value,
+        userId: uid
     }).then(() => {
         addItemsForm.reset();
-    })
+    });
+
+    db.collection('accounts').doc(uid).collection('userItems').add({
+        title: addItemsForm['title'].value,
+        description: addItemsForm['description'].value,
+        type: addItemsForm['type'].value,
+    }).then(() => {
+        addItemsForm.reset();
+    });
 });
 
 
