@@ -143,6 +143,7 @@ addItemsForm.addEventListener('submit', (e) => {
         console.log(docRef.id);
         addItemsForm.reset();
     });
+
     db.collection('accounts').doc(uid).collection('userItems').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
