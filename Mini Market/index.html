@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Testing firebase!</title>
+    <title>Mini Market</title>
     <link rel="stylesheet" href="Stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -14,8 +14,6 @@
         <h1 style="font-family: 'Comic Sans MS',serif; font-size: 400%">Mini Market</h1>
         <h1 style="font-family: 'Comic Sans MS',serif; font-size: 160%; padding-left: 30px">Trading Made Easy</h1>
     </div>
-
-
 </head>
 
 <!-- https://github.com/iamshaunjp/firebase-auth/blob/lesson-10/index.html -->
@@ -34,7 +32,7 @@
             <li class="logged-in">
                 <a href="#" class="modal-trigger" data-target="modal-add">Add Item</a>
             </li>
-            <li class="logged-in">
+            <li class="logged-out">
                 <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
             </li>
             <li class="logged-out">
@@ -49,21 +47,20 @@
     <div class="modal-content">
         <h3>Sign Up</h3>
         <form id="signup-form">
-
             <label>Email</label>
             <input type="text" placeholder="Enter Email" id="signup-email">
-
             <label>Password</label>
             <input type="password" placeholder="Enter Password" id="signup-password">
-            <label>Name</label>
-            <input type="text" placeholder="Enter Name" id="signup-name">
+            <label>First Name</label>
+            <input type="text" placeholder="Enter Your First Name" id="signup-first-name">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter Your Last Name" id="signup-last-name">
             <label>Campus</label>
             <input type="text" placeholder="Enter Campus" id="signup-campus">
             <label>Biography</label>
             <input type="text" placeholder="Enter Bio" id="signup-bio">
-
             <div class="button_class">
-                <button id="sign-up-button" type="submit">Submit</button>
+                <button id="sign-up-button" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
@@ -154,8 +151,6 @@
 
 
 
-<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
 <!-- Add Firebase products that you want to use -->
@@ -176,13 +171,18 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    // Create firebase connection constants
     const auth = firebase.auth();
     const db = firebase.firestore();
+
+    // Update firebase settings for timestamps
+    db.settings({timestampsInSnapshot:true});
 </script>
 
 <!-- javascript for page changes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="main.js"></script>
-<script src="auth.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/auth.js"></script>
 </body>
 </html>

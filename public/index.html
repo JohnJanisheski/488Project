@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Testing firebase!</title>
+    <title>Mini Market</title>
     <link rel="stylesheet" href="Stylesheet.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
@@ -32,7 +32,7 @@
             <li class="logged-in">
                 <a href="#" class="modal-trigger" data-target="modal-add">Add Item</a>
             </li>
-            <li class="logged-in">
+            <li class="logged-out">
                 <a href="#" class="modal-trigger" data-target="modal-login">Login</a>
             </li>
             <li class="logged-out">
@@ -49,11 +49,18 @@
         <form id="signup-form">
             <label>Email</label>
             <input type="text" placeholder="Enter Email" id="signup-email">
-
             <label>Password</label>
             <input type="password" placeholder="Enter Password" id="signup-password">
+            <label>First Name</label>
+            <input type="text" placeholder="Enter Your First Name" id="signup-first-name">
+            <label>Last Name</label>
+            <input type="text" placeholder="Enter Your Last Name" id="signup-last-name">
+            <label>Campus</label>
+            <input type="text" placeholder="Enter Campus" id="signup-campus">
+            <label>Biography</label>
+            <input type="text" placeholder="Enter Bio" id="signup-bio">
             <div class="button_class">
-                <button id="sign-up-button" type="submit">Submit</button>
+                <button id="sign-up-button" type="submit">Sign Up</button>
             </div>
         </form>
     </div>
@@ -84,7 +91,27 @@
 <div class="modal" id ="modal-account">
     <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
     <h3>Account Information</h3>
-    <div class="account-details"></div>
+    <div class="account-details">
+        <form id="account-details-form">
+            <div class="input-field">
+                <input type="text" id="name">
+                <label for="name">Name</label>
+            </div>
+            <div class="input-field">
+                <input id="email">
+                <label for="email">Email</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="campus">
+                <label for="campus">Campus</label>
+            </div>
+            <div class="input-field">
+                <input type="text" id="bio">
+                <label for="bio">Bio</label>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+    </div>
 </div>
 
 
@@ -95,40 +122,34 @@
 
     <form id="add-item-form">
         <div class="input-field">
-            <input type="text" id="title">
-            <label for="title">Item title</label>
+        <input type="text" id="title">
+        <label for="title">Title</label>
         </div>
         <div class="input-field">
-            <textarea id="description" class="textarea"></textarea>
-            <label for="description">Description of Item</label>
+            <textarea id="description"></textarea>
+            <label for="description">Description</label>
         </div>
-        <div class="button_class">
-            <button id="item-button" type="submit">Submit</button>
+        <div class="input-field">
+            <input type="text" id="type">
+            <label for="type">Item Type</label>
         </div>
+        <button type="submit">Submit</button>
     </form>
-    <ul id="items-list"></ul>
+
+    </ul>
 
 </div>
 
-<!-- items already added -->
+<!-- items already added-->
 <div class="itemscontainer" >
     <ul class="collapsible itemslist">
-        <li>
-            <div class="collapsible-header">Title of item</div>
-            <div class="collapsible-body">Description</div>
+        <ul id="itemslist" class="itemsList-class">
 
-        </li>
-        <li>
-            <div class="collapsible-header">Title of item</div>
-            <div class="collapsible-body">Description</div>
-
-        </li>
+        </ul>
     </ul>
 </div>
 
 
-
-<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
@@ -150,13 +171,18 @@
     };
     // Initialize Firebase
     firebase.initializeApp(firebaseConfig);
+
+    // Create firebase connection constants
     const auth = firebase.auth();
     const db = firebase.firestore();
+
+    // Update firebase settings for timestamps
+    db.settings({timestampsInSnapshot:true});
 </script>
 
 <!-- javascript for page changes -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
-<script src="main.js"></script>
-<script src="auth.js"></script>
+<script src="scripts/main.js"></script>
+<script src="scripts/auth.js"></script>
 </body>
 </html>
