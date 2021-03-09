@@ -139,7 +139,8 @@ addItemsForm.addEventListener('submit', (e) => {
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
-        type: addItemsForm['type'].value
+        type: addItemsForm['type'].value,
+        userId: uid
     }).then(docRef => {
         console.log(docRef.id);
         itemId = String.valueOf(docRef.id);
