@@ -130,7 +130,8 @@ const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let user = firebase.auth().currentUser;
-    var uid;
+    var uid, itemId;
+
     if(user){
         uid = user.uid;
         console.log(uid);
@@ -141,9 +142,11 @@ addItemsForm.addEventListener('submit', (e) => {
         type: addItemsForm['type'].value
     }).then(docRef => {
         console.log(docRef.id);
+        itemId = String.valueOf(docRef.id);
         addItemsForm.reset();
     });
 
+    console.log(itemId);
     db.collection('accounts').doc(uid).collection('userItems').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
