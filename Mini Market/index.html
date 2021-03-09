@@ -31,31 +31,30 @@
     });
 </script>
 
-
 <!-- navigation -->
 <nav class="navi">
     <div class="nav-wrapper container">
         <ul id="navigation" class="navigation-options">
             <li class="logged-in">
-                <a href="#account" class="trigger" data-target="account">Account</a>
+                <a href="#account" data-target="account">Account</a>
             </li>
             <li class="logged-in">
-                <a href="#add-item" class="trigger" data-target="add-item">Add Item</a>
+                <a href="#add-item" data-target="add-item">Add Item</a>
             </li>
             <li class="logged-in">
-                <a href="#items-added" class="trigger" data-target="items-added">Item List</a>
+                <a href="#items-added" data-target="items-added">Item List</a>
             </li>
             <li class="logged-out">
-                <a href="#login" class="trigger" data-target="login">Login</a>
+                <a href="#login" data-target="login">Login</a>
             </li>
             <li class="logged-out">
-                <a href="#signup" class="trigger" data-target="signup">Sign Up</a>
+                <a href="#signup" data-target="signup">Sign Up</a>
             </li>
             <li class="logged-in">
-                <a href="#logout-page" class="trigger" id="logout" data-target="logout-page">Log out</a>
+                <a href="#logout-page" id="logout" data-target="logout-page">Log out</a>
             </li>
             <li class="logged-out">
-                <a href="#homepage" class="trigger" data-target="homepage">Homepage</a>
+                <a href="#homepage" data-target="homepage">Homepage</a>
             </li>
         </ul>
     </div>
@@ -175,6 +174,7 @@
 <!-- Add Firebase products that you want to use -->
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
 <script>
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -198,5 +198,7 @@
 <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
 <script src="scripts/main.js"></script>
 <script src="scripts/auth.js"></script>
+<script src="scripts/messaging.js"></script>
+<script src="scripts/firebase-messaging-sw.js"></script>
 </body>
 </html>
