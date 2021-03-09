@@ -129,8 +129,22 @@ function renderList(doc){
 const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(uid);
+    let user = firebase.auth().currentUser;
+    var uid;
+    if(user){
+        uid = user.uid;
+        console.log(uid);
+    }
     db.collection('items').add({
+        title: addItemsForm['title'].value,
+        description: addItemsForm['description'].value,
+        type: addItemsForm['type'].value
+    }).then(docRef => {
+        console.log(docRef.id);
+        addItemsForm.reset();
+    });
+
+    db.collection('accounts').doc(uid).collection('userItems').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
         type: addItemsForm['type'].value
