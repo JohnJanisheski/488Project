@@ -45,14 +45,12 @@ login.addEventListener('submit', (e) =>{
     }); // Error Handling Still needs to be implemented
 });
 
+// Sign the user out and go back to default page
 <!-- logout -->
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
-    e.preventDefault();
     auth.signOut();
 });
-// Sign the user out and go back to default page
-
 
 // signup
 const signupForm = document.querySelector('#signup-form');
@@ -71,7 +69,6 @@ signupForm.addEventListener('submit', (e) => {
             lastname: signupForm['signup-last-name'].value,
             campus: signupForm['signup-campus'].value,
         })
-
     }).then(() => {
         signupForm.reset();
         signupContainer.style.display="none";

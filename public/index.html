@@ -14,8 +14,6 @@
         <h1 style="font-family: 'Comic Sans MS',serif; font-size: 400%">Mini Market</h1>
         <h1 style="font-family: 'Comic Sans MS',serif; font-size: 160%; padding-left: 30px">Trading Made Easy</h1>
     </div>
-
-
 </head>
 
 
@@ -33,31 +31,30 @@
     });
 </script>
 
-
 <!-- navigation -->
 <nav class="navi">
     <div class="nav-wrapper container">
         <ul id="navigation" class="navigation-options">
             <li class="logged-in">
-                <a href="#account" class="trigger" data-target="account">Account</a>
+                <a href="#account" data-target="account">Account</a>
             </li>
             <li class="logged-in">
-                <a href="#add-item" class="trigger" data-target="add-item">Add Item</a>
+                <a href="#add-item" data-target="add-item">Add Item</a>
             </li>
             <li class="logged-in">
-                <a href="#items-added" class="trigger" data-target="items-added">Item List</a>
+                <a href="#items-added" data-target="items-added">Item List</a>
             </li>
             <li class="logged-out">
-                <a href="#login" class="trigger" data-target="login">Login</a>
+                <a href="#login" data-target="login">Login</a>
             </li>
             <li class="logged-out">
-                <a href="#signup" class="trigger" data-target="signup">Sign Up</a>
+                <a href="#signup" data-target="signup">Sign Up</a>
             </li>
             <li class="logged-in">
-                <a href="#logout-page" class="trigger" id="logout" data-target="logout-page">Log out</a>
+                <a href="#logout-page" id="logout" data-target="logout-page">Log out</a>
             </li>
             <li class="logged-out">
-                <a href="#homepage" class="trigger" data-target="homepage">Homepage</a>
+                <a href="#homepage" data-target="homepage">Homepage</a>
             </li>
         </ul>
     </div>
@@ -96,7 +93,7 @@
             <input type="text" placeholder="Enter Campus" id="signup-campus">
             <label>Biography</label>
             <input type="text" placeholder="Enter Bio" id="signup-bio">
-            <!-- This button will submit the form to the firebase authurization service ()-->
+            <!-- This button will submit the form to the firebase authorization service ()-->
             <div class="button_class">
                 <button id="sign-up-button" type="submit">Sign Up Now</button>
             </div>
@@ -114,10 +111,8 @@
         <div class="container">
             <label>Email</label>
             <input type="text" placeholder="Enter Email" id="login-email">
-
             <label>Password</label>
             <input type="password" placeholder="Enter Password" id="login-password">
-
             <div class="button_class">
                 <button  id="log-in-button" type="submit">Submit</button>
             </div>
@@ -142,7 +137,6 @@
 <div>
     <!-- https://www.w3schools.com/howto/howto_css_login_form.asp -->
     <h3>Add item</h3>
-
     <form id="add-item-form">
         <div class="input-field">
             <label for="title">Title</label>
@@ -158,9 +152,7 @@
         </div>
         <button id="button" type="submit">Submit</button>
     </form>
-
     </ul>
-
 </div>
 </section>
 
