@@ -4,5 +4,5 @@ message.requestPermission()
     console.log('Have permission'); //User Can Allow or Deny messages
 })
 .catch(function(err) {
-    console.log('Error Occured.')
+    console.log('Error Occurred.')
 })
