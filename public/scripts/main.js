@@ -25,49 +25,10 @@
   window.addEventListener("hashchange", loadContent)
 
 
-  const account = document.querySelector('#account-details');
-  const checkUser = (user) => {
-      if (user) {
-          db.collection('accounts').doc(user.uid).get().then(doc => {
-              const html = '<div>Logged in as ${user.email}</div>' +
-                  '<div>${doc.data().bio}</div>';
-              accountDetails.innerHTML = html;
-          });
-      }
-      else{
-          account.innerHTML = '';
-      }
-  };
-
-  document.addEventListener('DOMContentLoaded', function (){
-     // var modals = document.querySelectorAll('.modal');
-    //  M.Modal.init(modals);
-
-      var items = document.querySelectorAll('.collapsible');
-      M.Collapsible.init(items);
-
-
 
   });
 
   */
-
-//
-// const itemList = document.querySelector('.itemslist').get()
-// const setUpItems = (data) => {
-//
-//     let html = '';
-//     data.forEach(doc => {
-//         const item = doc.data();
-//         console.log(item);
-//         const li = '<li>' +
-//             '<div> ${item.title} < /div>' +
-//             '<div>${item.description}</div>' +
-//             '<div>${item.itemType}</div> </li>';
-//         html += li;
-//     });
-//     itemList.innerHTML = html;
-// };
 
 
 <!-- conditional menu links -->

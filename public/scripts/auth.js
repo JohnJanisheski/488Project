@@ -45,12 +45,14 @@ login.addEventListener('submit', (e) =>{
     }); // Error Handling Still needs to be implemented
 });
 
-// Sign the user out and go back to default page
 <!-- logout -->
 const logout = document.querySelector('#logout');
 logout.addEventListener('click', (e) => {
+    e.preventDefault();
     auth.signOut();
 });
+// Sign the user out and go back to default page
+
 
 // signup
 const signupForm = document.querySelector('#signup-form');
@@ -126,12 +128,26 @@ function renderList(doc){
 const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
-    console.log(uid);
+    let user = firebase.auth().currentUser;
+    let uid;
+
+    if(user){
+        uid = user.uid;
+        console.log(uid);
+    }
+    console.log("Outside If Statement")
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
-        type: addItemsForm['type'].value
-    }).then(() => {
-        addItemsForm.reset();
+        type: addItemsForm['type'].value,
+        userId: uid
     })
+        // This setup will create a collection that has a document for each item and inside each document
+        //  is a reference to each item created by said user
+        .then(docRef => {
+        console.log(docRef.id);
+        db.collection('accounts').doc(uid).collection('usersItems').add({
+            referenceValue: docRef.id,
+        }).then(addItemsForm.reset());
+    });
 });
