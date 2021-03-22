@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background-color: rgb(255,255,255);
+            /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+        }
+        #container{
+            position: absolute;
+            width: 450px;
+            height: 270px;
+            left: calc(50% - 225px);
+            top: calc(50% - 135px);
+            border-radius: 10px;
+            border: outset 2px black;
+        }
+s
+        .layui-icon {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .regist {
+            width: 50px;
+            font-size: 18px;
+            color: #0072ff;
+            margin-right: 45px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 30px;">
+            <legend>Mini Market</legend>
+        </fieldset>
+        <form class="layui-form" action="index_Old.html">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> </label>
+                <div class="layui-input-inline">
+                  <input type="text" name="username" lay-verify="required" lay-verType="tips" lay-reqText="Please enter your name"  placeholder="your name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe673;</i></label>
+                <div class="layui-input-inline">
+                  <input type="password" name="password"lay-verify="required" lay-verType="tips" lay-reqText="Please enter your password" placeholder="your password" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item" style="text-align: right;">
+                  <button class="layui-btn" style="width: 225px;margin-right: 20px;"  lay-submit lay-filter="formDemo">Sign In</button>
+                  <a href="regist.html" class="regist">Sign Up</a>
+            </div>
+        </form>
+    </div>
+    <script src="./layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form'], function(){
+        var layer = layui.layer
+        ,form = layui.form;
+        
+        });
+    </script> 
+</body>
+</html>
