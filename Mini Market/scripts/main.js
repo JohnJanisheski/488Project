@@ -43,7 +43,8 @@ const setupUI = (user) => {
             const html = `<div> Logged in as ${user.email}</div>
                       <div> Name is ${doc.data().name}</div>
                       <div> Campus is ${doc.data().campus}</div>
-                      <div> Biography: ${doc.data().bio}</div>   `;
+                      <div> Biography: ${doc.data().bio}</div>
+                      <div> Your Items: ${doc.data().usersItems}</div>   `;
             accountInfo.innerHTML = html;
         });
 

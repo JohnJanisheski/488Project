@@ -125,6 +125,7 @@ function renderList(doc){
     });
 }
 
+//Add an Item to the Database and to the user's account
 const addItemsForm = document.querySelector('#add-item-form');
 addItemsForm.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -135,7 +136,6 @@ addItemsForm.addEventListener('submit', (e) => {
         uid = user.uid;
         console.log(uid);
     }
-    console.log("Outside If Statement")
     db.collection('items').add({
         title: addItemsForm['title'].value,
         description: addItemsForm['description'].value,
