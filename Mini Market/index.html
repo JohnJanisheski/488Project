@@ -101,7 +101,7 @@ s
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
-        const observer = db.collection('accounts').doc(user).get('loggedIn');
+        auth.Auth.Persistence.SESSION;
 
     </script>
 

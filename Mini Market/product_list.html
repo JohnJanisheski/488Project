@@ -222,7 +222,7 @@
             measurementId: "G-D480CCRXP5"
         };
 
-        // firebase.initializeApp(firebaseConfig);      // This causes the page to be reloaded infinitely when combined
+        firebase.initializeApp(firebaseConfig);      // This causes the page to be reloaded infinitely when combined
                                                         // with the onAuthStateChanged function window.location
                                                         // from auth.js *Looking into possible solutions*
         const auth = firebase.auth();

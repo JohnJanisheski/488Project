@@ -7,10 +7,10 @@ const itemlist = document.querySelector('.itemslist');
 auth.onAuthStateChanged(user => {
     if (user){
         console.log("User is logged in");
-        window.location = 'product_list.html'; // This will automatically load product_list when auth is changed (This
-        // matched with the initialization of the firebase app at the bottom of product_list (Or any pages that we would
-        // like to load firebase on) will automatically load this page instead)  ***Need to find another way to redirect
-        // users after creating an account
+        // window.location = 'product_list.html'; // This will automatically load product_list when auth is changed (This
+        // // matched with the initialization of the firebase app at the bottom of product_list (Or any pages that we would
+        // // like to load firebase on) will automatically load this page instead)  ***Need to find another way to redirect
+        // // users after creating an account
 
         // db.collection('items').onSnapshot(snapshot => {
         //     let newChange = snapshot.docChanges();
@@ -27,7 +27,7 @@ auth.onAuthStateChanged(user => {
         // setupUI(user); //Since we are using static connection methods we don't need a setupUI as it currently is
     }
     else{
-        console.log('user logged out');
+        console.log('user is logged out');
         window.location = 'index.html';
     }
 });
@@ -47,6 +47,7 @@ login.addEventListener('submit', (e) =>{
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
         login.reset();
         loginContainer.style.display="none";
+        window.location = "product_list.html";
 
 
     }); // Error Handling Still needs to be implemented
