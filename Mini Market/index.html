@@ -56,6 +56,9 @@
             <li class="logged-out">
                 <a href="#homepage" data-target="homepage">Homepage</a>
             </li>
+            <li class="logged-in">
+                <a href="#messaging" data-target="messaging">Inbox</a>
+            </li>
         </ul>
     </div>
 </nav>
@@ -167,6 +170,39 @@
         </ul>
     </ul>
 </div>
+</section>
+
+<!-- messaging inbox-->
+<section id="messaging">
+    <div class="contacts">
+        <p>User contacts</p>
+    </div>
+    <form id="sendMessageForm">
+        <div class="input-field">
+            <label for="message">Type Message</label>
+            <input type="text" id="message">
+        </div>
+        <button class="send" type="submit">Send</button>
+    </form>
+    <form id="sendNewMessageForm">
+        <div class="input-field">
+            <label for="recEmail">Enter recipient email</label>
+            <input type="text" id="recEmail">
+        </div>
+        <div class="input-field">
+            <label for="newMessage">Type Message</label>
+            <input type="text" id="newMessage">
+        </div>
+        <button class="send" type="submit">Send</button>
+    </form>
+    <div class="messagingbox">
+        <p>This is where messages will go</p>
+        <ul class="collapsible inboxlist">
+            <ul id="inboxlist" class="inboxList-class">
+
+            </ul>
+        </ul>
+    </div>
 </section>
 
 

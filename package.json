@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/sderr01/488Project#readme",
   "dependencies": {
-    "firebase": "^8.2.7"
+    "@angular/fire": "^6.1.4",
+    "firebase": "^8.3.1"
   }
 }
