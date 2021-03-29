@@ -53,13 +53,7 @@ login.addEventListener('submit', (e) =>{
 });
 
 <!-- logout -->
-document.querySelector('#logout').addEventListener('click', (e) => {
-    // e.preventDefault();
-    auth.signOut().then(r => {
-        console.log("User is logging out...");
-        window.location = 'index.html'
-    });
-});
+// User is logged out when sent to index.html
 
 // signup
 const signupForm = document.querySelector('#signup-form');
