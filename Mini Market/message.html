@@ -129,7 +129,7 @@
             <span class="logo" style="float: left;">Mini Market</span>
             <span class="user" style="float: right;">
                 <a href="account.html"><i class="layui-icon layui-icon-username myIcon"></i></a>
-                <a id='logout'><i class="layui-icon layui-icon-logout myIcon"></i></a>
+                <a href="index.html"><i class="layui-icon layui-icon-logout myIcon"></i></a>
             </span>
             <div class="head">
                 <ul class="layui-nav" lay-filter="menus">
@@ -173,10 +173,19 @@
                     <div  class="msg-my"><span >this is a msg</span><img src="./img/bk1g.jpg"></div>
                     <div  class="msg-my msg-other"><span >this is a msg</span><img  src="./img/thinkinJava1.jpg"></div>
                 </div>
-                <div class="msg-send">
-                    <textarea name="desc" placeholder="type message" class="layui-textarea" id="msgInput"></textarea>
-                    <button type="button" class="layui-btn" style="float:right;" id="sendMsg">Send</button>
-                </div>
+
+                <!-- updated messaging where you put email and message, links up to firestore -->
+                <form id="sendNewMessageForm">
+                    <div class="input-field">
+                        <label for="recEmail">Enter recipient email</label>
+                        <input type="text" id="recEmail">
+                    </div>
+                    <div class="input-field">
+                        <label for="newMessage">Type Message</label>
+                        <input type="text" id="newMessage">
+                    </div>
+                    <button class="send" type="submit">Send</button>
+                </form>
             </div>
         </div>        
     </div>
