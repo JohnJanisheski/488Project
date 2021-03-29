@@ -7,6 +7,7 @@ message.requestPermission()
     console.log('Error Occured.')
 })
 
+// sending new message
 const createMessageForm = document.querySelector('#sendNewMessageForm');
 createMessageForm.addEventListener('submit', (e) => {
     e.preventDefault();

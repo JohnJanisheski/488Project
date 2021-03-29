@@ -78,7 +78,7 @@
             padding: 15px;
             border-bottom: rgb(71, 68, 68)1px solid;
         }
-        .selected{
+        .userTitle2:hover{
             padding: 15px;
             background-color: rgb(99, 95, 95);
             border-bottom: rgb(71, 68, 68)1px solid;
@@ -144,48 +144,55 @@
             <div class="user-list">
                 <div class="userTitle">
                     <img src="./img/bk1g.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME</span>
+                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Sarah</span>
                 </div>
                 <div class="userTitle2">
                     <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME1</span>
+                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">John</span>
                 </div>
-                <div class="userTitle2 selected">
+                <div class="userTitle2 ">
                     <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME2</span>
+                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Tyler</span>
                 </div>
                 <div class="userTitle2">
                     <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME3</span>
+                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Laura</span>
                 </div>
                 <div class="userTitle2">
                     <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME4</span>
+                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Yuhui</span>
                 </div>
-                <div class="userTitle2">
-                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME5</span>
-                </div>
+<!--                <div class="userTitle2">-->
+<!--                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">-->
+<!--                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME5</span>-->
+<!--                </div>-->
             </div>
             <div class="msg-content">
-                <div class="userTitle">USER NAME2</div>
+                <div class="userTitle">Tyler</div>
                 <div class="msg-list" id="msg-list">
                     <div  class="msg-my"><span >this is a msg</span><img src="./img/bk1g.jpg"></div>
                     <div  class="msg-my msg-other"><span >this is a msg</span><img  src="./img/thinkinJava1.jpg"></div>
                 </div>
 
-                <!-- updated messaging where you put email and message, links up to firestore -->
+
+                <!-- sending new messages -->
                 <form id="sendNewMessageForm">
-                    <div class="input-field">
-                        <label for="recEmail">Enter recipient email</label>
-                        <input type="text" id="recEmail">
-                    </div>
-                    <div class="input-field">
-                        <label for="newMessage">Type Message</label>
-                        <input type="text" id="newMessage">
-                    </div>
-                    <button class="send" type="submit">Send</button>
+                <div class="input-field">
+                    <label for="recEmail">Enter recipient email</label>
+                    <input type="text" id="recEmail">
+                </div>
+                <div class="msg-send">
+                    <textarea for="newMessage" placeholder="type message" class="layui-textarea" id="newMessage"></textarea>
+
+                </div>
+                <button class="layui-btn" style="float:right;" type="submit">Send</button>
                 </form>
+                <!--
+                <div class="msg-send">
+                    <textarea name="desc" placeholder="type message" class="layui-textarea" id="msgInput"></textarea>
+                    <button type="button" class="layui-btn" style="float:right;" id="sendMsg">Send</button>
+                </div>
+                -->
             </div>
         </div>        
     </div>
