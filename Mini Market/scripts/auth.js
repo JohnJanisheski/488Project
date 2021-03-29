@@ -175,3 +175,27 @@ createMessageForm.addEventListener('submit', (e) => {
             console.error("Error adding document: ", error);
         });
 });
+
+// https://firebase.google.com/codelabs/firebase-web#1
+// Loads chat messages history and listens for upcoming ones.
+// *is not functional currently*
+function loadMessages() {
+    // Create the query to load the last 12 messages and listen for new ones.
+    var query = firebase.firestore()
+        .collection('inbox')
+        .limit(12);
+
+    // Start listening to the query.
+    query.onSnapshot(function(snapshot) {
+        snapshot.docChanges().forEach(function(change) {
+            if (change.type === 'removed') {
+                deleteMessage(change.doc.id);
+            } else {
+                var message = change.doc.data();
+                displayMessage(change.doc.id, message.userId,
+                    message.newMessage);
+            }
+        });
+    });
+}
+loadMessages();

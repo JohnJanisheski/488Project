@@ -57,7 +57,10 @@
                 <a href="#homepage" data-target="homepage">Homepage</a>
             </li>
             <li class="logged-in">
-                <a href="#messaging" data-target="messaging">Inbox</a>
+                <a href="#messaging" data-target="messaging">Send Message</a>
+            </li>
+            <li class="logged-in">
+                <a href="#messages-container" data-target="messages-container">Inbox</a>
             </li>
         </ul>
     </div>
@@ -177,13 +180,13 @@
     <div class="contacts">
         <p>User contacts</p>
     </div>
-    <form id="sendMessageForm">
-        <div class="input-field">
-            <label for="message">Type Message</label>
-            <input type="text" id="message">
-        </div>
-        <button class="send" type="submit">Send</button>
-    </form>
+<!--    <form id="sendMessageForm">-->
+<!--        <div class="input-field">-->
+<!--            <label for="message">Type Message</label>-->
+<!--            <input type="text" id="message">-->
+<!--        </div>-->
+<!--        <button class="send" type="submit">Send</button>-->
+<!--    </form>-->
     <form id="sendNewMessageForm">
         <div class="input-field">
             <label for="recEmail">Enter recipient email</label>
@@ -197,17 +200,32 @@
     </form>
     <div class="messagingbox">
         <p>This is where messages will go</p>
-        <ul class="collapsible inboxlist">
-            <ul id="inboxlist" class="inboxList-class">
 
-            </ul>
-        </ul>
     </div>
 </section>
 
+<section id="messages-container">
+<main class="mdl-layout__content mdl-color--grey-100">
+    <div id="messages-card-container" class="mdl-cell mdl-cell--12-col mdl-grid">
+
+        <!-- Messages container -->
+        <div id="messages-card" class="mdl-card mdl-shadow--2dp mdl-cell mdl-cell--12-col mdl-cell--6-col-tablet mdl-cell--6-col-desktop">
+            <div class="mdl-card__supporting-text mdl-color-text--grey-600">
+                <div id="messages">
+                </div>
+                <ul class="collapsible inboxlist">
+                    <ul id="inboxlist" class="inboxList-class">
+
+                    </ul>
+                </ul>
+
+            </div>
+        </div>
 
 
-
+    </div>
+</main>
+</section>
 
 
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
