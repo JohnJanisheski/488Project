@@ -15,14 +15,15 @@
         }
     </style>
 </head>
+<section id="upload">
 <body>
     <div style="width: 500px; height: 520px;">
-        <form class="layui-form">
+        <form class="layui-form" id='upload_item_form'>
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-upload-list">
                         <p id="demoText"></p>
-                        <img class="layui-upload-img" style="width: 150px;height: 150px;" id="demo1">
+                        <img class="layui-upload-img" style="width: 150px;height: 150px;" id="image">
                         <button type="button" class="layui-btn" id="test1">Upload picture</button> 
                     </div>
                     
@@ -31,25 +32,25 @@
             <div class="layui-form-item">
                 <label class="layui-form-label"> Item name</label>
                 <div class="layui-input-block">
-                  <input type="text" id="shopName"   lay-verify="required" lay-verType="tips" lay-reqText="Please Input Item name" placeholder="Please Input Item name" autocomplete="off" class="layui-input">
+                  <input type="text" id="itemName" placeholder="Please Input Item name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">Description</label>
                 <div class="layui-input-block">
-                    <textarea id="descript"  lay-verify="required" lay-verType="tips" lay-reqText="Please Input Description" placeholder="Please Input Description" class="layui-textarea"></textarea>
+                    <textarea id="description" placeholder="Please Input Description" class="layui-textarea"></textarea>
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">Listing Price</label>
                 <div class="layui-input-block">
-                  <input id="Price" type="text" name="title" lay-verify="required" lay-verType="tips" lay-reqText="Please Input Price" autocomplete="off" class="layui-input">
+                  <input id="price" type="text" placeholder="Listing Price" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label">Condition</label>
                 <div class="layui-input-block">
-                  <select name="city"  lay-verify="required" lay-verType="tips" lay-reqText="Please select Condition" id="Condition" >
+                  <select name="city" id="Condition" >
                     <option value="">Choose Condition</option>
                     <option value="0">New</option>
                     <option value="1">Good</option>
@@ -60,7 +61,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Type</label>
                 <div class="layui-input-block">
-                  <select name="city" lay-verify="required" lay-verify="required" lay-verType="tips" lay-reqText="Please Select Type" id="Type"  >
+                  <select name="city" id="Type"  >
                     <option value="">Choose Type</option>
                     <option value="0">Furniture</option>
                     <option value="1">Books</option>
@@ -72,7 +73,7 @@
               <div class="layui-form-item">
                 <label class="layui-form-label">Campus</label>
                 <div class="layui-input-block">
-                  <select name="city" lay-verify="required" lay-verify="required" lay-verType="tips" lay-reqText="Please Select Campus" id="Campus" >
+                  <select name="city" id="Campus" >
                     <option value="">Choose   Campus</option>
                     <option value="0">Abington</option>
                     <option value="1">Altoona</option>
@@ -99,27 +100,29 @@
               </div>
             <div class="layui-form-item">
               <div class="layui-input-block">
-                <button class="layui-btn" id="closeIframe"  lay-submit >Submit </button>
+                <button class="layui-btn" id="submit-upload" >Submit </button>
                 <button type="reset" class="layui-btn layui-btn-primary">Reset </button>
               </div>
             </div>
         </form>
     </div>
-    <script src="./layui/layui.js"></script>
-    <script>
+</body>
+</section>
+<script src="./layui/layui.js"></script>
+<script>
         layui.use(['layer', 'form','element','upload'], function(){
             var layer = layui.layer
             ,form = layui.form
             ,element = layui.element
             ,$=layui.$
             ,upload = layui.upload;
-        
+
             var index = parent.layer.getFrameIndex(window.name);
             //关闭iframe
             $('#closeIframe').click(function(){
                 var val = $('#shopName').val();
- 
-                if($('#shopName').val() 
+
+                if($('#shopName').val()
                 && $('#descript').val()
                 && $('#Price').val()
                 && $('#Condition').val()
@@ -147,39 +150,38 @@
                 }
             });
         })
-    </script>
-    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
-    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
-    <!-- Add Firebase products that you want to use -->
-    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
-    <script>
-        // Your web app's Firebase configuration
-        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-        var firebaseConfig = {
-            apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
-            authDomain: "mini-market-aa3c4.firebaseapp.com",
-            databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
-            projectId: "mini-market-aa3c4",
-            storageBucket: "mini-market-aa3c4.appspot.com",
-            messagingSenderId: "490789165755",
-            appId: "1:490789165755:web:99ce734f2657cce080e79e",
-            measurementId: "G-D480CCRXP5"
-        };
-        // Initialize Firebase
-        firebase.initializeApp(firebaseConfig);
-        const auth = firebase.auth();
-        const db = firebase.firestore();
+</script>
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
+        authDomain: "mini-market-aa3c4.firebaseapp.com",
+        databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
+        projectId: "mini-market-aa3c4",
+        storageBucket: "mini-market-aa3c4.appspot.com",
+        messagingSenderId: "490789165755",
+        appId: "1:490789165755:web:99ce734f2657cce080e79e",
+        measurementId: "G-D480CCRXP5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
 
-    </script>
+</script>
 
-    <!-- javascript for page changes -->
-    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
-    <script src="scripts/main.js"></script>
-    <script src="scripts/auth.js"></script>
-    <script src="scripts/messaging.js"></script>
-    <script src="scripts/firebase-messaging-sw.js"></script>
-</body>
+<!-- javascript for page changes -->
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
+<script src="scripts/main.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/messaging.js"></script>
+<script src="scripts/firebase-messaging-sw.js"></script>
 </html>

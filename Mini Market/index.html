@@ -67,16 +67,6 @@ s
 </body>
 </section>
 
-<!--    <script src="./layui/layui.js"></script>-->
-
-<!--    <script>-->
-<!--        layui.use(['layer', 'form'], function(){-->
-<!--        var layer = layui.layer-->
-<!--        ,form = layui.form;-->
-<!--        -->
-<!--        });-->
-
-<!--    </script>-->
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
@@ -100,9 +90,9 @@ s
         // Initialize Firebase
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
+        auth.signOut();
         const db = firebase.firestore();
         auth.Auth.Persistence.SESSION;
-
     </script>
 
     <!-- javascript for page changes -->

@@ -28,7 +28,6 @@ auth.onAuthStateChanged(user => {
     }
     else{
         console.log('User is logged out');
-        window.location = 'index.html';
     }
 });
 
@@ -84,32 +83,5 @@ signupForm.addEventListener('submit', (e) =>{
     }).then(() => {
         signupForm.reset();
         signupContainer.style.display="none";
-    });
-});
-
-//Add an Item to the Database and to the user's account
-const addItemsForm = document.querySelector('#add-item-form');
-addItemsForm.addEventListener('submit', (e) => {
-    e.preventDefault();
-    let user = firebase.auth().currentUser;
-    let uid;
-
-    if(user){
-        uid = user.uid;
-        console.log(uid);
-    }
-    db.collection('items').add({
-        title: addItemsForm['title'].value,
-        description: addItemsForm['description'].value,
-        type: addItemsForm['type'].value,
-        userId: uid
-    })
-        // This setup will create a collection that has a document for each item and inside each document
-        //  is a reference to each item created by said user
-        .then(docRef => {
-        console.log(docRef.id);
-        db.collection('accounts').doc(uid).collection('usersItems').add({
-            referenceValue: docRef.id,
-        }).then(addItemsForm.reset());
     });
 });
