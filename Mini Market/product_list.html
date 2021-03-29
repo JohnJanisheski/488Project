@@ -118,7 +118,7 @@
             <span class="logo" style="float: left;">Mini Market</span>
             <span class="user" style="float: right;">
                 <a href="account.html"><i class="layui-icon layui-icon-username myIcon"></i></a>
-                <a id ='logout'><i class="layui-icon layui-icon-logout myIcon"></i></a>
+                <button id="logout"><i class="layui-icon layui-icon-logout myIcon"></i></button>
             </span>
             <div class="head">
                 <ul class="layui-nav" lay-filter="menus">
@@ -222,9 +222,7 @@
             measurementId: "G-D480CCRXP5"
         };
 
-        firebase.initializeApp(firebaseConfig);      // This causes the page to be reloaded infinitely when combined
-                                                        // with the onAuthStateChanged function window.location
-                                                        // from auth.js *Looking into possible solutions*
+        firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
     </script>

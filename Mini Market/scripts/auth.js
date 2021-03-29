@@ -27,7 +27,7 @@ auth.onAuthStateChanged(user => {
         // setupUI(user); //Since we are using static connection methods we don't need a setupUI as it currently is
     }
     else{
-        console.log('user is logged out');
+        console.log('User is logged out');
         window.location = 'index.html';
     }
 });
@@ -54,14 +54,13 @@ login.addEventListener('submit', (e) =>{
 });
 
 <!-- logout -->
-const logout = document.querySelector('#logout');
-logout.addEventListener('click', (e) => {
-    e.preventDefault();
+document.querySelector('#logout').addEventListener('click', (e) => {
+    // e.preventDefault();
     auth.signOut().then(r => {
-        console.log("User is Logged Out");
+        console.log("User is logging out...");
+        window.location = 'index.html'
     });
 });
-
 
 // signup
 const signupForm = document.querySelector('#signup-form');
@@ -88,77 +87,29 @@ signupForm.addEventListener('submit', (e) =>{
     });
 });
 
-
-<!-- conditional menu links -->
-// document.getElementById("log-in-button").addEventListener("click", () => {
-//     document.getElementById("add-item").style.display="none";
-//     document.getElementById("login").style.display="block";
-//     document.getElementById("signup").style.display="none";
-//     document.getElementById("items-added").style.display="none";
-//
-// }, false);
-//
-// document.getElementById("sign-up-button").addEventListener("click", () => {
-//     document.getElementById("add-item").style.display="none";
-//     document.getElementById("login").style.display="none";
-//     document.getElementById("signup").style.display="block";
-//     document.getElementById("items-added").style.display="none";
-// }, false);
-
-
-<!-- www.youtube.com/watch?v=zpQle4SBRfg&list=PL4cUxeGkcC9itfjle0ji1xOZ2cjRGY_WB&index=4&t=24s -->
-<!-- show items list -->
-
-function renderList(doc){
-    // let li = document.createElement('li');
-    // let title = document.createElement('span');
-    // let desc = document.createElement('span');
-    // let type = document.createElement('span');
-    // let del = document.createElement('del');
-    //
-    // li.setAttribute('data-id', doc.id);
-    // title.textContent = doc.data().title;
-    // desc.textContent = doc.data().description;
-    // type.textContent = doc.data().type;
-    // del.textContent = 'X';
-    //
-    // li.appendChild(title);
-    // li.appendChild(desc);
-    // li.appendChild(type);
-    // li.appendChild(del);
-    // itemlist.appendChild(li);
-    //
-    // //delete item
-    // del.addEventListener('click', (e) => {
-    //     e.stopPropagation();
-    //     let id = e.target.parentElement.getAttribute('data-id');
-    //     db.collection('items').doc(id).delete();
-    // });
-}
-
 //Add an Item to the Database and to the user's account
-// const addItemsForm = document.querySelector('#add-item-form');
-// addItemsForm.addEventListener('submit', (e) => {
-//     e.preventDefault();
-//     let user = firebase.auth().currentUser;
-//     let uid;
-//
-//     if(user){
-//         uid = user.uid;
-//         console.log(uid);
-//     }
-//     db.collection('items').add({
-//         title: addItemsForm['title'].value,
-//         description: addItemsForm['description'].value,
-//         type: addItemsForm['type'].value,
-//         userId: uid
-//     })
-//         // This setup will create a collection that has a document for each item and inside each document
-//         //  is a reference to each item created by said user
-//         .then(docRef => {
-//         console.log(docRef.id);
-//         db.collection('accounts').doc(uid).collection('usersItems').add({
-//             referenceValue: docRef.id,
-//         }).then(addItemsForm.reset());
-//     });
-// });
+const addItemsForm = document.querySelector('#add-item-form');
+addItemsForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let user = firebase.auth().currentUser;
+    let uid;
+
+    if(user){
+        uid = user.uid;
+        console.log(uid);
+    }
+    db.collection('items').add({
+        title: addItemsForm['title'].value,
+        description: addItemsForm['description'].value,
+        type: addItemsForm['type'].value,
+        userId: uid
+    })
+        // This setup will create a collection that has a document for each item and inside each document
+        //  is a reference to each item created by said user
+        .then(docRef => {
+        console.log(docRef.id);
+        db.collection('accounts').doc(uid).collection('usersItems').add({
+            referenceValue: docRef.id,
+        }).then(addItemsForm.reset());
+    });
+});
