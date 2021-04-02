@@ -18,15 +18,15 @@
 <section id="upload">
 <body>
     <div style="width: 500px; height: 520px;">
-        <form class="layui-form" id='upload_item_form'>
+        <form class="layui-form" id="upload_item_form">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-upload-list">
                         <p id="demoText"></p>
                         <img class="layui-upload-img" style="width: 150px;height: 150px;" id="image">
-                        <button type="button" class="layui-btn" id="test1">Upload picture</button> 
+                        <button type="button" class="layui-btn" id="test1">Upload picture</button>
                     </div>
-                    
+
                 </div>
             </div>
             <div class="layui-form-item">
@@ -50,7 +50,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Condition</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Condition" >
+                  <select name="city" id="condition" >
                     <option value="">Choose Condition</option>
                     <option value="0">New</option>
                     <option value="1">Good</option>
@@ -61,19 +61,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Type</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Type"  >
+                  <select name="city" id="type"  >
                     <option value="">Choose Type</option>
                     <option value="0">Furniture</option>
                     <option value="1">Books</option>
-                    <option value="2">Electric</option>
+                    <option value="2">Electronics</option>
                     <option value="3">Clothing</option>
+                    <option value="4">Other</option>
                   </select>
                 </div>
               </div>
               <div class="layui-form-item">
                 <label class="layui-form-label">Campus</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Campus" >
+                  <select name="city" id="campus" >
                     <option value="">Choose   Campus</option>
                     <option value="0">Abington</option>
                     <option value="1">Altoona</option>
@@ -100,7 +101,7 @@
               </div>
             <div class="layui-form-item">
               <div class="layui-input-block">
-                <button class="layui-btn" id="submit-upload" >Submit </button>
+                <button class="layui-btn" id="submit-upload"  type="submit">Submit </button>
                 <button type="reset" class="layui-btn layui-btn-primary">Reset </button>
               </div>
             </div>
@@ -110,11 +111,11 @@
 </section>
 <script src="./layui/layui.js"></script>
 <script>
-        layui.use(['layer', 'form','element','upload'], function(){
+        layui.use(['layer', 'form','element', 'upload'], function(){
             var layer = layui.layer
-            ,form = layui.form
-            ,element = layui.element
-            ,$=layui.$
+           ,form = layui.form
+           ,element = layui.element
+           ,$=layui.$
             ,upload = layui.upload;
 
             var index = parent.layer.getFrameIndex(window.name);
@@ -184,4 +185,5 @@
 <script src="scripts/auth.js"></script>
 <script src="scripts/messaging.js"></script>
 <script src="scripts/firebase-messaging-sw.js"></script>
+<script src="scripts/db-item-functions.js"></script>
 </html>
