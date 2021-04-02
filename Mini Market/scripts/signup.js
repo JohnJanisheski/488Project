@@ -7,11 +7,14 @@ signupForm.addEventListener('submit', (e) =>{
     const userEmail = signupForm['email'].value.concat("@psu.edu");
     console.log("Creating User");
     let userPassword = signupForm['password'].value;
+
+    // If passwords don't match, reset form and log it
     if(!(userPassword === signupForm['confirmPassword'].value)){
         console.log("Passwords are the different");
         signupForm.reset();
         return;
     }
+
     // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
     auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
         return db.collection('accounts').doc(cred.user.uid).set({
