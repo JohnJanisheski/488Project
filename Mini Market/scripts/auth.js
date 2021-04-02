@@ -54,28 +54,3 @@ login.addEventListener('submit', (e) =>{
 
 <!-- logout -->
 // User is logged out when sent to index.html
-
-// signup
-const signupForm = document.querySelector('#signup-form');
-const signupContainer = document.querySelector('#signup');
-
-signupForm.addEventListener('submit', (e) =>{
-    e.preventDefault();
-    const userEmail = signupForm['email'].value;
-    const userPassword = signupForm['password'].value;
-    if(!userPassword === signupForm['confirmPassword'].value())
-        return;
-
-    // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
-    auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        return db.collection('accounts').doc(cred.user.uid).set({
-            firstname: signupForm['first-name'].value,
-            lastname: signupForm['last-name'].value,
-            campus: signupForm['signup-campus'].value,
-            phone: signupForm['phone'].value,
-        })
-    }).then(() => {
-        signupForm.reset();
-        signupContainer.style.display="none";
-    });
-});

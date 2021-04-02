@@ -50,12 +50,12 @@ addItemsForm.addEventListener('submit', (e) => {
     if(validateForm()) {
         db.collection('items').add({
             itemName: addItemsForm['itemName'].value,
-            // description: addItemsForm['']
-            // price:
-            // condition:
-            // type:
-            // campus:
-            // userId: uid
+            description: addItemsForm['description'].value,
+            price: addItemsForm['price'].value,
+            condition: addItemsForm['condition'].value,
+            type: addItemsForm['type'].value,
+            campus: addItemsForm['campus'].value,
+            userId: uid
             // title: addItemsForm['title'].value,
             // description: addItemsForm['description'].value,
             // type: addItemsForm['type'].value,

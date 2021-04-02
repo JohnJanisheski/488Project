@@ -46,7 +46,6 @@
     </style>
 </head>
 <section id="signup">
-<body>
     <div id="container">
         <fieldset class="layui-elem-field layui-field-title" style="margin-top: 5px;">
             <legend>Mini Market</legend>
@@ -55,19 +54,19 @@
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> </label>
                 <div class="layui-input-inline">
-                  <input type="text" name="first-name"  placeholder="First Name" autocomplete="off" class="layui-input">
+                  <input type="text" id="first-name"  placeholder="First Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> </label>
                 <div class="layui-input-inline">
-                    <input type="text" name="last-name"  placeholder="Last Name" autocomplete="off" class="layui-input">
+                    <input type="text" id="last-name"  placeholder="Last Name" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon">&#xe618;</i></label>
                 <div class="layui-input-inline" style="width:140px">
-                  <input type="text" name="email" placeholder="Email" autocomplete="off" class="layui-input">
+                  <input type="text" id="email" placeholder="Email" autocomplete="off" class="layui-input">
                 </div>
                 <div class="layui-form-mid layui-word-aux" style="width: 40px;">@psu.edu</div>
             </div>
@@ -75,13 +74,13 @@
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon">&#xe618;</i></label>
                 <div class="layui-input-inline">
-                    <input type="text" name="campus" placeholder="PSU Campus" autocomplete="off" class="layui-input">
+                    <input type="text" id="campus" placeholder="PSU Campus" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
                 <label class="layui-form-label"><i class="layui-icon">&#xe678;</i></label>
                 <div class="layui-input-inline">
-                  <input type="text" name="phone" placeholder="Phone Number" autocomplete="off" class="layui-input">
+                  <input type="text" id="phone" placeholder="Phone Number" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
@@ -97,31 +96,11 @@
                 </div>
               </div>
             <div class="layui-form-item" style="text-align: right;">
-                  <button class="layui-btn" style="width: 40%; margin-right: 5%;" >Sign Up</button>
+                  <button class="layui-btn" type="submit" style="width: 40%; margin-right: 5%;" >Sign Up</button>
                   <a href="index.html" class="regist">Sign in</a>
             </div>
         </form>
     </div>
-<!--    <script src="./layui/layui.js"></script>-->
-<!--    <script>-->
-<!--        layui.use(['layer', 'form'], function(){-->
-<!--        var layer = layui.layer-->
-<!--        ,form = layui.form-->
-<!--        ,$ = layui.$;-->
-
-<!--            form.on('submit(formDemo)', function(data){-->
-<!--                debugger-->
-<!--                var password = $("#password").val();-->
-<!--                var comfirePassword = $("#comfirePassword").val();-->
-<!--                if(comfirePassword!=password){-->
-<!--                    layer.msg('Please confirm the password', function(){-->
-<!--                    });-->
-<!--                    return false;-->
-<!--                }-->
-<!--            });-->
-<!--        });-->
-<!--    </script> -->
-</body>
 </section>
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -147,14 +126,10 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
-    auth.Auth.Persistence.SESSION;
 
 </script>
 
 <!-- javascript for page changes -->
 <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
-<script src="scripts/main.js"></script>
-<script src="scripts/auth.js"></script>
-<script src="scripts/messaging.js"></script>
-<script src="scripts/firebase-messaging-sw.js"></script>
+<script src="scripts/signup.js"></script>
 </html>
