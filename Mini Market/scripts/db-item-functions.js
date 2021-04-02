@@ -2,12 +2,12 @@
 // Validate User input items into the form
 function validateForm() {
     console.log("Validating...")
-    let itemName = document.forms["upload-item-form"]["itemName"].value;
-    let description = document.forms["upload-item-form"]["description"].value;
-    let listingPrice = document.forms["upload-item-form"]["price"].value;
-    let condition = document.forms["upload-item-form"]["condition"].value;
-    let type = document.forms["upload-item-form"]["type"].value;
-    let campus = document.forms["upload-item-form"]["campus"].value;
+    let itemName = document.forms["upload_item_form"]["itemName"].value;
+    let description = document.forms["upload_item_form"]["description"].value;
+    let listingPrice = document.forms["upload_item_form"]["price"].value;
+    let condition = document.forms["upload_item_form"]["condition"].value;
+    let type = document.forms["upload_item_form"]["type"].value;
+    let campus = document.forms["upload_item_form"]["campus"].value;
 
     if (itemName === "") {
         alert("Name must be filled out");
@@ -37,16 +37,20 @@ function validateForm() {
         return true;
 }
 
-//Add an Item to the Database and to the user's account
-const addItemsForm = document.querySelector('#upload-item-form');
+
+const addItemsForm = document.querySelector('#upload_item_form');
 addItemsForm.addEventListener('submit', (e) => {
+    //prevents reloading the page
     e.preventDefault();
+
+
     let user = firebase.auth().currentUser;
     let uid;
     if(user){
         uid = user.uid;
-        console.log(uid);
+        console.log("in add items form with user:    " + uid);
     }
+
     if(validateForm()) {
         db.collection('items').add({
             itemName: addItemsForm['itemName'].value,
@@ -55,22 +59,20 @@ addItemsForm.addEventListener('submit', (e) => {
             condition: addItemsForm['condition'].value,
             type: addItemsForm['type'].value,
             campus: addItemsForm['campus'].value,
-            userId: uid
-            // title: addItemsForm['title'].value,
-            // description: addItemsForm['description'].value,
-            // type: addItemsForm['type'].value,
-            // userId: uid
+            userId: uid,
         })
-            // This setup will create a collection that has a document for each item and inside each document
-            //  is a reference to each item created by said user
             .then(docRef => {
-                console.log(docRef.id);
-                db.collection('accounts').doc(uid).collection('usersItems').add({
+                // console.log(docRef.id);
+                db.collection('accounts').doc(uid).collection('userItems').add({
                     referenceValue: docRef.id,
                 }).then(addItemsForm.reset());
             });
     }
 });
+
+
+
+
 
 // Remove Item
 // Find My Items

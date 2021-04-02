@@ -18,14 +18,15 @@
 <section id="upload">
 <body>
     <div style="width: 500px; height: 520px;">
-        <form class="layui-form" id='upload_item_form'>
+        <form class="layui-form" id="upload_item_form">
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-upload-list">
                         <p id="demoText"></p>
                         <img class="layui-upload-img" style="width: 150px;height: 150px;" id="image">
-                        <button type="button" class="layui-btn" id="test1">Upload picture</button> 
+                        <button type="button" class="layui-btn" id="test1">Upload picture</button>
                     </div>
+
                 </div>
             </div>
             <div class="layui-form-item">
@@ -49,7 +50,7 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Condition</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Condition" >
+                  <select name="city" id="condition" >
                     <option value="">Choose Condition</option>
                     <option value="0">New</option>
                     <option value="1">Good</option>
@@ -60,19 +61,20 @@
             <div class="layui-form-item">
                 <label class="layui-form-label">Type</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Type"  >
+                  <select name="city" id="type"  >
                     <option value="">Choose Type</option>
                     <option value="0">Furniture</option>
                     <option value="1">Books</option>
-                    <option value="2">Electric</option>
+                    <option value="2">Electronics</option>
                     <option value="3">Clothing</option>
+                    <option value="4">Other</option>
                   </select>
                 </div>
               </div>
               <div class="layui-form-item">
                 <label class="layui-form-label">Campus</label>
                 <div class="layui-input-block">
-                  <select name="city" id="Campus" >
+                  <select name="city" id="campus" >
                     <option value="">Choose   Campus</option>
                     <option value="0">Abington</option>
                     <option value="1">Altoona</option>
@@ -99,7 +101,7 @@
               </div>
             <div class="layui-form-item">
               <div class="layui-input-block">
-                <button class="layui-btn" type="submit" >Submit </button>
+                <button class="layui-btn" id="submit-upload"  type="submit">Submit </button>
                 <button type="reset" class="layui-btn layui-btn-primary">Reset </button>
               </div>
             </div>
@@ -107,49 +109,49 @@
     </div>
 </body>
 </section>
-<!--<script src="./layui/layui.js"></script>-->
-<!--<script>-->
-<!--        layui.use(['layer', 'form','element','upload'], function(){-->
-<!--            var layer = layui.layer-->
-<!--            ,form = layui.form-->
-<!--            ,element = layui.element-->
-<!--            ,$=layui.$-->
-<!--            ,upload = layui.upload;-->
+<script src="./layui/layui.js"></script>
+<script>
+        layui.use(['layer', 'form','element', 'upload'], function(){
+            var layer = layui.layer
+           ,form = layui.form
+           ,element = layui.element
+           ,$=layui.$
+            ,upload = layui.upload;
 
-<!--            var index = parent.layer.getFrameIndex(window.name);-->
-<!--            //关闭iframe-->
-<!--            $('#closeIframe').click(function(){-->
-<!--                var val = $('#shopName').val();-->
+            var index = parent.layer.getFrameIndex(window.name);
+            //关闭iframe
+            $('#closeIframe').click(function(){
+                var val = $('#shopName').val();
 
-<!--                if($('#shopName').val()-->
-<!--                && $('#descript').val()-->
-<!--                && $('#Price').val()-->
-<!--                && $('#Condition').val()-->
-<!--                && $('#Type').val()-->
-<!--                && $('#Campus').val()-->
-<!--                ){-->
-<!--                  parent.layer.msg('Product['+val+'] have been submitted');-->
-<!--                  parent.layer.close(index);-->
-<!--                }-->
-<!--            });-->
-<!--            //普通图片上传-->
-<!--            var uploadInst = upload.render({-->
-<!--                elem: '#test1'-->
-<!--                ,url: 'https://httpbin.org/post' //改成您自己的上传接口-->
-<!--                ,before: function(obj){-->
-<!--                obj.preview(function(index, file, result){-->
-<!--                    $('#demo1').attr('src', result); //图片链接（base64）-->
-<!--                });-->
-<!--                }-->
-<!--                ,done: function(res){-->
-<!--                //如果上传失败-->
-<!--                if(res.code > 0){-->
-<!--                    return layer.msg('上传失败');-->
-<!--                }-->
-<!--                }-->
-<!--            });-->
-<!--        })-->
-<!--</script>-->
+                if($('#shopName').val()
+                && $('#descript').val()
+                && $('#Price').val()
+                && $('#Condition').val()
+                && $('#Type').val()
+                && $('#Campus').val()
+                ){
+                  parent.layer.msg('Product['+val+'] have been submitted');
+                  parent.layer.close(index);
+                }
+            });
+            //普通图片上传
+            var uploadInst = upload.render({
+                elem: '#test1'
+                ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+                ,before: function(obj){
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+                }
+                ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+                }
+            });
+        })
+</script>
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
@@ -183,4 +185,5 @@
 <script src="scripts/auth.js"></script>
 <script src="scripts/messaging.js"></script>
 <script src="scripts/firebase-messaging-sw.js"></script>
+<script src="scripts/db-item-functions.js"></script>
 </html>
