@@ -43,7 +43,6 @@ addItemsForm.addEventListener('submit', (e) => {
     //prevents reloading the page
     e.preventDefault();
 
-
     let user = firebase.auth().currentUser;
     let uid;
     if(user){
@@ -62,16 +61,12 @@ addItemsForm.addEventListener('submit', (e) => {
             userId: uid,
         })
             .then(docRef => {
-                // console.log(docRef.id);
                 db.collection('accounts').doc(uid).collection('userItems').add({
                     referenceValue: docRef.id,
                 }).then(addItemsForm.reset());
             });
     }
 });
-
-
-
 
 
 // Remove Item
