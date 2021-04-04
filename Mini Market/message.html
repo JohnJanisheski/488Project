@@ -144,8 +144,16 @@
             <div class="user-list">
                 <div class="userTitle">
                     <img src="./img/bk1g.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Sarah</span>
+
+                    <span id = "user" style="margin-left: 15px;font-size: 32;font-weight: 500;"></span>
+                    <script>
+                        aN = document.getElementById("accountName").value;
+                        span = document.getElementById("user");
+                        txt = document.createTextNode(aN);
+                        span.appendChild(txt);
+                    </script>
                 </div>
+
                 <div class="userTitle2">
                     <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
                     <span style="margin-left: 15px;font-size: 32;font-weight: 500;">John</span>
