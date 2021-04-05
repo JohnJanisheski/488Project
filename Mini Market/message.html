@@ -145,38 +145,27 @@
                 <div class="userTitle">
                     <img src="./img/bk1g.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
 
-                    <span id = "user" style="margin-left: 15px;font-size: 32;font-weight: 500;"></span>
+                    <span id = "user" style="margin-left: 15px;font-size: 15px;font-weight: 500;"></span>
                     <script>
-                        aN = document.getElementById("accountName").value;
+                        aN = document.getElementById("accountName").value; //Needs fixing
                         span = document.getElementById("user");
-                        txt = document.createTextNode(aN);
-                        span.appendChild(txt);
+                        span.innerText = "Sarah";
+
+
                     </script>
                 </div>
 
-                <div class="userTitle2">
-                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">John</span>
-                </div>
-                <div class="userTitle2 ">
-                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Tyler</span>
-                </div>
-                <div class="userTitle2">
-                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Laura</span>
-                </div>
-                <div class="userTitle2">
-                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">
-                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">Yuhui</span>
-                </div>
+                <div id ="friendBoxes"></div>
+
+                <button class="layui-btn" style="float:left;" onclick = addFriend()>Add Friend</button>
+
 <!--                <div class="userTitle2">-->
 <!--                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">-->
 <!--                    <span style="margin-left: 15px;font-size: 32;font-weight: 500;">USER NAME5</span>-->
 <!--                </div>-->
             </div>
             <div class="msg-content">
-                <div class="userTitle">Tyler</div>
+                <div id = "uT" class="userTitle"></div>
                 <div class="msg-list" id="msg-list">
                     <div  class="msg-my"><span >this is a msg</span><img src="./img/bk1g.jpg"></div>
                     <div  class="msg-my msg-other"><span >this is a msg</span><img  src="./img/thinkinJava1.jpg"></div>
@@ -258,6 +247,8 @@
     <script src="scripts/main.js"></script>
     <script src="scripts/auth.js"></script>
     <script src="scripts/messaging.js"></script>
+    <script src="scripts/add.js"></script>
+    <script src="scripts/box-load.js"></script>
     <script src="scripts/firebase-messaging-sw.js"></script>
 </body>
 </html>
