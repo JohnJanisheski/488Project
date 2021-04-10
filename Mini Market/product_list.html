@@ -186,18 +186,18 @@
             ,form = layui.form
             ,element = layui.element;
         $=layui.$;
-
-        (function(){
-            var html = "";
-            for(var i=0;i<10;i++){
-                html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
-                    "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
-            }
-            $("#container-center").html(html);
-        })()
         $(".shopContainer").on("click",function(){
             window.location.href = "detail.html";
         })
+
+        // (function(){
+        //     var html = "";
+        //     for(var i=0;i<10;i++){
+        //         html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
+        //             "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
+        //     }
+        //     $("#container-center").html(html);
+        // })()
     })
 </script>
 
