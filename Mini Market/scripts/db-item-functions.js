@@ -17,19 +17,19 @@ function validateForm() {
         alert("Please enter a description");
         return false;
     }
-    else if(listingPrice === "" || listingPrice < 0){
-        alert("Please enter a valid number");
+    else if(listingPrice === "" || listingPrice < 0 || isNaN(listingPrice)){
+        alert("Please enter a valid number for Price");
         return false;
     }
-    else if(condition === ""){
+    else if(condition.includes("Choose")){
         alert("Please select a condition");
         return false;
     }
-    else if(type === ""){
+    else if(type.includes("Choose")){
         alert("Please select a valid Type");
         return false;
     }
-    else if(campus === ""){
+    else if(campus.includes("Choose")){
         alert("Please select a valid Campus");
         return false;
     }
