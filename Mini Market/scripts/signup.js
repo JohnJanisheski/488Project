@@ -24,6 +24,7 @@ signupForm.addEventListener('submit', (e) =>{
             phone: signupForm['phone'].value,
         })
     }).then(() => {
+        alert("Your account has been created!")
         console.log("User Created")
         signupForm.reset();
         signupContainer.style.display="none";

@@ -109,7 +109,7 @@
         <div style = 'width: 80%; margin-left: 10%;'>
             <div id="publish" style="position:absolute;top:100px;right: 80px;">
                 <button type="button" class="layui-btn " id="toPublish">
-                    <i class="layui-icon">&#xe67c;Create New List</i>
+                    <i class="layui-icon">&#xe67c; Create New List</i>
                 </button>
             </div>
             <div id="container-center"></div>
@@ -124,25 +124,27 @@
             ,$=layui.$;
 
             (function(){
-                var html = "";
-                for(var i=0;i<100;i++){
-                    html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
-                    "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
-                }
-                $("#container-center").html(html);
+                $("#toPublish").on("click",function(){
+                    layer.open({
+                        title:"Item Info",
+                        type: 2,
+                        area: ['530px', '670px'],
+                        fixed: false,
+                        maxmin: true,
+                        content: './upload.html'
+                    });
+                })
+                // 129 - 133 Displays items on the page
+                // Commenting the code out keeps the "Create New List" button
+                // var html = "";
+                // for(var i=0;i<100;i++){
+                //     html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
+                //     "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
+                // }
+                // $("#container-center").html(html);
             })()
             $(".shopContainer").on("click",function(){
                 window.location.href = "detail.html";
-            })
-            $("#toPublish").on("click",function(){
-                layer.open({
-                title:"Item Info",
-                type: 2,
-                area: ['530px', '650px'],
-                fixed: false,
-                maxmin: true,
-                content: './upload.html'
-                });
             })
         })
     </script>
@@ -179,5 +181,6 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/messaging.js"></script>
     <script src="scripts/firebase-messaging-sw.js"></script>
+    <script src="scripts/db-item-functions.js"></script>
 </body>
 </html>

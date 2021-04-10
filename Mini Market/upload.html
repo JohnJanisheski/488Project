@@ -17,7 +17,7 @@
 </head>
 <section id="upload">
     <body>
-    <div style="width: 500px; height: 520px;">
+    <div class="popup" style="width: 500px; height: 520px;">
         <form class="layui-form" id="upload_item_form">
             <div class="layui-form-item">
                 <div class="layui-input-block">
@@ -109,6 +109,10 @@
     </div>
     </body>
 </section>
+<!--<div class="alert" id="alertSuccessUpload">-->
+<!--    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+<!--    This is an alert box.-->
+<!--</div>-->
 <script src="./layui/layui.js"></script>
 <script>
     layui.use(['layer', 'form','element', 'upload'], function(){
@@ -152,6 +156,35 @@
         });
     })
 </script>
+
+<style>
+    .alert {
+        opacity: 1;
+        transition: opacity 0.6s; /* 600ms to fade out */
+    }
+</style>
+<script>
+    // Get all elements with class="closebtn"
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    // Loop through all close buttons
+    for (i = 0; i < close.length; i++) {
+        // When someone clicks on a close button
+        close[i].onclick = function(){
+
+            // Get the parent of <span class="closebtn"> (<div class="alert">)
+            var div = this.parentElement;
+
+            // Set the opacity of div to 0 (transparent)
+            div.style.opacity = "0";
+
+            // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
+    }
+</script>
+
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>

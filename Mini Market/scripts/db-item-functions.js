@@ -62,16 +62,13 @@ addItemsForm.addEventListener('submit', (e) => {
             userId: uid,
         })
             .then(docRef => {
-                // console.log(docRef.id);
                 db.collection('accounts').doc(uid).collection('userItems').add({
                     referenceValue: docRef.id,
                 }).then(addItemsForm.reset());
-            });
+            })
+            .then(x => { alert("Your Item has successfully been uploaded!")});
     }
 });
-
-
-
 
 
 // Remove Item
