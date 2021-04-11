@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Market</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: rgb(255,255,255);
+        }
+        #container{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.418);
+            overflow-y: auto;
+        }
+        #container-center {
+            width: 650px;
+            margin-left: calc(50% - 325px);
+            padding: 15px 25px;
+            background-color: rgba(255, 255, 255, 0.788);
+            margin-top: 55px;
+            border-radius: 10px;
+            border-style: ridge;
+        }
+        .head{
+            width: 640px;
+            margin-left: 320px;
+        }
+        .logo {
+            float: left;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 15px;
+        }
+        .user{
+            float: right;
+            margin: 15px;
+        }
+        .myIcon {
+            background-color: rgb(48, 46, 46);
+            color: rgb(255, 253, 253);
+            font-size: 28px;
+            border-radius: 21px;
+            padding: 5px;
+        }
+        .layui-nav{
+            background-color: transparent;
+        }
+        #demo1{
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            border: 1px solid #e6e6e6;
+        }
+        #submit{
+            float: right;
+            width: 150px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
+            <span class="logo" style="float: left;">Mini Market</span>
+            <span class="user" style="float: right;">
+                <a href="account.html"><i class="layui-icon layui-icon-username myIcon"></i></a>
+                <a href="index.html"><i class="layui-icon layui-icon-logout myIcon"></i></a>
+            </span>
+            <div class="head">
+                <ul class="layui-nav" lay-filter="menus">
+                    <li class="layui-nav-item  "><a href="product_list.html">Product list</a></li>
+                    <li class="layui-nav-item"><a href="myShop.html">My product</a></li>
+                    <li class="layui-nav-item   layui-this" layui-this><a href="account.html">Account</a></li>
+                    <li class="layui-nav-item"><a href="message.html">Messaging</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container-center">
+            <form class="layui-form">
+                <div class="layui-form-item">
+                    <label class="layui-form-label">HeadImg</label>
+                    <div class="layui-input-block">
+                        <div class="layui-upload">
+                            <div class="layui-upload-list">
+                              <img class="layui-upload-img" id="demo1">
+                              <p id="demoText"></p>
+                            </div>
+                            <button style="display: none;" type="button" class="layui-btn" id="test1">select picture</button>
+                          </div>  
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Account</label>
+                    <div class="layui-input-block">
+                        <input id ="accountName" type="text" name="account" disabled  autocomplete="off" class="layui-input" value="bob">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Email</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="title" disabled class="layui-input" value="bob@psu.edu"> 
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Sex</label>
+                    <div class="layui-input-block">
+                        <input type="radio" name="sex"  value="male" title="male">
+                        <input type="radio" name="sex"  value="female" title="female" checked>
+                      </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">RegistTime</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="title" disabled class="layui-input" value="2020-01-01">
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label">Num of sale</label>
+                    <div class="layui-input-block">
+                      <input type="text" name="title" disabled value="12/45"  class="layui-input" >
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-input-block">
+                      <a id="submit" class="layui-btn" lay-filter="formDemo">edit</a>
+                    </div>
+                </div>
+            </form>
+        </div>        
+    </div>
+    <script src="./layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form','element','upload'], function(){
+            var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element
+            ,$=layui.$
+            ,upload = layui.upload;
+                
+            $("#submit").click(function(){
+                var butten = $(this);
+                var mode = butten.text();
+                if(mode=='edit'){
+                    $("#test1").css("display","inline")
+                    $("[name='account']").removeAttr("disabled");
+                    $("[name='sex']").removeAttr("disabled");
+                }else{
+                    $("#test1").css("display","none")
+                    $("[name='account']").attr("disabled",true);
+                    $("[name='sex']").attr("disabled",true);
+                }
+                mode = mode == "save"?"edit":"save";
+                butten.text(mode);
+                
+            });
+
+
+
+            //普通图片上传
+                var uploadInst = upload.render({
+                    elem: '#test1'
+                    ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+                    ,before: function(obj){
+                    //预读本地文件示例，不支持ie8
+                    obj.preview(function(index, file, result){
+                        $('#demo1').attr('src', result); //图片链接（base64）
+                    });
+                    }
+                    ,done: function(res){
+                    //如果上传失败
+                    if(res.code > 0){
+                        return layer.msg('upload fail');
+                    }
+                    //上传成功
+                    }
+                    ,error: function(){
+                    //演示失败状态，并实现重传
+                    var demoText = $('#demoText');
+                    demoText.html('<span style="color: #FF5722;">上传失败</span> <a class="layui-btn layui-btn-xs demo-reload">重试</a>');
+                    demoText.find('.demo-reload').on('click', function(){
+                        uploadInst.upload();
+                    });
+                    }
+                });
+        })
+    </script>
+    <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+    <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+    <!-- Add Firebase products that you want to use -->
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+    <script>
+        // Your web app's Firebase configuration
+        // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+        var firebaseConfig = {
+            apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
+            authDomain: "mini-market-aa3c4.firebaseapp.com",
+            databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
+            projectId: "mini-market-aa3c4",
+            storageBucket: "mini-market-aa3c4.appspot.com",
+            messagingSenderId: "490789165755",
+            appId: "1:490789165755:web:99ce734f2657cce080e79e",
+            measurementId: "G-D480CCRXP5"
+        };
+        // Initialize Firebase
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+    </script>
+
+    <!-- javascript for page changes -->
+    <!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
+    <script src="scripts/main.js"></script>
+    <script src="scripts/auth.js"></script>
+    <script src="scripts/messaging.js"></script>
+    <script src="scripts/firebase-messaging-sw.js"></script>
+</body>
+</html>

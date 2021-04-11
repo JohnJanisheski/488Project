@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mini Market</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+    </style>
+</head>
+<section id="upload">
+    <body>
+    <div class="popup" style="width: 500px; height: 520px;">
+        <form class="layui-form" id="upload_item_form">
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <div class="layui-upload-list">
+                        <p id="demoText"></p>
+                        <img class="layui-upload-img" style="width: 150px;height: 150px;" id="image">
+                        <button type="button" class="layui-btn" id="test1">Upload picture</button>
+                    </div>
+
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"> Item name</label>
+                <div class="layui-input-block">
+                    <input type="text" id="itemName" placeholder="Please Input Item name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Description</label>
+                <div class="layui-input-block">
+                    <textarea id="description" placeholder="Please Input Description" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Listing Price</label>
+                <div class="layui-input-block">
+                    <input id="price" type="text" placeholder="Listing Price" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Condition</label>
+                <div class="layui-input-block">
+                    <select name="city" id="condition" >
+                        <option>Choose Condition</option>
+                        <option>New</option>
+                        <option>Good</option>
+                        <option>Fair</option>
+                        <option>Poor</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Type</label>
+                <div class="layui-input-block">
+                    <select id="type"  >
+                        <option>Choose Type</option>
+                        <option>Furniture</option>
+                        <option>Books</option>
+                        <option>Electronics</option>
+                        <option>Clothing</option>
+                        <option>Other</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Campus</label>
+                <div class="layui-input-block">
+                    <select id="campus" >
+                        <option>Choose Campus</option>
+                        <option>Abington</option>
+                        <option>Altoona</option>
+                        <option>Beaver</option>
+                        <option>Berks</option>
+                        <option>Brandywine</option>
+                        <option>DuBois</option>
+                        <option>Erie</option>
+                        <option>Fayette</option>
+                        <option>Greater Allegheny</option>
+                        <option>Harrisburg</option>
+                        <option>Hazleton</option>
+                        <option>Lehigh Valley</option>
+                        <option>Mont Alto</option>
+                        <option>New Kensington</option>
+                        <option>Schuylkill</option>
+                        <option>Scranton</option>
+                        <option>Shenango</option>
+                        <option>University Park</option>
+                        <option>Wilkes-Barre</option>
+                        <option>York</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <button class="layui-btn" id="submit-upload"  type="submit">Submit </button>
+                    <button type="reset" class="layui-btn layui-btn-primary">Reset </button>
+                </div>
+            </div>
+        </form>
+    </div>
+    </body>
+</section>
+<!--<div class="alert" id="alertSuccessUpload">-->
+<!--    <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>-->
+<!--    This is an alert box.-->
+<!--</div>-->
+<script src="./layui/layui.js"></script>
+<script>
+    layui.use(['layer', 'form','element', 'upload'], function(){
+        var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element
+            ,$=layui.$
+            ,upload = layui.upload;
+
+        var index = parent.layer.getFrameIndex(window.name);
+        //关闭iframe
+        $('#closeIframe').click(function(){
+            var val = $('#shopName').val();
+
+            if($('#shopName').val()
+                && $('#descript').val()
+                && $('#Price').val()
+                && $('#Condition').val()
+                && $('#Type').val()
+                && $('#Campus').val()
+            ){
+                parent.layer.msg('Product['+val+'] have been submitted');
+                parent.layer.close(index);
+            }
+        });
+        //普通图片上传
+        var uploadInst = upload.render({
+            elem: '#test1'
+            ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+            ,before: function(obj){
+                obj.preview(function(index, file, result){
+                    $('#demo1').attr('src', result); //图片链接（base64）
+                });
+            }
+            ,done: function(res){
+                //如果上传失败
+                if(res.code > 0){
+                    return layer.msg('上传失败');
+                }
+            }
+        });
+    })
+</script>
+
+<style>
+    .alert {
+        opacity: 1;
+        transition: opacity 0.6s; /* 600ms to fade out */
+    }
+</style>
+<script>
+    // Get all elements with class="closebtn"
+    var close = document.getElementsByClassName("closebtn");
+    var i;
+
+    // Loop through all close buttons
+    for (i = 0; i < close.length; i++) {
+        // When someone clicks on a close button
+        close[i].onclick = function(){
+
+            // Get the parent of <span class="closebtn"> (<div class="alert">)
+            var div = this.parentElement;
+
+            // Set the opacity of div to 0 (transparent)
+            div.style.opacity = "0";
+
+            // Hide the div after 600ms (the same amount of milliseconds it takes to fade out)
+            setTimeout(function(){ div.style.display = "none"; }, 600);
+        }
+    }
+</script>
+
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
+        authDomain: "mini-market-aa3c4.firebaseapp.com",
+        databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
+        projectId: "mini-market-aa3c4",
+        storageBucket: "mini-market-aa3c4.appspot.com",
+        messagingSenderId: "490789165755",
+        appId: "1:490789165755:web:99ce734f2657cce080e79e",
+        measurementId: "G-D480CCRXP5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+</script>
+
+<!-- javascript for page changes -->
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
+<script src="scripts/main.js"></script>
+<script src="scripts/auth.js"></script>
+<script src="scripts/messaging.js"></script>
+<script src="scripts/firebase-messaging-sw.js"></script>
+<script src="scripts/db-item-functions.js"></script>
+</html>

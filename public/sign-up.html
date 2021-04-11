@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+        }
+        body{
+            background-color: rgb(255,255,255);
+            /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+        }
+        #container{
+            position: absolute;
+            width: 450px;
+            height: 555px;
+            left: calc(50% - 225px);
+            top: calc(50% - 260px);
+            border-radius: 10px;
+            border: outset 2px black;
+        }
+        .layui-elem-field legend{
+            text-align: center;
+            font-style: italic;
+            font-size: 46px;
+            font-weight:800;
+            font-family: cursive;
+        }
+        .layui-icon {
+            font-size: 25px;
+            font-weight: bold;
+        }
+        
+        .regist {
+            width: 50px;
+            font-size: 18px;
+            color: #0072ff;
+            margin-right: 45px;
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<section id="signup">
+    <div id="container">
+        <fieldset class="layui-elem-field layui-field-title" style="margin-top: 5px;">
+            <legend>Mini Market</legend>
+        </fieldset>
+        <form id ="signup-form" class="layui-form" action="index.html">
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> </label>
+                <div class="layui-input-inline">
+                  <input type="text" id="first-name"  placeholder="First Name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe66f;</i> </label>
+                <div class="layui-input-inline">
+                    <input type="text" id="last-name"  placeholder="Last Name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe618;</i></label>
+                <div class="layui-input-inline" style="width:140px">
+                  <input type="text" id="email" placeholder="Email" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux" style="width: 40px;">@psu.edu</div>
+            </div>
+<!-- WANT TO ADD DROP DOWN BAR OF OPTIONS FOR CAMPUSES           -->
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe618;</i></label>
+                <div class="layui-input-inline">
+                    <input type="text" id="campus" placeholder="PSU Campus" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe678;</i></label>
+                <div class="layui-input-inline">
+                  <input type="text" id="phone" placeholder="Phone Number" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe673;</i></label>
+                <div class="layui-input-inline">
+                  <input type="password" id="password" name="password" placeholder="Password" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><i class="layui-icon">&#xe679;</i></label>
+                <div class="layui-input-inline">
+                  <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+            <div class="layui-form-item" style="text-align: right;">
+                  <button class="layui-btn" type="submit" style="width: 40%; margin-right: 5%;" >Sign Up</button>
+                  <a href="index.html" class="regist">Sign in</a>
+            </div>
+        </form>
+    </div>
+</section>
+<!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
+<!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
+<!-- Add Firebase products that you want to use -->
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+<script>
+    // Your web app's Firebase configuration
+    // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+    var firebaseConfig = {
+        apiKey: "AIzaSyBHTt49PkYD2n_xOEaTfLffHBxvCoHQDes",
+        authDomain: "mini-market-aa3c4.firebaseapp.com",
+        databaseURL: "https://mini-market-aa3c4-default-rtdb.firebaseio.com",
+        projectId: "mini-market-aa3c4",
+        storageBucket: "mini-market-aa3c4.appspot.com",
+        messagingSenderId: "490789165755",
+        appId: "1:490789165755:web:99ce734f2657cce080e79e",
+        measurementId: "G-D480CCRXP5"
+    };
+    // Initialize Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.firestore();
+
+</script>
+
+<!-- javascript for page changes -->
+<!-- script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script-->
+<script src="scripts/signup.js"></script>
+</html>
