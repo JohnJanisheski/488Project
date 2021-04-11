@@ -236,7 +236,6 @@
                 querySnapshot.forEach((doc) => {
                     let element = document.createElement('item');
                     element.innerHTML = "<div>" +
-                        doc.id +"<br>" +
                         "Item Name: " + doc.data().itemName + "<br>" +
                         "Item Description: " + doc.data().description + "<br>" +
                         "Campus: " + doc.data().campus + "<br>" +
@@ -246,15 +245,6 @@
                         "<button> Add Poster's Info To Inbox </button>" +
                         "</div>" + "<hr>"
                     document.getElementById("container-center").appendChild(element);
-                    // // doc.data() is never undefined for query doc snapshots
-                    // console.log(doc.id, " => ", doc.data());
-                    // console.log("Item Name => ", doc.data().itemName)
-                    // console.log("Item Description => ", doc.data().description)
-                    // console.log("Item campus => ", doc.data().campus)
-                    // console.log("Item condition => ", doc.data().condition)
-                    // console.log("Item price => ", doc.data().price)
-                    // console.log("Item type => ", doc.data().type)
-                    // console.log("Item's User => ", doc.data().userId)
                 });
             })
             .catch((error) => {
