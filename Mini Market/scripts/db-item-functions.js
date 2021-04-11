@@ -61,16 +61,20 @@ addItemsForm.addEventListener('submit', (e) => {
             campus: addItemsForm['campus'].value,
             userId: uid,
         })
-            .then(docRef => {
-                db.collection('accounts').doc(uid).collection('userItems').add({
-                    referenceValue: docRef.id,
-                }).then(addItemsForm.reset());
-            })
+            // .then(docRef => {
+            //     db.collection('accounts').doc(uid).collection('userItems').add({
+            //         referenceValue: docRef.id,
+            //     }).then(addItemsForm.reset());
+            // })
             .then(x => { alert("Your Item has successfully been uploaded!")});
     }
 });
 
-
 // Remove Item
+function removeItem(x){
+    db.collection("items").doc(x).delete().then(e => {
+        window.location = "myShop.html";
+    })
+}
 // Find My Items
 // Find all items/Find Specific Items

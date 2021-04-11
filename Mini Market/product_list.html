@@ -15,7 +15,7 @@
         }
         body{
             background-color: rgb(255,255,255);
-            /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+             /*background-image: url('./img/bk1g.jpg');background-repeat: no-repeat;background-size: 100% 100%;*/
         }
         #container{
             width: 100%;
@@ -113,7 +113,7 @@
     </style>
 </head>
 <body>
-<div id="container">
+<div id="productListContainer">
     <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
         <span class="logo" style="float: left;">Mini Market</span>
         <span class="user" style="float: right;">
@@ -174,32 +174,33 @@
                 <i class=" layui-icon layui-icon-triangle-d upordown" id="upordown"></i>
             </span>
     </div>
+    <hr>
     <div id="container-center">
-
     </div>
 </div>
-<script src="./layui/layui.js"></script>
-<script>
-    var $;
-    layui.use(['layer', 'form','element'], function(){
-        var layer = layui.layer
-            ,form = layui.form
-            ,element = layui.element;
-        $=layui.$;
-        $(".shopContainer").on("click",function(){
-            window.location.href = "detail.html";
-        })
 
-        // (function(){
-        //     var html = "";
-        //     for(var i=0;i<10;i++){
-        //         html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
-        //             "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
-        //     }
-        //     $("#container-center").html(html);
-        // })()
-    })
-</script>
+<!--<script src="./layui/layui.js"></script>-->
+<!--<script>-->
+<!--    var $;-->
+<!--    layui.use(['layer', 'form','element'], function(){-->
+<!--        var layer = layui.layer-->
+<!--            ,form = layui.form-->
+<!--            ,element = layui.element;-->
+<!--        $=layui.$;-->
+<!--        $(".shopContainer").on("click",function(){-->
+<!--            window.location.href = "detail.html";-->
+<!--        })-->
+
+<!--        (function(){-->
+<!--            var html = "";-->
+<!--            for(var i=0;i<10;i++){-->
+<!--                html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+-->
+<!--                    "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";-->
+<!--            }-->
+<!--            $("#container-center").html(html);-->
+<!--        })()-->
+<!--    })-->
+<!--</script>-->
 
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -225,6 +226,41 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+</script>
+<script>
+    window.addEventListener('load', function(){
+        //.where("capital", "==", true)
+        db.collection("items").limit(20)
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    let element = document.createElement('item');
+                    element.innerHTML = "<div>" +
+                        doc.id +"<br>" +
+                        "Item Name: " + doc.data().itemName + "<br>" +
+                        "Item Description: " + doc.data().description + "<br>" +
+                        "Campus: " + doc.data().campus + "<br>" +
+                        "Item Condition: " + doc.data().condition + "<br>" +
+                        "Price: " + doc.data().price + "<br>" +
+                        "Type: " + doc.data().type + "<br>" +
+                        "<button> Add Poster's Info To Inbox </button>" +
+                        "</div>" + "<hr>"
+                    document.getElementById("container-center").appendChild(element);
+                    // // doc.data() is never undefined for query doc snapshots
+                    // console.log(doc.id, " => ", doc.data());
+                    // console.log("Item Name => ", doc.data().itemName)
+                    // console.log("Item Description => ", doc.data().description)
+                    // console.log("Item campus => ", doc.data().campus)
+                    // console.log("Item condition => ", doc.data().condition)
+                    // console.log("Item price => ", doc.data().price)
+                    // console.log("Item type => ", doc.data().type)
+                    // console.log("Item's User => ", doc.data().userId)
+                });
+            })
+            .catch((error) => {
+                console.log("Error getting documents: ", error);
+            });
+    })
 </script>
 
 <!-- javascript for page changes -->

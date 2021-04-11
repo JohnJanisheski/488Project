@@ -14,7 +14,7 @@
             padding: 0px;
         }
         body{
-            background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%;
+            /*background-image: url('./img/bk1g.jpg');background-repeat: no-repeat;background-size: 100% 100%;*/
         }
         #container{
             width: 100%;
@@ -107,47 +107,17 @@
             </div>
         </div>
         <div style = 'width: 80%; margin-left: 10%;'>
-            <div id="publish" style="position:absolute;top:100px;right: 80px;">
+            <div id="publish" style="position:absolute;top:100px;right: 40px;">
                 <button type="button" class="layui-btn " id="toPublish">
                     <i class="layui-icon">&#xe67c; Create New List</i>
                 </button>
             </div>
-            <div id="container-center"></div>
-        </div>   
+            <section>
+                <div id="container-center"> </div>
+                <br>
+            </section>
+        </div>
     </div>
-    <script src="./layui/layui.js"></script>
-    <script>
-        layui.use(['layer', 'form','element'], function(){
-            var layer = layui.layer
-            ,form = layui.form
-            ,element = layui.element
-            ,$=layui.$;
-
-            (function(){
-                $("#toPublish").on("click",function(){
-                    layer.open({
-                        title:"Item Info",
-                        type: 2,
-                        area: ['530px', '670px'],
-                        fixed: false,
-                        maxmin: true,
-                        content: './upload.html'
-                    });
-                })
-                // 129 - 133 Displays items on the page
-                // Commenting the code out keeps the "Create New List" button
-                // var html = "";
-                // for(var i=0;i<100;i++){
-                //     html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
-                //     "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
-                // }
-                // $("#container-center").html(html);
-            })()
-            $(".shopContainer").on("click",function(){
-                window.location.href = "detail.html";
-            })
-        })
-    </script>
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
@@ -182,5 +152,63 @@
     <script src="scripts/messaging.js"></script>
     <script src="scripts/firebase-messaging-sw.js"></script>
     <script src="scripts/db-item-functions.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form','element'], function(){
+            var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element
+            ,$=layui.$;
+
+            (function(){
+                $("#toPublish").on("click",function(){
+                    layer.open({
+                        title:"Item Info",
+                        type: 2,
+                        area: ['530px', '670px'],
+                        fixed: false,
+                        maxmin: true,
+                        content: './upload.html'
+                    });
+                })
+            })()
+        })
+    </script>
+    <script>
+        auth.onAuthStateChanged(x => {
+            db.collection("items").where("userId", "==", auth.currentUser.uid)
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        let element = document.createElement('item');
+                        element.innerHTML = "<div>" +
+                            "Item Name: " + doc.data().itemName + "<br>" +
+                            "Item Description: " + doc.data().description + "<br>" +
+                            "Campus: " + doc.data().campus + "<br>" +
+                            "Item Condition: " + doc.data().condition + "<br>" +
+                            "Price: " + doc.data().price + "<br>" +
+                            "Type: " + doc.data().type + "<br>" +
+                            "<button> Remove This Item </button>" +
+                            "</div>" + "<hr>"
+                        element.addEventListener("click", e =>{
+                            removeItem(doc.id);
+                        })
+                        document.getElementById("container-center").appendChild(element);
+                        // // doc.data() is never undefined for query doc snapshots
+                        // console.log(doc.id, " => ", doc.data());
+                        // console.log("Item Name => ", doc.data().itemName)
+                        // console.log("Item Description => ", doc.data().description)
+                        // console.log("Item campus => ", doc.data().campus)
+                        // console.log("Item condition => ", doc.data().condition)
+                        // console.log("Item price => ", doc.data().price)
+                        // console.log("Item type => ", doc.data().type)
+                        // console.log("Item's User => ", doc.data().userId)
+                    });
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+        })
+    </script>
 </body>
 </html>
