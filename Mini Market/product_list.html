@@ -238,6 +238,9 @@
                                 "Type: " + doc.data().type + "<br>" +
                                 "<button> Add Poster's Info To Inbox </button>" +
                                 "</div>" + "<hr>";
+                        text.addEventListener("click", e =>{
+                            console.log(doc.data().userId);
+                        });
                         outerDiv.appendChild(text);
                         console.log("text");
                     }).then(() => {
