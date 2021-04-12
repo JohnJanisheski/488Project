@@ -16,6 +16,12 @@
         body{
             background-color: rgb(255,255,255);
         }
+        .hidden {
+            display:none;
+        }
+        .show {
+            display:block;
+        }
         #container{
             width: 100%;
             height: 100%;
@@ -86,7 +92,7 @@
             </div>
         </div>
         <div id="container-center">
-            <form class="layui-form">
+            <form class="layui-form" id="userInfoForm">
                 <div class="layui-form-item">
                     <label class="layui-form-label">HeadImg</label>
                     <div class="layui-input-block">
@@ -99,10 +105,22 @@
                           </div>
                     </div>
                 </div>
-                <div class="layui-form-item">
+                <div class="layui-form-item show" id="accountDiv">
                     <label class="layui-form-label">Account</label>
                     <div class="layui-input-block">
                       <input type="text" name="account" disabled  autocomplete="off" class="layui-input" value="">
+                    </div>
+                </div>
+                <div class="layui-form-item hidden" id="firstNameDiv">
+                    <label class="layui-form-label">First Name</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="firstName" disabled  class="layui-input" value="">
+                    </div>
+                </div>
+                <div class="layui-form-item hidden" id="lastNameDiv">
+                    <label class="layui-form-label">Last Name</label>
+                    <div class="layui-input-block">
+                        <input type="text" name="lastName" disabled  class="layui-input" value="">
                     </div>
                 </div>
                 <div class="layui-form-item">
@@ -142,6 +160,9 @@
             ,$=layui.$
             ,upload = layui.upload;
 
+            const userInfoForm = document.querySelector('#userInfoForm');
+
+
             $("#submit").click(function(){
                 var button = $(this);
                 var mode = button.text();
@@ -150,13 +171,58 @@
                     $("[name='account']").removeAttr("disabled");
                     $("[name='campus']").removeAttr("disabled");
                     $("[name='phoneNumber']").removeAttr("disabled");
-                    $("[name='email']").removeAttr("disabled");
-                }else{
+                    $("[name='firstName']").removeAttr("disabled");
+                    $("[name='lastName']").removeAttr("disabled");
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
+                }
+                else if (mode=='save'){
+                    let user = auth.currentUser;
+                    let uid;
+
+                    if(user){
+                        uid = user.uid;
+                    }
+                    var fName = userInfoForm['firstName'].value;
+                    var lName = userInfoForm['lastName'].value;
+
+                    db.collection('accounts').doc(uid).update({
+                        "campus": userInfoForm['campus'].value,
+                        "phone": userInfoForm['phoneNumber'].value,
+                        "firstname": userInfoForm['firstName'].value,
+                        "lastname": userInfoForm['lastName'].value,
+
+                    })
+                    .then(() => {
+                        console.log("Updated!");
+                        }
+                    )
+                    $("#test1").css("display","none")
+                    $("[name='account']").attr("disabled",true).val(fName + " " + lName);
+                    $("[name='campus']").attr("disabled",true);
+                    $("[name='phoneNumber']").attr("disabled",true);
+                    $("[name='email']").attr("disabled",true);
+                    $("[name='firstName']").attr("disabled",true);
+                    $("[name='lastName']").attr("disabled",true);
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
+                }
+                else{
                     $("#test1").css("display","none")
                     $("[name='account']").attr("disabled",true);
                     $("[name='campus']").attr("disabled",true);
                     $("[name='phoneNumber']").attr("disabled",true);
                     $("[name='email']").attr("disabled",true);
+                    $("[name='firstName']").attr("disabled",true);
+                    $("[name='lastName']").attr("disabled",true);
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
                 }
                 mode = mode == "save"?"edit":"save";
                 button.text(mode);
