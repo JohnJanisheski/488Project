@@ -22,11 +22,13 @@
             <div class="layui-form-item">
                 <div class="layui-input-block">
                     <div class="layui-upload-list">
-                        <p id="demoText"></p>
-                        <img class="layui-upload-img" style="width: 150px;height: 150px;" id="image">
-                        <button type="button" class="layui-btn" id="test1">Upload picture</button>
+<!--                        <p id="demoText"></p>-->
+                        <img class="layui-upload-img" style="width: 150px;height: 150px;" id="displayImage" src="./img/questionMark.png">
+                        <input type="file" onchange="uploadImage()" id="files" name="files[]" multiple />
+                        <progress style="position:absolute; right:5px;" value="0" id="uploader" max="100" hidden>0%</progress>
+                        <textarea id="imageRefText" value="defaultImage" hidden></textarea>
+<!--                        <button id="submit_link"type="submit" name="button">Save</button>-->
                     </div>
-
                 </div>
             </div>
             <div class="layui-form-item">
@@ -139,22 +141,23 @@
                 parent.layer.close(index);
             }
         });
+        // Upload functionality going to be re-created
         //普通图片上传
-        var uploadInst = upload.render({
-            elem: '#test1'
-            ,url: 'https://httpbin.org/post' //改成您自己的上传接口
-            ,before: function(obj){
-                obj.preview(function(index, file, result){
-                    $('#demo1').attr('src', result); //图片链接（base64）
-                });
-            }
-            ,done: function(res){
-                //如果上传失败
-                if(res.code > 0){
-                    return layer.msg('上传失败');
-                }
-            }
-        });
+        // var uploadInst = upload.render({
+        //     elem: '#test1'
+        //     ,url: 'https://httpbin.org/post' //改成您自己的上传接口
+        //     ,before: function(obj){
+        //         obj.preview(function(index, file, result){
+        //             $('#demo1').attr('src', result); //图片链接（base64）
+        //         });
+        //     }
+        //     ,done: function(res){
+        //         //如果上传失败
+        //         if(res.code > 0){
+        //             return layer.msg('上传失败');
+        //         }
+        //     }
+        //});
     })
 </script>
 
@@ -193,6 +196,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+
 <script>
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -210,7 +215,45 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+    const storageRef = firebase.storage().ref();
 
+</script>
+<script>
+    function uploadImage() {
+        let uploader = document.getElementById('uploader');
+        uploader.hidden = false;
+        let file = document.getElementById("files").files[0];
+        let imageRefId = "images/" + auth.currentUser.uid + Date.now() + ".png";
+        let thisRef = storageRef.child(imageRefId);
+        let uploadTask = thisRef.put(file);
+
+        uploadTask.on('state_changed', (snapshot) => {
+                uploader.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                switch (snapshot.state) {
+                    case firebase.storage().TaskState.PAUSED: // or 'paused'
+                        console.log('Upload is paused');
+                        break;
+                    case firebase.storage().TaskState.RUNNING: // or 'running'
+                        console.log('Upload is running');
+                        break;
+                }
+            }, (error) => {
+                // Handle unsuccessful uploads
+                window.alert("Image upload unsuccessful. Please try again soon");
+                uploader.hidden = true;
+            }, () => {
+                // Handle successful uploads on complete
+                console.log("Upload Successful!")
+                uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                    //Might not be working
+                    document.getElementById('displayImage').setAttribute("src", downloadURL);
+                    console.log(downloadURL);
+                    uploader.hidden = true;
+                    document.getElementById("imageRefText").value = imageRefId;
+                });
+            }
+        );
+    }
 </script>
 
 <!-- javascript for page changes -->

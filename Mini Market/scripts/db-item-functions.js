@@ -33,10 +33,11 @@ function validateForm() {
         alert("Please select a valid Campus");
         return false;
     }
-    else
+    else{
+        console.log("Valid");
         return true;
+    }
 }
-
 
 const addItemsForm = document.querySelector('#upload_item_form');
 addItemsForm.addEventListener('submit', (e) => {
@@ -53,6 +54,7 @@ addItemsForm.addEventListener('submit', (e) => {
 
     if(validateForm()) {
         db.collection('items').add({
+            imageRef: addItemsForm['imageRefText'].value,
             itemName: addItemsForm['itemName'].value,
             description: addItemsForm['description'].value,
             price: addItemsForm['price'].value,
@@ -66,14 +68,16 @@ addItemsForm.addEventListener('submit', (e) => {
             //         referenceValue: docRef.id,
             //     }).then(addItemsForm.reset());
             // })
-            .then(x => { alert("Your Item has successfully been uploaded!")});
+            .then(x => { alert("Your Item has successfully been uploaded!"); addItemsForm.reset();});
     }
 });
 
 // Remove Item
-function removeItem(x){
+function removeItem(x, y){
     db.collection("items").doc(x).delete().then(e => {
-        window.location = "myShop.html";
+        storageRef.child(y).delete().then( e => {
+            window.location = "myShop.html";
+        })
     })
 }
 // Find My Items

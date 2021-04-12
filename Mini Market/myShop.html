@@ -22,7 +22,7 @@
             background-color: rgba(255, 255, 255, 0.418);
             overflow-y: auto;
         }
-        #container-center{
+        #container-center-myShop{
             padding-top: 15px;
             float: left;
         }
@@ -86,7 +86,7 @@
         .layui-nav{
             background-color: transparent;
         }
-        
+
     </style>
 </head>
 <body>
@@ -113,7 +113,7 @@
                 </button>
             </div>
             <section>
-                <div id="container-center"> </div>
+                <div id="container-center-myShop"> </div>
                 <br>
             </section>
         </div>
@@ -125,6 +125,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -142,6 +143,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+        const storageRef = firebase.storage().ref();
 
     </script>
 
@@ -180,20 +182,28 @@
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        let element = document.createElement('item');
-                        element.innerHTML = "<div>" +
-                            "Item Name: " + doc.data().itemName + "<br>" +
-                            "Item Description: " + doc.data().description + "<br>" +
-                            "Campus: " + doc.data().campus + "<br>" +
-                            "Item Condition: " + doc.data().condition + "<br>" +
-                            "Price: " + doc.data().price + "<br>" +
-                            "Type: " + doc.data().type + "<br>" +
-                            "<button> Remove This Item </button>" +
-                            "</div>" + "<hr>"
-                        element.addEventListener("click", e =>{
-                            removeItem(doc.id);
-                        })
-                        document.getElementById("container-center").appendChild(element);
+                        console.log("imageRef " + doc.data().imageRef);
+                        storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
+                            console.log("image url: " + url);
+                            let image = document.createElement('img');
+                            image.setAttribute("src", url);
+                            document.getElementById("container-center-myShop").appendChild(image);
+
+                            let element = document.createElement('item');
+                            element.innerHTML = "<div>" +
+                                "Item Name: " + doc.data().itemName + "<br>" +
+                                "Item Description: " + doc.data().description + "<br>" +
+                                "Campus: " + doc.data().campus + "<br>" +
+                                "Item Condition: " + doc.data().condition + "<br>" +
+                                "Price: " + doc.data().price + "<br>" +
+                                "Type: " + doc.data().type + "<br>" +
+                                "<button> Remove This Item </button>" +
+                                "</div>" + "<hr>"
+                            element.addEventListener("click", e =>{
+                                removeItem(doc.id, doc.data().imageRef);
+                            });
+                            document.getElementById("container-center-myShop").appendChild(element);
+                        });
                     });
                 })
                 .catch((error) => {
