@@ -1,11 +1,15 @@
+function recipient(){
+    ///console.log("www " + personEmail)
+}
+
 const message = firebase.messaging();
 message.requestPermission()
-.then(function() {
-    console.log('Have permission'); //User Can Allow or Deny messages
-})
-.catch(function(err) {
-    console.log('Error Occured.')
-})
+    .then(function() {
+        console.log('Have permission'); //User Can Allow or Deny messages
+    })
+    .catch(function(err) {
+        console.log('Error Occured.')
+    })
 
 // sending new message
 const createMessageForm = document.querySelector('#sendNewMessageForm');
@@ -13,8 +17,8 @@ createMessageForm.addEventListener('submit', (e) => {
     e.preventDefault();
     let user = firebase.auth().currentUser;
     let uid;
-    let senderid = createMessageForm['recEmail'].value;
-    console.log(senderid);
+    let senderid = personEmail;
+    //console.log("www2" + senderid);
     if(user){
         uid = user.uid;
         console.log(uid);
@@ -25,6 +29,7 @@ createMessageForm.addEventListener('submit', (e) => {
     })
         .then((docRef) => {
             createMessageForm.reset();
+            location.reload();
         })
         .catch((error) => {
             console.error("Error adding document: ", error);
