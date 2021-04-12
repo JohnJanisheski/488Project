@@ -18,10 +18,11 @@ signupForm.addEventListener('submit', (e) =>{
     // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
     auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
         return db.collection('accounts').doc(cred.user.uid).set({
-            firstname: signupForm['first-name'].value,
-            lastname: signupForm['last-name'].value,
+            firstname: signupForm['firstname'].value,
+            lastname: signupForm['lastname'].value,
             campus: signupForm['campus'].value,
             phone: signupForm['phone'].value,
+            email: signupForm['email'].value + "@psu.edu",
         })
     }).then(() => {
         alert("Your account has been created!")

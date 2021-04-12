@@ -16,6 +16,12 @@
         body{
             background-color: rgb(255,255,255);
         }
+        .hidden {
+            display:none;
+        }
+        .show {
+            display:block;
+        }
         #container{
             width: 100%;
             height: 100%;
@@ -69,75 +75,81 @@
     </style>
 </head>
 <body>
-    <div id="container">
-        <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
-            <span class="logo" style="float: left;">Mini Market</span>
-            <span class="user" style="float: right;">
+<div id="container">
+    <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
+        <span class="logo" style="float: left;">Mini Market</span>
+        <span class="user" style="float: right;">
                 <a href="account.html"><i class="layui-icon layui-icon-username myIcon"></i></a>
                 <a href="index.html"><i class="layui-icon layui-icon-logout myIcon"></i></a>
             </span>
-            <div class="head">
-                <ul class="layui-nav" lay-filter="menus">
-                    <li class="layui-nav-item  "><a href="product_list.html">Product list</a></li>
-                    <li class="layui-nav-item"><a href="myShop.html">My product</a></li>
-                    <li class="layui-nav-item   layui-this" layui-this><a href="account.html">Account</a></li>
-                    <li class="layui-nav-item"><a href="message.html">Messaging</a></li>
-                </ul>
-            </div>
+        <div class="head">
+            <ul class="layui-nav" lay-filter="menus">
+                <li class="layui-nav-item  "><a href="product_list.html">Product list</a></li>
+                <li class="layui-nav-item"><a href="myShop.html">My product</a></li>
+                <li class="layui-nav-item   layui-this" layui-this><a href="account.html">Account</a></li>
+                <li class="layui-nav-item"><a href="message.html">Messaging</a></li>
+            </ul>
         </div>
-        <div id="container-center">
-            <form class="layui-form">
-                <div class="layui-form-item">
-                    <label class="layui-form-label">HeadImg</label>
-                    <div class="layui-input-block">
-                        <div class="layui-upload">
-                            <div class="layui-upload-list">
-                              <img class="layui-upload-img" id="demo1">
-                              <p id="demoText"></p>
-                            </div>
-                            <button style="display: none;" type="button" class="layui-btn" id="test1">select picture</button>
-                          </div>  
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">Account</label>
-                    <div class="layui-input-block">
-                        <input id ="accountName" type="text" name="account" disabled  autocomplete="off" class="layui-input" value="bob">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">Email</label>
-                    <div class="layui-input-block">
-                        <input type="text" name="title" disabled class="layui-input" value="bob@psu.edu"> 
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">Sex</label>
-                    <div class="layui-input-block">
-                        <input type="radio" name="sex"  value="male" title="male">
-                        <input type="radio" name="sex"  value="female" title="female" checked>
-                      </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">RegistTime</label>
-                    <div class="layui-input-block">
-                      <input type="text" name="title" disabled class="layui-input" value="2020-01-01">
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <label class="layui-form-label">Num of sale</label>
-                    <div class="layui-input-block">
-                      <input type="text" name="title" disabled value="12/45"  class="layui-input" >
-                    </div>
-                </div>
-                <div class="layui-form-item">
-                    <div class="layui-input-block">
-                      <a id="submit" class="layui-btn" lay-filter="formDemo">edit</a>
-                    </div>
-                </div>
-            </form>
-        </div>        
     </div>
+    <div id="container-center">
+        <form class="layui-form" id="userInfoForm">
+            <div class="layui-form-item">
+                <label class="layui-form-label">HeadImg</label>
+                <div class="layui-input-block">
+                    <div class="layui-upload">
+                        <div class="layui-upload-list">
+                            <img class="layui-upload-img" id="demo1">
+                            <p id="demoText"></p>
+                        </div>
+                        <button style="display: none;" type="button" class="layui-btn" id="test1">select picture</button>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-form-item show" id="accountDiv">
+                <label class="layui-form-label">Account</label>
+                <div class="layui-input-block">
+                    <input type="text" name="account" disabled  autocomplete="off" class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item hidden" id="firstNameDiv">
+                <label class="layui-form-label">First Name</label>
+                <div class="layui-input-block">
+                    <input type="text" name="firstName" disabled  class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item hidden" id="lastNameDiv">
+                <label class="layui-form-label">Last Name</label>
+                <div class="layui-input-block">
+                    <input type="text" name="lastName" disabled  class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Email</label>
+                <div class="layui-input-block">
+                    <input type="text" name="email" disabled class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Campus</label>
+                <div class="layui-input-block">
+                    <input type="text" name="campus" disabled class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">Phone Number</label>
+                <div class="layui-input-block">
+                    <input type="text" name="phoneNumber" disabled   class="layui-input" value="">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <div class="layui-input-block">
+                    <a id="submit" class="layui-btn" lay-filter="formDemo">edit</a>
+                </div>
+            </div>
+        </form>
+
+    </div>
+</div>
     <script src="./layui/layui.js"></script>
     <script>
         layui.use(['layer', 'form','element','upload'], function(){
@@ -146,22 +158,73 @@
             ,element = layui.element
             ,$=layui.$
             ,upload = layui.upload;
-                
+            const userInfoForm = document.querySelector('#userInfoForm');
+
+
             $("#submit").click(function(){
-                var butten = $(this);
-                var mode = butten.text();
+                var button = $(this);
+                var mode = button.text();
                 if(mode=='edit'){
                     $("#test1").css("display","inline")
                     $("[name='account']").removeAttr("disabled");
-                    $("[name='sex']").removeAttr("disabled");
-                }else{
+                    $("[name='campus']").removeAttr("disabled");
+                    $("[name='phoneNumber']").removeAttr("disabled");
+                    $("[name='firstName']").removeAttr("disabled");
+                    $("[name='lastName']").removeAttr("disabled");
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
+                }
+                else if (mode=='save'){
+                    let user = auth.currentUser;
+                    let uid;
+
+                    if(user){
+                        uid = user.uid;
+                    }
+                    var fName = userInfoForm['firstName'].value;
+                    var lName = userInfoForm['lastName'].value;
+
+                    db.collection('accounts').doc(uid).update({
+                        "campus": userInfoForm['campus'].value,
+                        "phone": userInfoForm['phoneNumber'].value,
+                        "firstname": userInfoForm['firstName'].value,
+                        "lastname": userInfoForm['lastName'].value,
+
+                    })
+                        .then(() => {
+                                console.log("Updated!");
+                            }
+                        )
+                    $("#test1").css("display","none")
+                    $("[name='account']").attr("disabled",true).val(fName + " " + lName);
+                    $("[name='campus']").attr("disabled",true);
+                    $("[name='phoneNumber']").attr("disabled",true);
+                    $("[name='email']").attr("disabled",true);
+                    $("[name='firstName']").attr("disabled",true);
+                    $("[name='lastName']").attr("disabled",true);
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
+                }
+                else{
                     $("#test1").css("display","none")
                     $("[name='account']").attr("disabled",true);
-                    $("[name='sex']").attr("disabled",true);
+                    $("[name='campus']").attr("disabled",true);
+                    $("[name='phoneNumber']").attr("disabled",true);
+                    $("[name='email']").attr("disabled",true);
+                    $("[name='firstName']").attr("disabled",true);
+                    $("[name='lastName']").attr("disabled",true);
+                    $("[id='firstNameDiv']").toggle();
+                    $("[id='lastNameDiv']").toggle();
+                    $("[id='accountDiv']").toggle();
+
                 }
                 mode = mode == "save"?"edit":"save";
-                butten.text(mode);
-                
+                button.text(mode);
+
             });
 
 
@@ -227,5 +290,7 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/messaging.js"></script>
     <script src="scripts/firebase-messaging-sw.js"></script>
+    <script src="scripts/userInfo.js"></script>
+
 </body>
 </html>
