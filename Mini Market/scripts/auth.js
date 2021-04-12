@@ -1,7 +1,6 @@
 
 <!-- "Firebase auth tutorial creating new users -->
 <!-- www.youtube.com/watch?v=wkdCpktUfGg&list=PL4cUxeGkcC9jUPIes_B8vRjn1_GaplOPQ&index=5  -->
-
 const itemlist = document.querySelector('.itemslist');
 <!-- auth state changes -->
 auth.onAuthStateChanged(user => {
