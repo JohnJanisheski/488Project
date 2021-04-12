@@ -22,6 +22,7 @@ signupForm.addEventListener('submit', (e) =>{
             lastname: signupForm['last-name'].value,
             campus: signupForm['campus'].value,
             phone: signupForm['phone'].value,
+            email: signupForm['email'].value + "@psu.edu",
         })
     }).then(() => {
         alert("Your account has been created!")
