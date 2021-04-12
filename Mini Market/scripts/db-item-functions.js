@@ -48,7 +48,6 @@ addItemsForm.addEventListener('submit', (e) => {
     let uid;
     if(user){
         uid = user.uid;
-        console.log("in add items form with user:    " + uid);
     }
 
     if(validateForm()) {
