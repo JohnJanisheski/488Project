@@ -175,32 +175,9 @@
             </span>
     </div>
     <hr>
-    <div id="container-center">
+    <div id="container-center-product-list">
     </div>
 </div>
-
-<!--<script src="./layui/layui.js"></script>-->
-<!--<script>-->
-<!--    var $;-->
-<!--    layui.use(['layer', 'form','element'], function(){-->
-<!--        var layer = layui.layer-->
-<!--            ,form = layui.form-->
-<!--            ,element = layui.element;-->
-<!--        $=layui.$;-->
-<!--        $(".shopContainer").on("click",function(){-->
-<!--            window.location.href = "detail.html";-->
-<!--        })-->
-
-<!--        (function(){-->
-<!--            var html = "";-->
-<!--            for(var i=0;i<10;i++){-->
-<!--                html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+-->
-<!--                    "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";-->
-<!--            }-->
-<!--            $("#container-center").html(html);-->
-<!--        })()-->
-<!--    })-->
-<!--</script>-->
 
 <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
 <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
@@ -209,6 +186,8 @@
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
 <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+<script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
+
 <script>
     // Your web app's Firebase configuration
     // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -226,6 +205,7 @@
     firebase.initializeApp(firebaseConfig);
     const auth = firebase.auth();
     const db = firebase.firestore();
+    const storageRef = firebase.storage().ref();
 </script>
 <script>
     window.addEventListener('load', function(){
@@ -234,23 +214,41 @@
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
-                    let element = document.createElement('item');
-                    element.innerHTML = "<div>" +
-                        "Item Name: " + doc.data().itemName + "<br>" +
-                        "Item Description: " + doc.data().description + "<br>" +
-                        "Campus: " + doc.data().campus + "<br>" +
-                        "Item Condition: " + doc.data().condition + "<br>" +
-                        "Price: " + doc.data().price + "<br>" +
-                        "Type: " + doc.data().type + "<br>" +
-                        "<button> Add Poster's Info To Inbox </button>" +
-                        "</div>" + "<hr>"
-                    document.getElementById("container-center").appendChild(element);
+                    let outerDiv = document.createElement("div");
+                    outerDiv.innerHTML = "<hr>"
+                    outerDiv.setAttribute("id", "outer");
+                    console.log("outerDiv")
+
+                    storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
+                        let image = document.createElement("img")
+                        image.setAttribute("src", url);
+                        image.style.height = "150px";
+                        image.style.width = "150px";
+                        outerDiv.appendChild(image);
+                        console.log("image")
+
+                        //Can style by creating elements within the first one instead of line breaks;
+                        let text = document.createElement("item");
+                        text.innerHTML = "<div>" +
+                                "Item Name: " + doc.data().itemName + "<br>" +
+                                "Item Description: " + doc.data().description + "<br>" +
+                                "Campus: " + doc.data().campus + "<br>" +
+                                "Item Condition: " + doc.data().condition + "<br>" +
+                                "Price: " + doc.data().price + "<br>" +
+                                "Type: " + doc.data().type + "<br>" +
+                                "<button> Add Poster's Info To Inbox </button>" +
+                                "</div>" + "<hr>";
+                        outerDiv.appendChild(text);
+                        console.log("text");
+                    }).then(() => {
+                        document.getElementById("container-center-product-list").appendChild(outerDiv);
+                    })
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
                 });
             })
-            .catch((error) => {
-                console.log("Error getting documents: ", error);
-            });
-    })
+    });
 </script>
 
 <!-- javascript for page changes -->

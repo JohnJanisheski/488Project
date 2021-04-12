@@ -182,15 +182,23 @@
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
-                        console.log("imageRef " + doc.data().imageRef);
-                        storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
-                            console.log("image url: " + url);
-                            let image = document.createElement('img');
-                            image.setAttribute("src", url);
-                            document.getElementById("container-center-myShop").appendChild(image);
+                        //-------------------------------------------
+                        let outerDiv = document.createElement("div");
+                        outerDiv.innerHTML = "<hr>"
+                        outerDiv.setAttribute("id", "outer");
+                        console.log("outerDiv")
 
-                            let element = document.createElement('item');
-                            element.innerHTML = "<div>" +
+                        storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
+                            let image = document.createElement("img")
+                            image.setAttribute("src", url);
+                            image.style.height = "150px";
+                            image.style.width = "150px";
+                            outerDiv.appendChild(image);
+                            console.log("image")
+
+                            //Can style by creating elements within the first one instead of line breaks;
+                            let text = document.createElement('item');
+                            text.innerHTML = "<div>" +
                                 "Item Name: " + doc.data().itemName + "<br>" +
                                 "Item Description: " + doc.data().description + "<br>" +
                                 "Campus: " + doc.data().campus + "<br>" +
@@ -199,17 +207,21 @@
                                 "Type: " + doc.data().type + "<br>" +
                                 "<button> Remove This Item </button>" +
                                 "</div>" + "<hr>"
-                            element.addEventListener("click", e =>{
+                            text.addEventListener("click", e =>{
                                 removeItem(doc.id, doc.data().imageRef);
                             });
-                            document.getElementById("container-center-myShop").appendChild(element);
-                        });
-                    });
+                            outerDiv.appendChild(text);
+                            console.log("text");
+                        }).then(() => {
+                            document.getElementById("container-center-myShop").appendChild(outerDiv);
+                        })
+                        //-------------------------------------------
                 })
                 .catch((error) => {
                     console.log("Error getting documents: ", error);
                 });
-        })
+            })
+        });
     </script>
 </body>
 </html>
