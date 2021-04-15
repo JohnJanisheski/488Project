@@ -98,7 +98,7 @@
                     <div class="layui-input-block">
                         <div class="layui-upload">
                             <div class="layui-upload-list">
-                              <img class="layui-upload-img" id="showImage">
+                              <img class="layui-upload-img" id="showImage" name="roundHeader">
                               <p id="demoText"></p>
                             </div>
                             <input id='fileid' type='file' name='filename' hidden/>
@@ -274,7 +274,10 @@
                             console.log(downloadURL);
                             uploader.hidden = true;
                             document.getElementById("imageRefText").value = imageRefId;
-                        });
+                            db.collection('accounts').doc(auth.currentUser.uid).update({
+                                "downloadURL": downloadURL,
+                            });
+                        })
                     }
                 );
 
