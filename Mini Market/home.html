@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HomePage</title>
+    <link rel="stylesheet" href="../../../../../../Downloads/minimarket-pro/layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: rgb(255,255,255);
+            /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+        }
+        #container{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.418);
+            overflow-y: auto;
+        }
+        #container-center{
+            width: 80%;
+            margin-left: 10%;
+        }
+        .head{
+            width: 640px;
+            margin-left: 320px;
+        }
+        .shopContainer {
+            width: 150px;
+            height: 220px;
+            float: left;
+            background-color: rgba(245, 245, 245, 0.719);
+            margin: 15px;
+            cursor:pointer;
+        }
+        .shopContainer > img{
+            width: 120px;
+            height: 120px;
+            margin: 15px;
+        }
+        .shopContainer > .shopName{
+            text-align: center;
+            width: 80px;
+            font-weight: bolder;
+            white-space: nowrap;
+            font-weight: bolder;
+            text-overflow: ellipsis;
+            color: rgb(80, 75, 75);
+            margin: 0px 35px;
+            overflow-x: hidden;
+        }
+        .shopContainer > .price{
+            margin: 0px 15px;
+            color: red;
+            width: 120px;
+        }
+        .shopContainer > .desc{
+            margin: 0px 15px;
+            width: 120px;
+            height: 38px;
+            overflow:hidden;
+        }
+        .logo {
+            float: left;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 15px;
+        }
+        .user{
+            float: right;
+            margin: 15px;
+        }
+        .myIcon {
+            background-color: rgb(48, 46, 46);
+            color: rgb(255, 253, 253);
+            font-size: 28px;
+            border-radius: 21px;
+            padding: 5px;
+        }
+        .layui-nav{
+
+            background-color: transparent;
+        }
+        .filter{
+            margin-top: 15px;
+            margin-left: calc(10% + 55px);
+            height: 25px;
+            background-color: rgba(230, 227, 223, 0.185);
+            font-size: 18px;
+        }
+        .filter > *{
+            padding:1px 3px;
+            width: 150px;
+            height: 35px;
+            font-size: 16px;
+            border-color: #e6e6e6;
+        }
+        #search {
+            display: inline;
+        }
+        .upordown{
+            cursor: pointer;
+            transform: rotate(180deg);
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
+            <span class="logo" style="float: left;">Mini Market</span>
+            <div class="head">
+                <ul class="layui-nav" lay-filter="menus">
+                    <li class="layui-nav-item  layui-this"><a href="home.html">HomePage</a></li>
+                    <li class="layui-nav-item"><a href="aboutUs.html">About Us</a></li>
+                    <li class="layui-nav-item"><a href="https://github.com/JohnJanisheski/488Project/tree/main/SupportingDocumentation"  target="_blank">Support Files</a></li>
+                    <li class="layui-nav-item"><a href="../../../../../../Downloads/minimarket-pro/message.html" target="_blank">Try me</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container-center">
+            <video controls="controls"
+                width="100%"
+             src="https://play.tudou.com/v_show/id_XNTExNTk1NDQ0NA==.html?spm=a2hex.20746969_WEBHOME_GRAY.drawer2.d_zj1_3&scm=20140719.manual.25359.video_XNTExNTk1NDQ0NA%3D%3D">
+                Your browser does not support the video tag.
+            </video>
+        </div>        
+    </div>
+    <script src="../../../../../../Downloads/minimarket-pro/layui/layui.js"></script>
+    <script>
+        var $;
+        layui.use(['layer', 'form','element'], function(){
+            var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element;
+            $=layui.$;
+
+        })
+    </script> 
+</body>
+</html>
