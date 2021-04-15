@@ -102,6 +102,7 @@
                               <p id="demoText"></p>
                             </div>
                             <input id='fileid' type='file' name='filename' hidden/>
+                            <progress style="position:absolute; right:5px;" value="0" id="uploader" max="100" hidden>0%</progress>
                             <input style="display: none;" type="button" class="layui-btn" id="uploadButton" value="select picture"><!--select picture</input-->
                           </div>
                     </div>
@@ -230,10 +231,52 @@
 
             });
 
+            var fileUploadButton = document.getElementById("fileid");
+
 
             document.getElementById("uploadButton").addEventListener("click", uploadFunction);
             function uploadFunction(){
                 console.log("clicked!");
+                document.getElementById("fileid").click();
+            }
+            fileUploadButton.addEventListener("change", popUp_Upload);
+            function popUp_Upload(){
+                let uploader = document.getElementById('uploader');
+                uploader.hidden = false;
+                var showImage = document.getElementById("showImage");
+                console.log("upload clicked!");
+                var file = fileUploadButton.files[0];
+                console.log(file);
+                var imageRefId = "icons/" + auth.currentUser.uid + Date.now() + ".png";
+                var thisRef = storageRef.child(imageRefId);
+                let uploadTask = thisRef.put(file);
+                uploadTask.on('state_changed', (snapshot) => {
+                        uploader.value = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+                        switch (snapshot.state) {
+                            case firebase.storage().TaskState.PAUSED: // or 'paused'
+                                console.log('Upload is paused');
+                                break;
+                            case firebase.storage().TaskState.RUNNING: // or 'running'
+                                console.log('Upload is running');
+                                break;
+                        }
+                    }, (error) => {
+                        // Handle unsuccessful uploads
+                        window.alert("Image upload unsuccessful. Please try again soon");
+                        uploader.hidden = true;
+                    }, () => {
+                        // Handle successful uploads on complete
+                        console.log("Upload Successful!")
+                        uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
+                            //Might not be working
+                            document.getElementById('displayImage').setAttribute("src", downloadURL);
+                            console.log(downloadURL);
+                            uploader.hidden = true;
+                            document.getElementById("imageRefText").value = imageRefId;
+                        });
+                    }
+                );
+
             }
             //
             // //普通图片上传
