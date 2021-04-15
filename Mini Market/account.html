@@ -103,6 +103,7 @@
                             </div>
                             <input id='fileid' type='file' name='filename' hidden/>
                             <progress style="position:absolute; right:5px;" value="0" id="uploader" max="100" hidden>0%</progress>
+                            <label for="imageRefText"></label><textarea id="imageRefText" hidden></textarea>
                             <input style="display: none;" type="button" class="layui-btn" id="uploadButton" value="select picture"><!--select picture</input-->
                           </div>
                     </div>
@@ -269,7 +270,7 @@
                         console.log("Upload Successful!")
                         uploadTask.snapshot.ref.getDownloadURL().then((downloadURL) => {
                             //Might not be working
-                            document.getElementById('displayImage').setAttribute("src", downloadURL);
+                            document.getElementById('showImage').setAttribute("src", downloadURL);
                             console.log(downloadURL);
                             uploader.hidden = true;
                             document.getElementById("imageRefText").value = imageRefId;
