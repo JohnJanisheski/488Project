@@ -2,6 +2,7 @@
 // Validate User input items into the form
 function validateForm() {
     console.log("Validating...")
+    let image = document.forms["upload_item_form"]["imageRefText"].value;
     let itemName = document.forms["upload_item_form"]["itemName"].value;
     let description = document.forms["upload_item_form"]["description"].value;
     let listingPrice = document.forms["upload_item_form"]["price"].value;
@@ -34,6 +35,8 @@ function validateForm() {
         return false;
     }
     else{
+        if(image === "")
+            document.forms["upload_item_form"]["imageRefText"].value = "images/questionMark.png"
         console.log("Valid");
         return true;
     }
@@ -61,22 +64,22 @@ addItemsForm.addEventListener('submit', (e) => {
             type: addItemsForm['type'].value,
             campus: addItemsForm['campus'].value,
             userId: uid,
+            timestamp: Date.now(),
         })
-            // .then(docRef => {
-            //     db.collection('accounts').doc(uid).collection('userItems').add({
-            //         referenceValue: docRef.id,
-            //     }).then(addItemsForm.reset());
-            // })
-            .then(x => { alert("Your Item has successfully been uploaded!"); addItemsForm.reset();});
+            .then(x => { alert("Your Item has successfully been uploaded!"); addItemsForm.reset(); window.close()});
     }
 });
 
 // Remove Item
 function removeItem(x, y){
     db.collection("items").doc(x).delete().then(e => {
-        storageRef.child(y).delete().then( e => {
-            window.location = "myShop.html";
-        })
+        if(!(y === "images/questionMark.png")) {
+            storageRef.child(y).delete().then(e => {
+                window.location="myShop.html";
+            })
+        }
+        else
+            window.location="myShop.html";
     })
 }
 // Find My Items

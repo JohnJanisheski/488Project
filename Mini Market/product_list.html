@@ -23,9 +23,10 @@
             background-color: rgba(255, 255, 255, 0.418);
             overflow-y: auto;
         }
-        #container-center{
+        #container-center-product-list{
             width: 80%;
             margin-left: 10%;
+            padding-top: 20px;
         }
         .head{
             width: 640px;
@@ -130,51 +131,49 @@
         </div>
     </div>
     <div class="filter">
-        <input type="text" name="title" required  lay-verify="required" placeholder="search item name" autocomplete="off" class="layui-input" id="search">
-        <i class="layui-icon" style="cursor: pointer;">&#xe615;</i>
-        <label ></label>
-        <select name="condition" >
-            <option value="0" >condition</option>
-            <option value="0">New</option>
-            <option value="1">Good</option>
-            <option value="2">Fair</option>
+        <input type="text" id="searchName" class="search" required  lay-verify="required" placeholder="search item name" autocomplete="off">
+        <select id="condition" >
+            <option>Condition</option>
+            <option>New</option>
+            <option>Good</option>
+            <option>Fair</option>
         </select>
-        <select name="Type" >
-            <option value="">Type</option>
-            <option value="0">Furniture</option>
-            <option value="1">Books</option>
-            <option value="2">Electronics</option>
-            <option value="3">Clothing</option>
+        <select id="type" >
+            <option>Type</option>
+            <option>Furniture</option>
+            <option>Books</option>
+            <option>Electronics</option>
+            <option>Clothing</option>
         </select>
-        <select name="campus" >
-            <option value="">campus</option>
-            <option value="0">Abington</option>
-            <option value="1">Altoona</option>
-            <option value="2">Beaver</option>
-            <option value="3">Berks</option>
-            <option value="2">Brandywine</option>
-            <option value="3">DuBois</option>
-            <option value="0">Erie</option>
-            <option value="1">Fayette</option>
-            <option value="2">Greater Allegheny</option>
-            <option value="3">Harrisburg</option>
-            <option value="2">Hazleton</option>
-            <option value="3">Lehigh Valley</option>
-            <option value="3">Mont Alto</option>
-            <option value="0">New Kensington</option>
-            <option value="1">Schuylkill</option>
-            <option value="2">Scranton</option>
-            <option value="3">Shenango</option>
-            <option value="2">University Park</option>
-            <option value="3">Wilkes-Barre</option>
-            <option value="2">York</option>
+        <select id="campus" >
+            <option>campus</option>
+            <option>Abington</option>
+            <option>Altoona</option>
+            <option>Beaver</option>
+            <option>Berks</option>
+            <option>Brandywine</option>
+            <option>DuBois</option>
+            <option>Erie</option>
+            <option>Fayette</option>
+            <option>Greater Allegheny</option>
+            <option>Harrisburg</option>
+            <option>Hazleton</option>
+            <option>Lehigh Valley</option>
+            <option>Mont Alto</option>
+            <option>New Kensington</option>
+            <option>Schuylkill</option>
+            <option>Scranton</option>
+            <option>Shenango</option>
+            <option>University Park</option>
+            <option>Wilkes-Barre</option>
+            <option>York</option>
         </select>
-        <span onclick="$('#upordown').toggleClass('upordown')" style="cursor: pointer;">
-                Chronological Order
-                <i class=" layui-icon layui-icon-triangle-d upordown" id="upordown"></i>
-            </span>
+<!--        <span onclick="sortByTime()" style="cursor: pointer;">-->
+<!--                Chronological Order-->
+<!--                <i class=" layui-icon layui-icon-triangle-d upordown" id="upordown"></i>-->
+<!--            </span>-->
+        <button id="searchButton" class="layui-icon" style="cursor: pointer;">&#xe615;</button>
     </div>
-    <hr>
     <div id="container-center-product-list">
     </div>
 </div>
@@ -210,10 +209,12 @@
 <script>
     window.addEventListener('load', function(){
         //.where("capital", "==", true)
-        db.collection("items").limit(20)
+        db.collection("items").orderBy("timestamp", "desc")
             .get()
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
+
+
                     let outerDiv = document.createElement("div");
                     outerDiv.innerHTML = "<hr>"
                     outerDiv.setAttribute("id", "outer");
@@ -252,6 +253,73 @@
                 });
             })
     });
+</script>
+<script>
+    document.getElementById("searchButton").addEventListener("click", function() {
+        let condition = document.getElementById("condition").value;
+        let type = document.getElementById("type").value;
+        let campus = document.getElementById("campus").value;
+        let searchName = document.getElementById("searchName").value;
+        console.log(condition + " | " + type + " | " + campus + " | " + searchName);
+        document.getElementById("container-center-product-list").innerHTML = "";
+        db.collection("items").orderBy("timestamp", "desc")
+            .get()
+            .then((querySnapshot) => {
+                querySnapshot.forEach((doc) => {
+                    let bCondition = true;
+                    let bType = true;
+                    let bCampus = true;
+                    let bSearchName = true;
+
+                    if (condition !== "Condition")
+                        if(doc.data().condition !== condition) {bCondition = false;}
+                    if(type !== "Type")
+                        if(doc.data().type !== type) {bType = false;}
+                    if(campus !== "campus")
+                        if(doc.data().campus !== campus) {bCampus = false;}
+                    if(searchName !== "")
+                        if(!(doc.data().itemName.includes(searchName) || doc.data().description.includes(searchName))) {bSearchName = false;}
+
+
+                    console.log( bSearchName + " | " + bCondition + " | " + bType + " | " + bCampus);
+                    if(bCampus && bCondition && bType && bSearchName){
+                        console.log("Inside final if")
+                        let outerDiv = document.createElement("div");
+                        outerDiv.innerHTML = "<hr>"
+                        outerDiv.setAttribute("id", "outer");
+
+                        storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
+                            let image = document.createElement("img")
+                            image.setAttribute("src", url);
+                            image.style.height = "150px";
+                            image.style.width = "150px";
+                            outerDiv.appendChild(image);
+
+                            //Can style by creating elements within the first one instead of line breaks;
+                            let text = document.createElement("item");
+                            text.innerHTML = "<div>" +
+                                "Item Name: " + doc.data().itemName + "<br>" +
+                                "Item Description: " + doc.data().description + "<br>" +
+                                "Campus: " + doc.data().campus + "<br>" +
+                                "Item Condition: " + doc.data().condition + "<br>" +
+                                "Price: " + doc.data().price + "<br>" +
+                                "Type: " + doc.data().type + "<br>" +
+                                "<button> Add Poster's Info To Inbox </button>" +
+                                "</div>" + "<hr>";
+                            text.addEventListener("click", e => {
+                                console.log(doc.data().userId);
+                            });
+                            outerDiv.appendChild(text);
+                        }).then(() => {
+                            document.getElementById("container-center-product-list").appendChild(outerDiv);
+                        })
+                    }
+                })
+                    .catch((error) => {
+                        console.log("Error getting documents: ", error);
+                    });
+            })
+    })
 </script>
 
 <!-- javascript for page changes -->

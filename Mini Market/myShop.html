@@ -178,10 +178,11 @@
     </script>
     <script>
         auth.onAuthStateChanged(x => {
-            db.collection("items").where("userId", "==", auth.currentUser.uid)
+            db.collection("items").orderBy("timestamp", "desc")
                 .get()
                 .then((querySnapshot) => {
                     querySnapshot.forEach((doc) => {
+                        if (doc.data().userId === auth.currentUser.uid) {
                         //-------------------------------------------
                         let outerDiv = document.createElement("div");
                         outerDiv.innerHTML = "<hr>"
@@ -191,6 +192,7 @@
                         storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
                             let image = document.createElement("img")
                             image.setAttribute("src", url);
+                            image.setAttribute("style", "inline-block")
                             image.style.height = "150px";
                             image.style.width = "150px";
                             outerDiv.appendChild(image);
@@ -207,7 +209,7 @@
                                 "Type: " + doc.data().type + "<br>" +
                                 "<button> Remove This Item </button>" +
                                 "</div>" + "<hr>"
-                            text.addEventListener("click", e =>{
+                            text.addEventListener("click", e => {
                                 removeItem(doc.id, doc.data().imageRef);
                             });
                             outerDiv.appendChild(text);
@@ -216,6 +218,7 @@
                             document.getElementById("container-center-myShop").appendChild(outerDiv);
                         })
                         //-------------------------------------------
+                    }
                 })
                 .catch((error) => {
                     console.log("Error getting documents: ", error);
