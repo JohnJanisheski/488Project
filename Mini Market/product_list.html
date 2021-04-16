@@ -146,7 +146,7 @@
             <option>Clothing</option>
         </select>
         <select id="campus" >
-            <option>campus</option>
+            <option>Campus</option>
             <option>Abington</option>
             <option>Altoona</option>
             <option>Beaver</option>
@@ -214,36 +214,47 @@
             .then((querySnapshot) => {
                 querySnapshot.forEach((doc) => {
 
-
                     let outerDiv = document.createElement("div");
                     outerDiv.innerHTML = "<hr>"
                     outerDiv.setAttribute("id", "outer");
-                    console.log("outerDiv")
 
                     storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
                         let image = document.createElement("img")
                         image.setAttribute("src", url);
+                        image.setAttribute("style", "float:left");
                         image.style.height = "150px";
                         image.style.width = "150px";
+                        image.style.paddingInlineEnd = "30px";
+                        image.style.paddingBlockEnd = "10px";
                         outerDiv.appendChild(image);
-                        console.log("image")
 
-                        //Can style by creating elements within the first one instead of line breaks;
-                        let text = document.createElement("item");
-                        text.innerHTML = "<div>" +
-                                "Item Name: " + doc.data().itemName + "<br>" +
-                                "Item Description: " + doc.data().description + "<br>" +
-                                "Campus: " + doc.data().campus + "<br>" +
-                                "Item Condition: " + doc.data().condition + "<br>" +
-                                "Price: " + doc.data().price + "<br>" +
-                                "Type: " + doc.data().type + "<br>" +
-                                "<button> Add Poster's Info To Inbox </button>" +
-                                "</div>" + "<hr>";
-                        text.addEventListener("click", e =>{
+                        let text = document.createElement('item');
+                        let itemName = document.createElement('itemDescriptionElement');
+                        itemName.innerHTML = "ItemName: " + doc.data().itemName + "<br>";
+                        text.appendChild(itemName);
+                        let itemDescription = document.createElement("itemDescriptionElement");
+                        itemDescription.innerHTML = "Item Description: " + doc.data().description + "<br>";
+                        text.appendChild(itemDescription);
+                        let itemCampus = document.createElement("itemDescriptionElement");
+                        itemCampus.innerHTML = "Campus: " + doc.data().campus + "<br>";
+                        text.appendChild(itemCampus);
+                        let itemCondition = document.createElement("itemDescriptionElement");
+                        itemCondition.innerHTML = "Condition: " + doc.data().condition + "<br>";
+                        text.appendChild(itemCondition);
+                        let itemPrice = document.createElement("itemDescriptionElement");
+                        itemPrice.innerHTML = "Price: " + doc.data().price + "<br>";
+                        text.appendChild(itemPrice);
+                        let itemType = document.createElement("itemDescriptionElement");
+                        itemType.innerHTML = "Type: " + doc.data().type + "<br>";
+                        text.appendChild(itemType);
+                        let addUserButton = document.createElement("itemDescriptionElement");
+                        addUserButton.innerHTML = "<button> Add User To Inbox </button><br>"
+                        addUserButton.addEventListener("click", e => {
                             console.log(doc.data().userId);
-                        });
+                        })
+                        text.appendChild(addUserButton);
+
                         outerDiv.appendChild(text);
-                        console.log("text");
                     }).then(() => {
                         document.getElementById("container-center-product-list").appendChild(outerDiv);
                     })
@@ -272,18 +283,24 @@
                     let bSearchName = true;
 
                     if (condition !== "Condition")
-                        if(doc.data().condition !== condition) {bCondition = false;}
-                    if(type !== "Type")
-                        if(doc.data().type !== type) {bType = false;}
-                    if(campus !== "campus")
-                        if(doc.data().campus !== campus) {bCampus = false;}
-                    if(searchName !== "")
-                        if(!(doc.data().itemName.includes(searchName) || doc.data().description.includes(searchName))) {bSearchName = false;}
+                        if (doc.data().condition !== condition) {
+                            bCondition = false;
+                        }
+                    if (type !== "Type")
+                        if (doc.data().type !== type) {
+                            bType = false;
+                        }
+                    if (campus !== "Campus")
+                        if (doc.data().campus !== campus) {
+                            bCampus = false;
+                        }
+                    if (searchName !== "")
+                        if (!(doc.data().itemName.includes(searchName) || doc.data().description.includes(searchName))) {
+                            bSearchName = false;
+                        }
 
 
-                    console.log( bSearchName + " | " + bCondition + " | " + bType + " | " + bCampus);
-                    if(bCampus && bCondition && bType && bSearchName){
-                        console.log("Inside final if")
+                    if (bCampus && bCondition && bType && bSearchName) {
                         let outerDiv = document.createElement("div");
                         outerDiv.innerHTML = "<hr>"
                         outerDiv.setAttribute("id", "outer");
@@ -291,33 +308,48 @@
                         storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
                             let image = document.createElement("img")
                             image.setAttribute("src", url);
+                            image.setAttribute("style", "float:left");
                             image.style.height = "150px";
                             image.style.width = "150px";
+                            image.style.paddingInlineEnd = "30px";
+                            image.style.paddingBlockEnd = "10px";
                             outerDiv.appendChild(image);
 
-                            //Can style by creating elements within the first one instead of line breaks;
-                            let text = document.createElement("item");
-                            text.innerHTML = "<div>" +
-                                "Item Name: " + doc.data().itemName + "<br>" +
-                                "Item Description: " + doc.data().description + "<br>" +
-                                "Campus: " + doc.data().campus + "<br>" +
-                                "Item Condition: " + doc.data().condition + "<br>" +
-                                "Price: " + doc.data().price + "<br>" +
-                                "Type: " + doc.data().type + "<br>" +
-                                "<button> Add Poster's Info To Inbox </button>" +
-                                "</div>" + "<hr>";
-                            text.addEventListener("click", e => {
+                            let text = document.createElement('item');
+                            let itemName = document.createElement('itemDescriptionElement');
+                            itemName.innerHTML = "ItemName: " + doc.data().itemName + "<br>";
+                            text.appendChild(itemName);
+                            let itemDescription = document.createElement("itemDescriptionElement");
+                            itemDescription.innerHTML = "Item Description: " + doc.data().description + "<br>";
+                            text.appendChild(itemDescription);
+                            let itemCampus = document.createElement("itemDescriptionElement");
+                            itemCampus.innerHTML = "Campus: " + doc.data().campus + "<br>";
+                            text.appendChild(itemCampus);
+                            let itemCondition = document.createElement("itemDescriptionElement");
+                            itemCondition.innerHTML = "Condition: " + doc.data().condition + "<br>";
+                            text.appendChild(itemCondition);
+                            let itemPrice = document.createElement("itemDescriptionElement");
+                            itemPrice.innerHTML = "Price: " + doc.data().price + "<br>";
+                            text.appendChild(itemPrice);
+                            let itemType = document.createElement("itemDescriptionElement");
+                            itemType.innerHTML = "Type: " + doc.data().type + "<br>";
+                            text.appendChild(itemType);
+                            let addUserButton = document.createElement("itemDescriptionElement");
+                            addUserButton.innerHTML = "<button> Add User To Inbox </button><br>"
+                            addUserButton.addEventListener("click", e => {
                                 console.log(doc.data().userId);
-                            });
+                            })
+                            text.appendChild(addUserButton);
+
                             outerDiv.appendChild(text);
                         }).then(() => {
                             document.getElementById("container-center-product-list").appendChild(outerDiv);
                         })
+                            .catch((error) => {
+                                console.log("Error getting documents: ", error);
+                            });
                     }
                 })
-                    .catch((error) => {
-                        console.log("Error getting documents: ", error);
-                    });
             })
     })
 </script>

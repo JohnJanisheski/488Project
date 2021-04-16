@@ -23,48 +23,48 @@
             overflow-y: auto;
         }
         #container-center-myShop{
+            width: 80%;
             padding-top: 15px;
             float: left;
         }
-
         .head{
             width: 640px;
             margin-left: 320px;
         }
-        .shopContainer {
-            width: 150px;
-            height: 220px;
-            float: left;
-            background-color: rgba(245, 245, 245, 0.719);
-            margin: 15px;
-            cursor:pointer;
-        }
-        .shopContainer > img{
-            width: 120px;
-            height: 120px;
-            margin: 15px;
-        }
-        .shopContainer > .shopName{
-            text-align: center;
-            width: 80px;
-            white-space: nowrap;
-            font-weight: bolder;
-            text-overflow: ellipsis;
-            color: rgb(80, 75, 75);
-            margin: 0px 35px;
-            overflow-x: hidden;
-        }
-        .shopContainer > .price{
-            margin: 0px 15px;
-            color: red;
-            width: 120px;
-        }
-        .shopContainer > .desc{
-            margin: 0px 15px;
-            width: 120px;
-            height: 38px;
-            overflow:hidden;
-        }
+        /*.shopContainer {*/
+        /*    width: 150px;*/
+        /*    height: 220px;*/
+        /*    float: left;*/
+        /*    background-color: rgba(245, 245, 245, 0.719);*/
+        /*    margin: 15px;*/
+        /*    cursor:pointer;*/
+        /*}*/
+        /*.shopContainer > img{*/
+        /*    width: 120px;*/
+        /*    height: 120px;*/
+        /*    margin: 15px;*/
+        /*}*/
+        /*.shopContainer > .shopName{*/
+        /*    text-align: center;*/
+        /*    width: 80px;*/
+        /*    white-space: nowrap;*/
+        /*    font-weight: bolder;*/
+        /*    text-overflow: ellipsis;*/
+        /*    color: rgb(80, 75, 75);*/
+        /*    margin: 0px 35px;*/
+        /*    overflow-x: hidden;*/
+        /*}*/
+        /*.shopContainer > .price{*/
+        /*    margin: 0px 15px;*/
+        /*    color: red;*/
+        /*    width: 120px;*/
+        /*}*/
+        /*.shopContainer > .desc{*/
+        /*    margin: 0px 15px;*/
+        /*    width: 120px;*/
+        /*    height: 38px;*/
+        /*    overflow:hidden;*/
+        /*}*/
         .logo {
             float: left;
             font-size: 32px;
@@ -177,7 +177,7 @@
         })
     </script>
     <script>
-        auth.onAuthStateChanged(x => {
+        window.addEventListener('load', function(){
             db.collection("items").orderBy("timestamp", "desc")
                 .get()
                 .then((querySnapshot) => {
@@ -187,37 +187,47 @@
                         let outerDiv = document.createElement("div");
                         outerDiv.innerHTML = "<hr>"
                         outerDiv.setAttribute("id", "outer");
-                        console.log("outerDiv")
 
                         storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
                             let image = document.createElement("img")
                             image.setAttribute("src", url);
-                            image.setAttribute("style", "inline-block")
+                            image.setAttribute("style", "float:left");
                             image.style.height = "150px";
                             image.style.width = "150px";
+                            image.style.paddingInlineEnd = "30px";
+                            image.style.paddingBlockEnd = "10px";
                             outerDiv.appendChild(image);
-                            console.log("image")
 
-                            //Can style by creating elements within the first one instead of line breaks;
                             let text = document.createElement('item');
-                            text.innerHTML = "<div>" +
-                                "Item Name: " + doc.data().itemName + "<br>" +
-                                "Item Description: " + doc.data().description + "<br>" +
-                                "Campus: " + doc.data().campus + "<br>" +
-                                "Item Condition: " + doc.data().condition + "<br>" +
-                                "Price: " + doc.data().price + "<br>" +
-                                "Type: " + doc.data().type + "<br>" +
-                                "<button> Remove This Item </button>" +
-                                "</div>" + "<hr>"
-                            text.addEventListener("click", e => {
+                            let itemName = document.createElement('itemDescriptionElement');
+                            itemName.innerHTML = "ItemName: " + doc.data().itemName + "<br>";
+                            text.appendChild(itemName);
+                            let itemDescription = document.createElement("itemDescriptionElement");
+                            itemDescription.innerHTML = "Item Description: " + doc.data().description + "<br>";
+                            text.appendChild(itemDescription);
+                            let itemCampus = document.createElement("itemDescriptionElement");
+                            itemCampus.innerHTML = "Campus: " + doc.data().campus + "<br>";
+                            text.appendChild(itemCampus);
+                            let itemCondition = document.createElement("itemDescriptionElement");
+                            itemCondition.innerHTML = "Condition: " + doc.data().condition + "<br>";
+                            text.appendChild(itemCondition);
+                            let itemPrice = document.createElement("itemDescriptionElement");
+                            itemPrice.innerHTML = "Price: " + doc.data().price + "<br>";
+                            text.appendChild(itemPrice);
+                            let itemType = document.createElement("itemDescriptionElement");
+                            itemType.innerHTML = "Type: " + doc.data().type + "<br>";
+                            text.appendChild(itemType);
+                            let itemRemoveButton = document.createElement("itemDescriptionElement");
+                            itemRemoveButton.innerHTML = "<button> Remove This Item </button><br>"
+                            itemRemoveButton.addEventListener("click", e => {
                                 removeItem(doc.id, doc.data().imageRef);
-                            });
+                            })
+                            text.appendChild(itemRemoveButton);
+
                             outerDiv.appendChild(text);
-                            console.log("text");
                         }).then(() => {
                             document.getElementById("container-center-myShop").appendChild(outerDiv);
                         })
-                        //-------------------------------------------
                     }
                 })
                 .catch((error) => {
