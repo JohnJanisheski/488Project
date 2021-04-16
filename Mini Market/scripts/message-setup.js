@@ -7,13 +7,13 @@ function loadMessages() {
     ids2 = [];
     names = [];
     uID = firebase.auth().currentUser.uid;
-    clickedonemail = "user1@psu.edu";
+    //clickedonemail = "user1@psu.edu";
     //console.log(uID);
     db.collection("accounts").get().then((querySnapshot) => {
         querySnapshot.forEach((doc) => {
             uEmails.push(doc.data().email);
             uIDS.push(doc.id);
-            names.push(doc.data().firstname);
+            names.push(doc.data().firstname + " " + doc.data().lastname);
             //console.log(users);
 
 
@@ -40,7 +40,8 @@ function loadMessages() {
         }
 
         //LOADS MESSAGES SENT
-        ids.push(uEmails[x]);
+        //ids.push(uEmails[x]);
+        console.log(sentEmail);
         db.collection("inbox").doc(uID).collection(sentEmail).get().then((querySnapshot) => { //.doc(User's id), .collection(email of the person who got your message)
             querySnapshot.forEach((doc) => {
                 //console.log(doc.id, " => ", doc.data());
