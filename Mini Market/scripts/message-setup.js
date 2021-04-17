@@ -11,6 +11,9 @@ function loadMessages() {
     names = [];
     sent_dates =[];
     rec_dates =[];
+    dates = [];
+    htmlArray = [];
+    combine = {};
     uID = firebase.auth().currentUser.uid;
     //clickedonemail = "user1@psu.edu";
     //console.log(uID);
@@ -45,7 +48,7 @@ function loadMessages() {
 
         //LOADS MESSAGES SENT
         //ids.push(uEmails[x]);
-        console.log(sentEmail);
+        //console.log(sentEmail);
         db.collection("inbox").doc(uID).collection(sentEmail).get().then((querySnapshot) => { //.doc(User's id), .collection(email of the person who got your message)
             querySnapshot.forEach((doc) => {
                 //console.log(doc.id, " => ", doc.data());
@@ -57,29 +60,10 @@ function loadMessages() {
 
 
             });
-            console.log(sentEmail + " " + sent_messages);
+            //console.log(sentEmail + " " + sent_messages);
             //document.getElementById("sentMessage").innerText = sent_messages[0];
-            for (var i = sent_messages.length-1; i >= 0; i--) {
-                //if(!count.includes(i)) {
-                htmlElements2 += ' <div class="msg-my"><span id = "sentMessage' + i + '"></span><img src="./img/bk1g.jpg"></div>';
-                //console.log(count);
 
-                //count.push(i);
 
-            }
-            console.log("bef " + htmlElements2);
-
-            messages.innerHTML = htmlElements2;
-            messageGroup = [];
-
-            for (y = 0; y < sent_messages.length; y++) {
-                messageSent = document.getElementById("sentMessage" + y);
-                console.log(y);
-                console.log(sent_messages[y]);
-                messageSent.innerText = sent_messages[y];
-                messageGroup.push(messageSent);
-                console.log(messageGroup);
-            }
 
             //}
         });
@@ -98,34 +82,56 @@ function loadMessages() {
 
 
                 });
-                console.log(recID + " " + rec_messages);
-                for (var j = rec_messages.length-1; j >= 0; j--) {
-                    //if(!count.includes(i)) {
-                    htmlElements2 += '<div class="msg-my msg-other"><span id = "recMessage' + j + '"></span><img src="./img/thinkinJava1.jpg"></div>';
-                    //console.log(count);
-
-                    //count.push(i);
-
+                //console.log(recID + " " + rec_messages);
+                i = 0, j = 0, k = 0, l = 0;
+                while (i < sent_messages.length){
+                    dates[k] = sent_dates[i];
+                    htmlArray[l] = ' <div class="msg-my msg-other"><span id = "sentMessage' + i + '"></span><img src="./img/bk1g.jpg"></div>';
+                    i++;
+                    k++;
+                    l++;
+                    //console.log("a "+ dates);
+                    //console.log(htmlArray);
                 }
+                while (j < rec_messages.length){
+                    dates[k] = rec_dates[j];
+                    htmlArray[l] =  '<div class="msg-my"><span id = "recMessage' + j + '"></span><img src="./img/thinkinJava1.jpg"></div>';
+                    j++;
+                    k++;
+                    l++;
+                    //console.log(dates);
+                    //console.log(htmlArray);
+                }
+                for(m = 0; m<dates.length; m++){
+                    combine[dates[m]] = htmlArray[m];
+                }
+                //console.log(combine);
+                for (var key of Object.keys(combine)) {
+                    //console.log(key + " => " + combine[key])
+                    htmlElements2 += combine[key];
+                }
+
+                //dates.sort(function(a,b){return b - a});
 
 
                 messages2.innerHTML = htmlElements2;
+                messageGroup =[];
                 for (y = 0; y < sent_messages.length; y++) {
                     messageSent = document.getElementById("sentMessage" + y);
-                    console.log(y);
-                    console.log(sent_messages[y]);
+                    //console.log(y);
+                    //console.log(sent_messages[y]);
                     messageSent.innerText = sent_messages[y];
                     messageGroup.push(messageSent);
-                    console.log(messageGroup);
+                    //console.log(messageGroup);
                     for (z = 0; z < rec_messages.length; z++) {
 
                         messageRec = document.getElementById("recMessage" + z);
-                        console.log(z);
-                        console.log(rec_messages[z]);
+                        //console.log(z);
+                        //console.log(rec_messages[z]);
                         messageRec.innerText = rec_messages[z];
                         messageGroup.push(messageRec);
-                        console.log(messageGroup);
-                        console.log("adt " + htmlElements2);
+                        //console.log(messageGroup);
+                        //console.log("adt " + htmlElements2);
                     }
                 }
 
