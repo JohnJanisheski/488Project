@@ -34,7 +34,7 @@ firebase.auth().onAuthStateChanged(function(user) {
                             for (var i = 0; i < users3.length; i++) {
                                 if(!count.includes(i)) {
                                 htmlElements += '<div class="userTitle2 " onclick= changeTitle(' + i + ')>\n' +
-                                    '                    <img src="./img/thinkinJava1.jpg" style="width: 45px; height: 45px; border-radius: 22.5px;">\n' +
+                                    '                    <img src="./img/userimg.png" style="width: 45px; height: 45px; border-radius: 22.5px;">\n' +
                                     '                    <span id = "buddy' + i + '" style="margin-left: 15px;font-size: 32;font-weight: 500;"></span></div>';
                                 //console.log(count);
 
