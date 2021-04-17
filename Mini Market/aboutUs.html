@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AboutUs</title>
-    <link rel="stylesheet" href="../../../../../../Downloads/minimarket-pro/layui/css/layui.css">
+    <link rel="stylesheet" href="./layui/css/layui.css">
     <style>
         html,body{
             width: 100%;
@@ -16,6 +16,20 @@
         body{
             background-color: rgb(255,255,255);
             /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+        }
+        button {
+            background-color: rgb(66, 66, 66);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            width: 20%;
+        }
+        a.button {
+            background-color: rgb(66, 66, 66);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            margin-right: 10px;
         }
         #container{
             width: 100%;
@@ -147,6 +161,7 @@
             margin: 0 auto;
         }
         .person-text > img{
+            height: 250px;
             width: 245px;
         }
     </style>
@@ -157,54 +172,77 @@
             <span class="logo" style="float: left;">Mini Market</span>
             <div class="head">
                 <ul class="layui-nav" lay-filter="menus">
-                    <li class="layui-nav-item  "><a href="home.html">HomePage</a></li>
+                    <li class="layui-nav-item  "><a href="home.html">Home Page</a></li>
                     <li class="layui-nav-item layui-this"><a href="aboutUs.html">About Us</a></li>
                     <li class="layui-nav-item"><a href="https://github.com/JohnJanisheski/488Project/tree/main/SupportingDocumentation" target="_blank">Support Files</a></li>
-                    <li class="layui-nav-item"><a href="../../../../../../Downloads/minimarket-pro/login.html" target="_blank">Try me</a></li>
+                    <li class="layui-nav-item"><a href="index.html">Try me</a></li>
                 </ul>
             </div>
         </div>
         <div id="container-center">
             <div class="title">
                 <div class="desc-text"><h1>Who We Are</h1></div>
-                <div class="desc-text"> flexible libraries are trusted by developers all over the world</div>
-            </div>
-            <div class="desc">
-                <div class="desc-text"> Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</div>
+                <div class="desc-text"> Here you will find a description of each team member and any links to their personal websites.</div>
             </div>
             <div class="person-container">
                 <div class="person">
-                    <div class="person-text"> 
-                        <img src="../../../../../../Downloads/minimarket-pro/img/headImg.png"/>
-                        <p>Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</p>
+                    <div class="person-text" style="height: 250px">
+                        <img id="johnImage" src="./img/John.png" style="float:left; padding-right: 10px"/>
+                        <div  style="padding-left: 255px">
+                            <h1>John Janisheski</h1>
+                            <p>
+                                I am a Penn State Harrisburg student graduating in December of 2021 with a degree in Computer Science.
+                                Below are links to download my Resume, go to my LinkedIn account and my GitHub Repository for
+                                some of the work that I have done throughout my time at Penn State.
+                            </p>
+                        </div>
+                        <div style="padding-top: 137px">
+                            <a class="button" href="resumes/Resume-JohnJanisheski.pdf" download="Resume-JohnJanisheski.pdf"> Download my Resume! </a>
+                            <a class="button" href="https://www.linkedin.com/in/johnjanisheski/" target="_blank"> Go to my LinkedIn! </a>
+                            <a class="button" href="https://github.com/JohnJanisheski" target="_blank"> Check out my GitHub! </a>
+                        </div>
                     </div>
                 </div>
                 <div class="person">
-                    <div class="person-text"> 
-                        <img src="../../../../../../Downloads/minimarket-pro/img/headImg.png"/>
-                        <p>Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</p>
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:right"/>
+                        <div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="person">
-                    <div class="person-text"> 
-                        <img src="../../../../../../Downloads/minimarket-pro/img/headImg.png"/>
-                        <p>Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</p>
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:left"/>
+                        <div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="person">
-                    <div class="person-text"> 
-                        <img src="../../../../../../Downloads/minimarket-pro/img/headImg.png"/>
-                        <p>Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</p>
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:right"/>
+                        <div>
+
+                        </div>
                     </div>
                 </div>
                 <div class="person">
-                    <div class="person-text"> 
-                        <img src="../../../../../../Downloads/minimarket-pro/img/headImg.png"/>
-                        <p>Spring’s flexible libraries are trusted by developers all over the world. Spring delivers delightful experiences to millions of end-users every day—whether that’s streaming TV, online shopping, or countless other innovative solutions. Spring also has contributions from all the big names in tech, including Alibaba, Amazon, Google, Microsoft, and more.</p>
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:left"/>
+                        <div>
+
+                        </div>
                     </div>
                 </div>
             </div>
         </div>        
     </div>
-    <script src="../../../../../../Downloads/minimarket-pro/layui/layui.js"></script>
+</body>
+    <script src="./layui/layui.js"></script>
+    <script>
+        function downloadResume(x){
+
+        }
+    </script>
 </html>
