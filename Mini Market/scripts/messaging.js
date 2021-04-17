@@ -21,17 +21,28 @@ createMessageForm.addEventListener('submit', (e) => {
     //console.log("www2" + senderid);
     if(user){
         uid = user.uid;
-        console.log(uid);
+       // console.log(uid);
     }// Create new document that has the message sent to the other user
-    db.collection('inbox').doc(uid).collection(senderid).add({
-        newMessage: createMessageForm['newMessage'].value,
-        userId: uid,
-    })
-        .then((docRef) => {
-            createMessageForm.reset();
-            location.reload();
-        })
-        .catch((error) => {
-            console.error("Error adding document: ", error);
+
+    db.collection("date").get().then((querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+
+            message_num = doc.data().date_increment + 1;
+            db.collection("date").doc('YpFmsU7iMQcA9xrK1kfT').set({
+                date_increment: message_num
+            });
         });
-});
+            db.collection('inbox').doc(uid).collection(senderid).add({
+                newMessage: createMessageForm['newMessage'].value,
+                userId: uid,
+                date: message_num,
+            })
+                .then((docRef) => {
+                    createMessageForm.reset();
+                    location.reload();
+                })
+                .catch((error) => {
+                    console.error("Error adding document: ", error);
+                });
+        });
+    });
