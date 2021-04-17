@@ -74,7 +74,7 @@ function loadMessages() {
             db.collection("inbox").doc(recID).collection(uEmail).get().then((querySnapshot) => { //.doc(id of person who sent you a message), .collection(User's email)
                 querySnapshot.forEach((doc) => {
                     //console.log(doc.id, " => ", doc.data());
-                    //console.log(doc.data().newMessage);
+                    console.log(doc.data().newMessage);
                     ids2.push(doc.data().userId);
                     rec_dates.push(doc.data().date);
                     rec_messages.push(doc.data().newMessage);
@@ -95,7 +95,7 @@ function loadMessages() {
                 }
                 while (j < rec_messages.length){
                     dates[k] = rec_dates[j];
-                    htmlArray[l] =  '<div class="msg-my"><span id = "recMessage' + j + '"></span><img src="./img/thinkinJava1.jpg"></div>';
+                    htmlArray[l] =  '<div class="msg-my"><span id = "recMessage' + j + '"></span><img src="./img/userimg.png"></div>';
                     j++;
                     k++;
                     l++;
@@ -123,16 +123,29 @@ function loadMessages() {
                     messageSent.innerText = sent_messages[y];
                     messageGroup.push(messageSent);
                     //console.log(messageGroup);
+                    //console.log(rec_messages[0]);
                     for (z = 0; z < rec_messages.length; z++) {
-
                         messageRec = document.getElementById("recMessage" + z);
                         //console.log(z);
-                        //console.log(rec_messages[z]);
+                        //console.log(rec_messages);
                         messageRec.innerText = rec_messages[z];
                         messageGroup.push(messageRec);
                         //console.log(messageGroup);
                         //console.log("adt " + htmlElements2);
                     }
+                }
+
+                if(sent_messages.length === 0){
+                    for (z = 0; z < rec_messages.length; z++) {
+                        messageRec = document.getElementById("recMessage" + z);
+                        //console.log(z);
+                        //console.log(rec_messages);
+                        messageRec.innerText = rec_messages[z];
+                        messageGroup.push(messageRec);
+                        //console.log(messageGroup);
+                        //console.log("adt " + htmlElements2);
+                    }
+
                 }
 
                 //document.getElementById("recMessage").innerText = rec_messages[0];
