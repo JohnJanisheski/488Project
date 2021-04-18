@@ -7,24 +7,6 @@ const itemlist = document.querySelector('.itemslist');
 auth.onAuthStateChanged(user => {
     if (user){
         console.log("User is logged in");
-        // window.location = 'product_list.html'; // This will automatically load product_list when auth is changed (This
-        // // matched with the initialization of the firebase app at the bottom of product_list (Or any pages that we would
-        // // like to load firebase on) will automatically load this page instead)  ***Need to find another way to redirect
-        // // users after creating an account
-
-        // db.collection('items').onSnapshot(snapshot => {
-        //     let newChange = snapshot.docChanges();
-        //     newChange.forEach((change => {
-        //         if (change.type == 'added'){
-        //             renderList(change.doc);
-        //         }
-        //         else if (change.type == 'removed'){
-        //             let li = itemlist.querySelector('[data-id=' + change.doc.id + ']');
-        //             itemlist.removeChild(li);
-        //         }
-        //     }))
-        // });
-        // setupUI(user); //Since we are using static connection methods we don't need a setupUI as it currently is
     }
     else{
         console.log('User is logged out');
@@ -44,12 +26,21 @@ login.addEventListener('submit', (e) =>{
 
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        login.reset();
-        loginContainer.style.display="none";
-        window.location = "product_list.html";
-
-
-    }); // Error Handling Still needs to be implemented
+        if(auth.currentUser.emailVerified){
+            login.reset();
+            loginContainer.style.display="none";
+            window.location = "product_list.html";
+        }
+        else{
+            auth.signOut().then(e => {
+                window.alert("You must verify your email address!");
+                login.reset();
+            });
+        }
+    }).catch(e => {
+            console.log(e);
+            // window.alert("Please make sure you entered your email and password correctly");
+        });
 });
 
 <!-- logout -->

@@ -2,6 +2,7 @@
 // Validate User input items into the form
 function validateForm() {
     console.log("Validating...")
+    let image = document.forms["upload_item_form"]["imageRefText"].value;
     let itemName = document.forms["upload_item_form"]["itemName"].value;
     let description = document.forms["upload_item_form"]["description"].value;
     let listingPrice = document.forms["upload_item_form"]["price"].value;
@@ -17,26 +18,29 @@ function validateForm() {
         alert("Please enter a description");
         return false;
     }
-    else if(listingPrice === "" || listingPrice < 0){
-        alert("Please enter a valid number");
+    else if(listingPrice === "" || listingPrice < 0 || isNaN(listingPrice)){
+        alert("Please enter a valid number for Price");
         return false;
     }
-    else if(condition === ""){
+    else if(condition.includes("Choose")){
         alert("Please select a condition");
         return false;
     }
-    else if(type === ""){
+    else if(type.includes("Choose")){
         alert("Please select a valid Type");
         return false;
     }
-    else if(campus === ""){
+    else if(campus.includes("Choose")){
         alert("Please select a valid Campus");
         return false;
     }
-    else
+    else{
+        if(image === "")
+            document.forms["upload_item_form"]["imageRefText"].value = "images/questionMark.png"
+        console.log("Valid");
         return true;
+    }
 }
-
 
 const addItemsForm = document.querySelector('#upload_item_form');
 addItemsForm.addEventListener('submit', (e) => {
@@ -48,11 +52,11 @@ addItemsForm.addEventListener('submit', (e) => {
     let uid;
     if(user){
         uid = user.uid;
-        console.log("in add items form with user:    " + uid);
     }
 
     if(validateForm()) {
         db.collection('items').add({
+            imageRef: addItemsForm['imageRefText'].value,
             itemName: addItemsForm['itemName'].value,
             description: addItemsForm['description'].value,
             price: addItemsForm['price'].value,
@@ -60,20 +64,23 @@ addItemsForm.addEventListener('submit', (e) => {
             type: addItemsForm['type'].value,
             campus: addItemsForm['campus'].value,
             userId: uid,
+            timestamp: Date.now(),
         })
-            .then(docRef => {
-                // console.log(docRef.id);
-                db.collection('accounts').doc(uid).collection('userItems').add({
-                    referenceValue: docRef.id,
-                }).then(addItemsForm.reset());
-            });
+            .then(x => { alert("Your Item has successfully been uploaded!"); addItemsForm.reset(); window.close()});
     }
 });
 
-
-
-
-
 // Remove Item
+function removeItem(x, y){
+    db.collection("items").doc(x).delete().then(e => {
+        if(!(y === "images/questionMark.png")) {
+            storageRef.child(y).delete().then(e => {
+                window.location="myShop.html";
+            })
+        }
+        else
+            window.location="myShop.html";
+    })
+}
 // Find My Items
 // Find all items/Find Specific Items

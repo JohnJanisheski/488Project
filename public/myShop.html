@@ -14,7 +14,7 @@
             padding: 0px;
         }
         body{
-            background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%;
+            /*background-image: url('./img/bk1g.jpg');background-repeat: no-repeat;background-size: 100% 100%;*/
         }
         #container{
             width: 100%;
@@ -22,49 +22,49 @@
             background-color: rgba(255, 255, 255, 0.418);
             overflow-y: auto;
         }
-        #container-center{
+        #container-center-myShop{
+            width: 80%;
             padding-top: 15px;
             float: left;
         }
-
         .head{
             width: 640px;
             margin-left: 320px;
         }
-        .shopContainer {
-            width: 150px;
-            height: 220px;
-            float: left;
-            background-color: rgba(245, 245, 245, 0.719);
-            margin: 15px;
-            cursor:pointer;
-        }
-        .shopContainer > img{
-            width: 120px;
-            height: 120px;
-            margin: 15px;
-        }
-        .shopContainer > .shopName{
-            text-align: center;
-            width: 80px;
-            white-space: nowrap;
-            font-weight: bolder;
-            text-overflow: ellipsis;
-            color: rgb(80, 75, 75);
-            margin: 0px 35px;
-            overflow-x: hidden;
-        }
-        .shopContainer > .price{
-            margin: 0px 15px;
-            color: red;
-            width: 120px;
-        }
-        .shopContainer > .desc{
-            margin: 0px 15px;
-            width: 120px;
-            height: 38px;
-            overflow:hidden;
-        }
+        /*.shopContainer {*/
+        /*    width: 150px;*/
+        /*    height: 220px;*/
+        /*    float: left;*/
+        /*    background-color: rgba(245, 245, 245, 0.719);*/
+        /*    margin: 15px;*/
+        /*    cursor:pointer;*/
+        /*}*/
+        /*.shopContainer > img{*/
+        /*    width: 120px;*/
+        /*    height: 120px;*/
+        /*    margin: 15px;*/
+        /*}*/
+        /*.shopContainer > .shopName{*/
+        /*    text-align: center;*/
+        /*    width: 80px;*/
+        /*    white-space: nowrap;*/
+        /*    font-weight: bolder;*/
+        /*    text-overflow: ellipsis;*/
+        /*    color: rgb(80, 75, 75);*/
+        /*    margin: 0px 35px;*/
+        /*    overflow-x: hidden;*/
+        /*}*/
+        /*.shopContainer > .price{*/
+        /*    margin: 0px 15px;*/
+        /*    color: red;*/
+        /*    width: 120px;*/
+        /*}*/
+        /*.shopContainer > .desc{*/
+        /*    margin: 0px 15px;*/
+        /*    width: 120px;*/
+        /*    height: 38px;*/
+        /*    overflow:hidden;*/
+        /*}*/
         .logo {
             float: left;
             font-size: 32px;
@@ -86,7 +86,7 @@
         .layui-nav{
             background-color: transparent;
         }
-        
+
     </style>
 </head>
 <body>
@@ -107,45 +107,17 @@
             </div>
         </div>
         <div style = 'width: 80%; margin-left: 10%;'>
-            <div id="publish" style="position:absolute;top:100px;right: 80px;">
+            <div id="publish" style="position:absolute;top:100px;right: 40px;">
                 <button type="button" class="layui-btn " id="toPublish">
-                    <i class="layui-icon">&#xe67c;Create New List</i>
+                    <i class="layui-icon">&#xe67c; Create New List</i>
                 </button>
             </div>
-            <div id="container-center"></div>
-        </div>   
+            <section>
+                <div id="container-center-myShop"> </div>
+                <br>
+            </section>
+        </div>
     </div>
-    <script src="./layui/layui.js"></script>
-    <script>
-        layui.use(['layer', 'form','element'], function(){
-            var layer = layui.layer
-            ,form = layui.form
-            ,element = layui.element
-            ,$=layui.$;
-
-            (function(){
-                var html = "";
-                for(var i=0;i<100;i++){
-                    html+="<div class='shopContainer'><img src='./img/java.png'/><div class='shopName' title='Wuthering Heights'>Wuthering Heights</div>"+
-                    "<div class='price'>price：15$</div><div class='desc'>describe：this is 'powered by more psychological energy than any book ever written'. Readers admire Wuthering Heights because of 'its layered narrative structure, because it is a work of incredible imagination, and because it is far more than a love story. The story shows 'the eternal rocks beneath' our fleeting desires. </div></div>";
-                }
-                $("#container-center").html(html);
-            })()
-            $(".shopContainer").on("click",function(){
-                window.location.href = "detail.html";
-            })
-            $("#toPublish").on("click",function(){
-                layer.open({
-                title:"Item Info",
-                type: 2,
-                area: ['530px', '650px'],
-                fixed: false,
-                maxmin: true,
-                content: './upload.html'
-                });
-            })
-        })
-    </script>
     <!-- Insert these scripts at the bottom of the HTML, but before you use any Firebase services -->
     <!-- Firebase App (the core Firebase SDK) is always required and must be listed first -->
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-app.js"></script>
@@ -153,6 +125,7 @@
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-firestore.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-messaging.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.2.8/firebase-storage.js"></script>
     <script>
         // Your web app's Firebase configuration
         // For Firebase JS SDK v7.20.0 and later, measurementId is optional
@@ -170,6 +143,7 @@
         firebase.initializeApp(firebaseConfig);
         const auth = firebase.auth();
         const db = firebase.firestore();
+        const storageRef = firebase.storage().ref();
 
     </script>
 
@@ -179,5 +153,88 @@
     <script src="scripts/auth.js"></script>
     <script src="scripts/messaging.js"></script>
     <script src="scripts/firebase-messaging-sw.js"></script>
+    <script src="scripts/db-item-functions.js"></script>
+    <script src="./layui/layui.js"></script>
+    <script>
+        layui.use(['layer', 'form','element'], function(){
+            var layer = layui.layer
+            ,form = layui.form
+            ,element = layui.element
+            ,$=layui.$;
+
+            (function(){
+                $("#toPublish").on("click",function(){
+                    layer.open({
+                        title:"Item Info",
+                        type: 2,
+                        area: ['530px', '670px'],
+                        fixed: false,
+                        maxmin: true,
+                        content: './upload.html'
+                    });
+                })
+            })()
+        })
+    </script>
+    <script>
+        window.addEventListener('load', function(){
+            db.collection("items").orderBy("timestamp", "desc")
+                .get()
+                .then((querySnapshot) => {
+                    querySnapshot.forEach((doc) => {
+                        if (doc.data().userId === auth.currentUser.uid) {
+                        //-------------------------------------------
+                        let outerDiv = document.createElement("div");
+                        outerDiv.innerHTML = "<hr>"
+                        outerDiv.setAttribute("id", "outer");
+
+                        storageRef.child(doc.data().imageRef).getDownloadURL().then((url) => {
+                            let image = document.createElement("img")
+                            image.setAttribute("src", url);
+                            image.setAttribute("style", "float:left");
+                            image.style.height = "150px";
+                            image.style.width = "150px";
+                            image.style.paddingInlineEnd = "30px";
+                            image.style.paddingBlockEnd = "10px";
+                            outerDiv.appendChild(image);
+
+                            let text = document.createElement('item');
+                            let itemName = document.createElement('itemDescriptionElement');
+                            itemName.innerHTML = "ItemName: " + doc.data().itemName + "<br>";
+                            text.appendChild(itemName);
+                            let itemDescription = document.createElement("itemDescriptionElement");
+                            itemDescription.innerHTML = "Item Description: " + doc.data().description + "<br>";
+                            text.appendChild(itemDescription);
+                            let itemCampus = document.createElement("itemDescriptionElement");
+                            itemCampus.innerHTML = "Campus: " + doc.data().campus + "<br>";
+                            text.appendChild(itemCampus);
+                            let itemCondition = document.createElement("itemDescriptionElement");
+                            itemCondition.innerHTML = "Condition: " + doc.data().condition + "<br>";
+                            text.appendChild(itemCondition);
+                            let itemPrice = document.createElement("itemDescriptionElement");
+                            itemPrice.innerHTML = "Price: " + doc.data().price + "<br>";
+                            text.appendChild(itemPrice);
+                            let itemType = document.createElement("itemDescriptionElement");
+                            itemType.innerHTML = "Type: " + doc.data().type + "<br>";
+                            text.appendChild(itemType);
+                            let itemRemoveButton = document.createElement("itemDescriptionElement");
+                            itemRemoveButton.innerHTML = "<button> Remove This Item </button><br>"
+                            itemRemoveButton.addEventListener("click", e => {
+                                removeItem(doc.id, doc.data().imageRef);
+                            })
+                            text.appendChild(itemRemoveButton);
+
+                            outerDiv.appendChild(text);
+                        }).then(() => {
+                            document.getElementById("container-center-myShop").appendChild(outerDiv);
+                        })
+                    }
+                })
+                .catch((error) => {
+                    console.log("Error getting documents: ", error);
+                });
+            })
+        });
+    </script>
 </body>
 </html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AboutUs</title>
+    <link rel="stylesheet" href="./layui/css/layui.css">
+    <style>
+        html,body{
+            width: 100%;
+            height: 100%;
+            margin: 0px;
+            padding: 0px;
+        }
+        body{
+            background-color: rgb(255,255,255);
+            /* background-image: url('./img/bkg.jpg');background-repeat: no-repeat;background-size: 100% 100%; */
+        }
+        button {
+            background-color: rgb(66, 66, 66);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            width: 20%;
+        }
+        a.button {
+            background-color: rgb(66, 66, 66);
+            color: white;
+            padding: 15px 20px;
+            border: none;
+            margin-right: 10px;
+        }
+        #container{
+            width: 100%;
+            height: 100%;
+            background-color: rgba(255, 255, 255, 0.418);
+            overflow-y: auto;
+        }
+        .head{
+            width: 640px;
+            margin-left: 320px;
+        }
+        .shopContainer {
+            width: 150px;
+            height: 220px;
+            float: left;
+            background-color: rgba(245, 245, 245, 0.719);
+            margin: 15px;
+            cursor:pointer;
+        }
+        .shopContainer > img{
+            width: 120px;
+            height: 120px;
+            margin: 15px;
+        }
+        .shopContainer > .shopName{
+            text-align: center;
+            width: 80px;
+            font-weight: bolder;
+            white-space: nowrap;
+            font-weight: bolder;
+            text-overflow: ellipsis;
+            color: rgb(80, 75, 75);
+            margin: 0px 35px;
+            overflow-x: hidden;
+        }
+        .shopContainer > .price{
+            margin: 0px 15px;
+            color: red;
+            width: 120px;
+        }
+        .shopContainer > .desc{
+            margin: 0px 15px;
+            width: 120px;
+            height: 38px;
+            overflow:hidden;
+        }
+        .logo {
+            float: left;
+            font-size: 32px;
+            font-weight: bold;
+            color: white;
+            margin: 15px;
+        }
+        .user{
+            float: right;
+            margin: 15px;
+        }
+        .myIcon {
+            background-color: rgb(48, 46, 46);
+            color: rgb(255, 253, 253);
+            font-size: 28px;
+            border-radius: 21px;
+            padding: 5px;
+        }
+        .layui-nav{
+
+            background-color: transparent;
+        }
+        .filter{
+            margin-top: 15px;
+            margin-left: calc(10% + 55px);
+            height: 25px;
+            background-color: rgba(230, 227, 223, 0.185);
+            font-size: 18px;
+        }
+        .filter > *{
+            padding:1px 3px;
+            width: 150px;
+            height: 35px;
+            font-size: 16px;
+            border-color: #e6e6e6;
+        }
+        #search {
+            display: inline;
+        }
+        .upordown{
+            cursor: pointer;
+            transform: rotate(180deg);
+            display: inline-block;
+        }
+        .title{
+            padding: 20px 0;
+            background-color: rgb(30, 105, 136);
+            text-align: center;
+            color: #fff;
+        }
+        .desc{
+            width: 100%;
+            padding: 10px 0;
+            background-color: rgb(238, 236, 248);
+            
+        }
+        .desc-text{
+            width: 850px;
+            margin: 0 auto;
+        }
+        .person:nth-of-type(odd){
+            background-color: rgb(55, 168, 157);
+        }
+        .person:nth-of-type(odd) > .person-text > p{
+            float: right;
+            padding: 20px 10px;
+            width: calc(100% - 280px);
+        }
+        .person:nth-of-type(even) {
+            background-color: rgb(238, 236, 248);
+        }
+        .person:nth-of-type(even) > .person-text >p{
+            float: left;
+            padding: 20px 0px;
+            width: calc(100% - 250px);
+        }
+        .person{
+            width: 100%;
+            padding: 10px 0;
+        }
+        .person-text{
+            width: 1200px;
+            margin: 0 auto;
+        }
+        .person-text > img{
+            height: 250px;
+            width: 245px;
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div style="width: 100%;background-color: rgba(0, 0, 0, 0.74);">
+            <span class="logo" style="float: left;">Mini Market</span>
+            <div class="head">
+                <ul class="layui-nav" lay-filter="menus">
+                    <li class="layui-nav-item  "><a href="home.html">Home Page</a></li>
+                    <li class="layui-nav-item layui-this"><a href="aboutUs.html">About Us</a></li>
+                    <li class="layui-nav-item"><a href="https://github.com/JohnJanisheski/488Project/tree/main/SupportingDocumentation" target="_blank">Support Files</a></li>
+                    <li class="layui-nav-item"><a href="index.html">Try me</a></li>
+                </ul>
+            </div>
+        </div>
+        <div id="container-center">
+            <div class="title">
+                <div class="desc-text"><h1>Who We Are</h1></div>
+                <div class="desc-text"> Here you will find a description of each team member and any links to their personal websites.</div>
+            </div>
+            <div class="person-container">
+                <div class="person">
+                    <div class="person-text" style="height: 250px">
+                        <img id="johnImage" src="./img/John.png" style="float:left; padding-right: 10px"/>
+                        <div  style="padding-left: 255px">
+                            <h1>John Janisheski</h1>
+                            <p>
+                                I am a Penn State Harrisburg student graduating in December of 2021 with a degree in Computer Science.
+                                Below are links to download my Resume, go to my LinkedIn account and my GitHub Repository for
+                                some of the work that I have done throughout my time at Penn State.
+                            </p>
+                        </div>
+                        <div style="padding-top: 137px">
+                            <a class="button" href="resumes/Resume-JohnJanisheski.pdf" download="Resume-JohnJanisheski.pdf"> Download my Resume! </a>
+                            <a class="button" href="https://www.linkedin.com/in/johnjanisheski/" target="_blank"> Go to my LinkedIn! </a>
+                            <a class="button" href="https://github.com/JohnJanisheski" target="_blank"> Check out my GitHub! </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:right"/>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:left"/>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:right"/>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="person">
+                    <div class="person-text" style="height: 250px">
+                        <img src="./img/questionMark.png" style="float:left"/>
+                        <div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>        
+    </div>
+</body>
+    <script src="./layui/layui.js"></script>
+    <script>
+        function downloadResume(x){
+
+        }
+    </script>
+</html>
