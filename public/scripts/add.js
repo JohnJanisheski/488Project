@@ -68,17 +68,9 @@ function addFriend(){
                     }
                 }
             }
-
             if(!users.includes(friend)){
                 alert("Email is not in the system");
             }
         });
-
-
-
-
     }
-
-
-
 }

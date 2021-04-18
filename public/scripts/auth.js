@@ -26,7 +26,7 @@ login.addEventListener('submit', (e) =>{
 
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        if(auth.currentUser.email_verified){
+        if(auth.currentUser.emailVerified){
             login.reset();
             loginContainer.style.display="none";
             window.location = "product_list.html";
