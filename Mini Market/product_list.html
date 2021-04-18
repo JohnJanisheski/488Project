@@ -247,10 +247,27 @@
                         let itemType = document.createElement("itemDescriptionElement");
                         itemType.innerHTML = "Type: " + doc.data().type + "<br>";
                         text.appendChild(itemType);
+                        let poster = document.createElement("itemDescriptionElement");
+                        db.collection("accounts").get().then((querySnapshot) => {
+                            querySnapshot.forEach((doc) => {
+                                users3.push(doc.data().email);
+                                idens2.push(doc.id);
+                            });
+                            for(i = 0; i<idens2.length; i++){
+                                if(doc.data().userId === idens2[i]){
+                                    //posterAccount = accounts3[i];
+                                    posterEmail = users3[i];
+                                    poster.innerHTML = "Posted By: " + posterEmail + "<br>";
+                                }
+
+                            }
+                        });
+                        text.appendChild(poster);
                         let addUserButton = document.createElement("itemDescriptionElement");
-                        addUserButton.innerHTML = "<button> Add User To Inbox </button><br>"
+                        addUserButton.innerHTML = "<button> Add Poster To Messaging List </button><br>"
                         addUserButton.addEventListener("click", e => {
-                            console.log(doc.data().userId);
+                            //console.log(doc.data().userId);
+                            posterAdd(doc.data().userId);
                         })
                         text.appendChild(addUserButton);
 
@@ -334,10 +351,27 @@
                             let itemType = document.createElement("itemDescriptionElement");
                             itemType.innerHTML = "Type: " + doc.data().type + "<br>";
                             text.appendChild(itemType);
+                            let poster = document.createElement("itemDescriptionElement");
+                            db.collection("accounts").get().then((querySnapshot) => {
+                                querySnapshot.forEach((doc) => {
+                                    users3.push(doc.data().email);
+                                    idens2.push(doc.id);
+                                });
+                                for(i = 0; i<idens2.length; i++){
+                                    if(doc.data().userId === idens2[i]){
+                                        //posterAccount = accounts3[i];
+                                        posterEmail = users3[i];
+                                        poster.innerHTML = "Posted By: " + posterEmail + "<br>";
+                                    }
+
+                                }
+                            });
+                            text.appendChild(poster);
                             let addUserButton = document.createElement("itemDescriptionElement");
-                            addUserButton.innerHTML = "<button> Add User To Inbox </button><br>"
+                            addUserButton.innerHTML = "<button> Add Poster To Messaging List </button><br>"
                             addUserButton.addEventListener("click", e => {
-                                console.log(doc.data().userId);
+                                //console.log(doc.data().userId);
+                                posterAdd(doc.data().userId);
                             })
                             text.appendChild(addUserButton);
 
@@ -359,6 +393,7 @@
 <script src="scripts/main.js"></script>
 <script src="scripts/auth.js"></script>
 <script src="scripts/messaging.js"></script>
+<script src="scripts/poster-add.js"></script>
 <script src="scripts/firebase-messaging-sw.js"></script>
 
 </body>
