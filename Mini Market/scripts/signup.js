@@ -19,26 +19,26 @@ signupForm.addEventListener('submit', (e) =>{
             campus: signupForm['campus'].value,
             phone: signupForm['phone'].value,
             email: signupForm['email'].value.concat("@psu.edu"),
-        }).then(e => {
-            auth.currentUser.sendEmailVerification().then(e => {
-                window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
-                // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
-            }).then(e => {
-                signupForm.reset();
-                window.location = "index.html";
-            }).catch(reason => {
-                window.alert(reason);
-            })
-        })
-    })
-});
+//         }).then(e => {
+//             auth.currentUser.sendEmailVerification().then(e => {
+//                 window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
+//                 // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
+//             }).then(e => {
+//                 signupForm.reset();
+//                 window.location = "index.html";
+//             }).catch(reason => {
+//                 window.alert(reason);
+//             })
+//         })
+//     })
+// });
 
 // for testing without validation
-    //     }).then(() => {
-    //         console.log("User Created")
-    //         signupForm.reset();
-    //         window.location = "index.html";
-    //     }).catch(reason => {
-    //         console.log("This is the reason: " + reason);
-    //     });
-    // });
+        }).then(() => {
+            console.log("User Created")
+            signupForm.reset();
+            window.location = "index.html";
+        }).catch(reason => {
+            console.log("This is the reason: " + reason);
+        });
+    });})
