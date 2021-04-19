@@ -17,6 +17,7 @@ signupForm.addEventListener('submit', (e) =>{
             lastname: signupForm['last-name'].value,
             campus: signupForm['campus'].value,
             phone: signupForm['phone'].value,
+            email: signupForm['email'].value.concat("@psu.edu"),
         }).then(e => {
             auth.currentUser.sendEmailVerification().then(e => {
                 window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
