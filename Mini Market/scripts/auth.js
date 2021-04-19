@@ -26,17 +26,17 @@ login.addEventListener('submit', (e) =>{
 
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        // if(auth.currentUser.emailVerified){
-        //     login.reset();
-        //     loginContainer.style.display="none";
-        //     window.location = "product_list.html";
-        // }
-        // else{
-        //     auth.signOut().then(e => {
-        //         window.alert("You must verify your email address!");
-        //         login.reset();
-        //     });
-        // }
+        if(auth.currentUser.emailVerified){
+            login.reset();
+            loginContainer.style.display="none";
+            window.location = "product_list.html";
+        }
+        else{
+            auth.signOut().then(e => {
+                window.alert("You must verify your email address!");
+                login.reset();
+            });
+        }
     }).catch(e => {
             console.log(e);
             // window.alert("Please make sure you entered your email and password correctly");
