@@ -8,6 +8,8 @@ firsts3 = [];
 lasts3 = [];
 idens3 = [];
 friends2 = [];
+photoURL1 = [];
+photoURL2 = [];
 
 function posterAdd(posterId) {
     firebase.auth().onAuthStateChanged(function (user) {
@@ -34,6 +36,7 @@ function posterAdd(posterId) {
                             accounts3.push(doc.data().firstname + " " + doc.data().lastname);
                             firsts3.push(doc.data().firstname);
                             lasts3.push(doc.data().lastname);
+                            photoURL1.push(doc.data().downloadURL);
                             idens3.push(doc.id);
                         });
 
@@ -43,6 +46,7 @@ function posterAdd(posterId) {
                                 console.log(idens3);
                                 fName3 = firsts3[x];
                                 lName3 = lasts3[x];
+                                pURL = photoURL1[x];
                                 //iden3 = idens3[x];
                                 posterEmail2 = users4[x];
                                 if (posterEmail2  === userEmail2) {
@@ -55,6 +59,7 @@ function posterAdd(posterId) {
                                         email: posterEmail2,
                                         firstname: fName3,
                                         lastname: lName3,
+                                        downloadURL: pURL,
                                     })
                                         .then((docRef) => {
                                             //location.reload();
@@ -74,10 +79,12 @@ function posterAdd(posterId) {
                                 userEmail2 = users4[y];
                                 userFName2 = firsts3[y];
                                 userLName2 = lasts3[y];
+                                user_pURL = photoURL1[y];
                                 db.collection("friends").doc(posterId).collection(userEmail2).add({ //adds your name to their friends list
                                     email: userEmail2,
                                     firstname: userFName2,
                                     lastname: userLName2,
+                                    downloadURL: user_pURL,
                                 })
                                     .then((docRef) => {
                                         //location.reload();
