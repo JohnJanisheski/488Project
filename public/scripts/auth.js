@@ -13,7 +13,6 @@ auth.onAuthStateChanged(user => {
     }
 });
 
-
 <!-- login current users -->
 const login = document.querySelector('#login-form');
 const loginContainer = document.querySelector('#login');

@@ -1,16 +1,17 @@
 const signupForm = document.querySelector('#signup-form');
 signupForm.addEventListener('submit', (e) =>{
     e.preventDefault();
-    const userEmail = signupForm['email'].value.concat("@psu.edu");
-    console.log("Creating User");
-    let userPassword = signupForm['password'].value;
-
-    // If passwords don't match, reset form and log it
-    if(!(userPassword === signupForm['confirmPassword'].value)){
-        window.alert("Your Passwords did not match!");
-        return;
-    }
     if(validSignUpForm()){
+        const userEmail = signupForm['email'].value.concat("@psu.edu");
+        console.log("Creating User");
+        let userPassword = signupForm['password'].value;
+
+        // If passwords don't match, reset form and log it
+        if(!(userPassword === signupForm['confirmPassword'].value)){
+            window.alert("Your Passwords did not match!");
+            return;
+        }
+
         auth.createUserWithEmailAndPassword(userEmail, userPassword).then(cred => {
             db.collection('accounts').doc(cred.user.uid).set({
                 downloadURL: "https://firebasestorage.googleapis.com/v0/b/mini-market-aa3c4.appspot.com/o/icons%2Fprofileimage.jpg?alt=media&token=6830f44b-9b37-46f8-a72e-a501428335dc",
