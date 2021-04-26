@@ -42,10 +42,10 @@ function validSignUpForm(){
     let phone = signupForm['phone'].value;
     let email = signupForm['email'].value.concat("@psu.edu");
 
-    if(signupForm['password'] === '')       {window.alert("Please enter a password");           return false;}
+    if(signupForm['password'].value === "") {window.alert("Please enter a password");           return false;}
     else if(first === "")                   {window.alert("Please enter a valid First Name");   return false;}
     else if(last === "")                    {window.alert("Please enter a valid Last Name");    return false;}
-    else if(campus === "Choose a Campus")   {window.alert("Please select a Campus");            return false;}
+    else if(campus === "")                  {window.alert("Please select a Campus");            return false;}
     else if(phone === "")                   {window.alert("Please enter a phone number");       return false;}
     else if(email === "")                   {window.alert("You must enter an email");           return false;}
     return true;
