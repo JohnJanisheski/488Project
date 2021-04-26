@@ -24,24 +24,31 @@ login.addEventListener('submit', (e) =>{
     const userEmail = login['user-email'].value;
     const userPassword = login['user-password'].value;
 
+    const credentials = firebase.auth.EmailAuthProvider.credential(userEmail, userPassword);
+
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        if(auth.currentUser.emailVerified){
-            login.reset();
-            loginContainer.style.display="none";
-            window.location = "product_list.html";
-        }
-        else{
-            auth.currentUser.sendEmailVerification().then(e => {
-                window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
-                // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
-                    }).then(e => {
-                        auth.signOut().then(r => {
-                            login.reset();
-                            window.location = "index.html";
-                        });
+        auth.currentUser.reauthenticateWithCredential(credentials).then(r => {
+            if(auth.currentUser.email_verified){
+                console.log("emailVerified: " + auth.currentUser.emailVerified);
+                console.log("email_verified: " + auth.currentUser.email_verified);
+                window.alert("CONSOLE");
+                login.reset();
+                loginContainer.style.display="none";
+                window.location = "product_list.html";
+            }
+            else{
+                console.log("Resending Email");
+                auth.currentUser.sendEmailVerification().then(e => {
+                    window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
+                }).then(e => {
+                    auth.signOut().then(r => {
+                        login.reset();
+                        window.location = "index.html";
                     });
-        }
+                });
+            }
+        })
     }).catch(e => {
             console.log(e);
             window.alert("Please make sure you entered your email and password correctly");
