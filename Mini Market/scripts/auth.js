@@ -29,7 +29,7 @@ login.addEventListener('submit', (e) =>{
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
         auth.currentUser.reauthenticateWithCredential(credentials).then(r => {
-            if(auth.currentUser.email_verified){
+            if(auth.currentUser.emailVerified){
                 console.log("emailVerified: " + auth.currentUser.emailVerified);
                 console.log("email_verified: " + auth.currentUser.email_verified);
                 window.alert("CONSOLE");
