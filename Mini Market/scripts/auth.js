@@ -26,7 +26,6 @@ login.addEventListener('submit', (e) =>{
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
         login.reset();
-        loginContainer.style.display="none";
         window.location = "product_list.html";
 
         // if(true){
@@ -36,7 +35,6 @@ login.addEventListener('submit', (e) =>{
             // window.alert(auth.currentUser.emailVerified);
             // auth.signOut().then(r=>{console.log("Signed Out")});
             // login.reset();
-            // loginContainer.style.display="none";
             // window.location = "product_list.html";
         // }
         // else{
