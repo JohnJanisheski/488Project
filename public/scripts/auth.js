@@ -16,7 +16,6 @@ auth.onAuthStateChanged(user => {
 
 <!-- login current users -->
 const login = document.querySelector('#login-form');
-const loginContainer = document.querySelector('#login');
 
 login.addEventListener('submit', (e) =>{
     console.log("Logging in...");
@@ -24,36 +23,40 @@ login.addEventListener('submit', (e) =>{
     const userEmail = login['user-email'].value;
     const userPassword = login['user-password'].value;
 
-
     // Attempt to Sign user in
     auth.signInWithEmailAndPassword(userEmail, userPassword).then(cred => {
-        auth.currentUser.reload().then(e =>{
-            auth.currentUser.getIdToken(true).then(r => {
-                if(auth.currentUser.emailVerified){
-                    // console.log("emailVerified: " + auth.currentUser.emailVerified);
-                    login.reset();
-                    loginContainer.style.display="none";
-                    window.location = "product_list.html";
-                }
-                else{
-                    // console.log("emailVerified: " + auth.currentUser.emailVerified);
-                    // console.log("Resending Email");
-                    auth.currentUser.sendEmailVerification().then(e => {
-                        window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
-                    }).then(e => {
-                        auth.signOut().then(r => {
-                            login.reset();
-                            window.location = "index.html";
-                        });
-                    });
-                }
-            })
-        })
+        login.reset();
+        loginContainer.style.display="none";
+        window.location = "product_list.html";
+
+        // if(true){
+            // auth.currentUser.reload();
+            // console.log(auth.currentUser.email_verified);
+            // console.log(auth.currentUser.verificationId);
+            // window.alert(auth.currentUser.emailVerified);
+            // auth.signOut().then(r=>{console.log("Signed Out")});
+            // login.reset();
+            // loginContainer.style.display="none";
+            // window.location = "product_list.html";
+        // }
+        // else{
+        //     console.log("Resending Email");
+        //     auth.currentUser.sendEmailVerification().then(e => {
+        //         window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
+        //     }).then(e => {
+        //         auth.signOut().then(r => {
+        //             login.reset();
+        //             window.location = "index.html";
+        //             });
+        //         });
+        //     }
+        // })
     }).catch(e => {
             console.log(e);
             window.alert("Please make sure you entered your email and password correctly");
-        });
+    })
 });
+
 //
 // // for testing without validation
 // login.addEventListener('submit', (e) =>{
