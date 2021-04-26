@@ -32,10 +32,12 @@ login.addEventListener('submit', (e) =>{
             window.location = "product_list.html";
         }
         else{
-            auth.signOut().then(e => {
-                window.alert("You must verify your email address!");
-                login.reset();
-            });
+            auth.currentUser.sendEmailVerification().then(e => {
+                window.alert("Please verify your email by clicking on the link sent to the email entered. Please note that this email might get sent to your junk folder.");
+                // Attempt to create user with proposed email, password, Bio, First and last name and their desired campus
+                    }).then(e => {
+                        window.location = "index.html";
+                        });
         }
     }).catch(e => {
             console.log(e);
